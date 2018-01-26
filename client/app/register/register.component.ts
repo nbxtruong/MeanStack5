@@ -12,12 +12,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  username = new FormControl('', [
-    Validators.required,
-    Validators.minLength(2),
-    Validators.maxLength(30),
-    Validators.pattern('[a-zA-Z0-9_-\\s]*')
-  ]);
+
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
@@ -27,26 +22,17 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(6)
   ]);
-  role = new FormControl('', [
-    Validators.required
-  ]);
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              public toast: ToastComponent,
-              private userService: UserService) { }
+    private router: Router,
+    public toast: ToastComponent,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      username: this.username,
       email: this.email,
       password: this.password,
-      role: this.role
     });
-  }
-
-  setClassUsername() {
-    return { 'has-danger': !this.username.pristine && !this.username.valid };
   }
 
   setClassEmail() {
@@ -58,8 +44,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    console.log(this.registerForm.value);
     this.userService.register(this.registerForm.value).subscribe(
       res => {
+        console.log(res);
         this.toast.setMessage('you successfully registered!', 'success');
         this.router.navigate(['/login']);
       },

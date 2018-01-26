@@ -1,0 +1,95 @@
+<div class="app-container">
+  <div class="col-12-sm">
+    <table class="button-datatable" style="width:100%">
+      <thead>
+        <tr>
+          <td>
+            <h1>
+              <p class="namepage">All Devices</p>
+            </h1>
+          </td>
+          <td style="text-align: right; padding-top:18px">
+            <button class="create-button">
+              <b>CREATE DEVICE</b>
+            </button>
+            <button class="export-button">
+              <b>EXPORT</b>
+            </button>
+          </td>
+        </tr>
+      </thead>
+    </table>
+    <div class="inputicon">
+      <table id="datatables">
+        <p class="fa fa-search" aria-hidden="true"></p>
+        <p class="refresh" ng-click="">
+          <a class="fa fa-repeat"></a> Refresh</p>
+        <thead style="background-image: linear-gradient(339deg, #ff3355, #ee3731);">
+          <tr>
+            <th>
+              <input type="checkbox" name="select_all" value="1" class="select-all-checkbox">
+            </th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td class="email">nbxtruong@tma.com.vn</td>
+            <td>Truong</td>
+            <td *ngIf="1==1">
+              <li class="status-active">Active</li>
+            </td>
+            <td>
+              <button class="trash">
+                <a class="fa fa-trash-o"></a>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="email">lnkhang@tma.com.vn</td>
+            <td>Khang</td>
+            <td *ngIf="1==1">
+              <li class="status-disable">Disable</li>
+            </td>
+            <td>
+              <button class="trash">
+                <a class="fa fa-trash-o"></a>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="email">tai@tma.com.vn</td>
+            <td>Tai</td>
+            <td *ngIf="1==1">
+              <li class="status-active">Active</li>
+            </td>
+            <td>
+              <button class="trash">
+                <a class="fa fa-trash-o"></a>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="email">vtnghia@tma.com.vn</td>
+            <td>Nghia</td>
+            <td *ngIf="1==1">
+              <li class="status-active">Active</li>
+            </td>
+            <td>
+              <button class="trash">
+                <a class="fa fa-trash-o"></a>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

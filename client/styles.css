@@ -1,10 +1,253 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
+.app-container {
+    width: 95% !important;
+    margin: auto;
+  }
+  
+  html {
+    height: 100%;
+  }
+  
+  body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .namepage {
+    width: 173px;
+    height: 24px;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #444444;
+  }
+  .app-btn {
+    border-radius: 15px;
+    background-image: linear-gradient(202deg, #ff3355, #ee3731);
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    padding: 5px 20px;
+    font-weight: bold;
+  }
+  
+  .app-btn-white {
+    border-radius: 15px;
+    background: white;
+    border: none;
+    text-transform: uppercase;
+    color: #ee3731;
+    padding: 5px 20px;
+    font-weight: bold;
+    border: 1px solid #ee3731;
+  }
+  
+  
+  /*--------------------------------Datatable-----------------------------*/
+  
+  #datatables {
+    border-bottom: none !important;
+    border-left: 1px solid #dfd9d9 !important;
+    border-right: 1px solid #dfd9d9 !important;
+    border-radius: 10px;
+  }
 
-.input-group {
-  margin-bottom: 15px;
-}
+  #datatable_filter {
+    float: left;
+  }
+  table.dataTable.no-footer{
+    border-radius: 10px;
+    border: 1px solid #bebebe;
+  }
+  /*---Search---*/
+  
+  .dataTables_filter input {
+    border-radius: 20px !important;
+    padding-left: 21px !important;
+    width: 305px !important;
+    height: 35px !important;
+    border: 1px solid #dfd9d9 !important;
+  }
+  
+  #datatables_filter {
+    padding-right: 82.5%;
+  }
+  
+  
+  /*---Header---*/
+  
+  thead th {
+    color: rgb(255, 254, 254);
+    border-bottom: none !important;
+  }
+  
+  
+  table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+  }
+  
+  tr th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+  tr th:last-child {
+    border-top-right-radius: 10px;
+  }
+  
+  
+  /*---Sort---*/
+  
+  table.dataTable thead th.sorting:after,
+  table.dataTable thead th.sorting_asc:after,
+  table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    display: block;
+    font-family: FontAwesome;
+    margin-left: 10px;
+    display: inline;
+    position: relative;
+    top: auto;
+    right:auto;
+  }
+  
+  table.dataTable thead th.sorting:after {
+    content: "\f0dc";
+    color: white;
+    font-size: 0.8em;
+    padding-top: 0.1em;
+  }
+  
+  table.dataTable thead th.sorting_asc:after {
+    content: "\f0de";
+  }
+  
+  table.dataTable thead th.sorting_desc:after {
+    content: "\f0dd";
+  }
+  
+  
+  /*---Body---*/
+  
+  tbody td {
+    background-color: white;
+    border-bottom: 1px solid #eceeef;
+    font-size: 14px;
+    right: 50px;
+  }
+  
+  tbody td button {
+    background-color: white;
+    border: none;
+  }
+  
+  tbody td button:hover {
+    background-color: white;
+    border: none;
+  }
+  
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+  
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }
+  
+  
+  
+  .dataTables_wrapper .dataTables_length {
+    text-align: right !important;
+    float: right !important;
+    margin-top: 20px;
+    padding-top: 0px !important;
+    margin-right: 20px;
+  }
+  
+  .dataTables_length label select {
+    width: 60px;
+    height: 25px;
+    font-weight: normal !important;
+    color: #808080;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #dadada;
+  }
+  
+  
+  /*--Paging---*/
+  
+  .dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+    padding-top: 0px !important;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1em;
+    padding: 0 !important;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    width: 20px !important;
+    height: 25px !important;
+    border-radius: 5px !important;
+    background-color: #ffffff !important;
+  }
+  
+  .paginate_button.current {
+    padding: 2px !important;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border: solid 1px #ee3731 !important;
+    background: #ffffff !important;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #dfd9d9 !important;
+    background: #ffffff !important;
+  }
+  
+  @media screen and (max-width:1920px) {
+    /*---Search---*/
+    #users-datatables_filter {
+      padding-right: 83%;
+    }
+  }
+  
+  @media screen and (max-width:1366px) {
+    /*---Search---*/
+    #users-datatables_filter {
+      padding-right: 76%;
+    }
+  
+  }
+  /*---Footer---*/
+  
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    box-shadow: -0px -1px 1px 0 rgba(0, 0, 0, 0.2);
+    line-height: 30px;
+    background-color: #ffffff;
+    font-family: Poppins;
+    font-size: 90%;
+    font-style: normal;
+    font-stretch: normal;
+    color: #808080;
+    text-align: center;
+    line-height: 30px;
+    letter-spacing: normal;
+  }
+  

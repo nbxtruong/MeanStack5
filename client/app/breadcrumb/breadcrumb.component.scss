@@ -1,0 +1,21 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#ee3731;
+.app-breadcrumb {
+    background-color: #fafafa;
+  .breadcrumb {
+    background-color: transparent;
+    padding:12px 0;
+  }
+  .breadcrumb-item {
+    a {
+      color: $primary-color;
+    }
+    &.active {
+      color: $second-color;
+    }
+  }
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: '>';
+  }
+}

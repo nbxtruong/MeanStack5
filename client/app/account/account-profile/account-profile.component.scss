@@ -1,0 +1,18 @@
+.bottom-bar {
+    width: 100%;
+    background: white;
+    position: fixed;
+    right:0;
+    bottom: 0;
+    height: 70px;
+    box-shadow: -0px -2px 5px 0 rgba(150, 150, 150, 0.2);
+    .bottom-bar-buttons {
+      float: right;
+      width: 85%;
+      .app-btn,
+      .app-btn-white {
+        margin: 20px 10px;
+      }
+    }
+  }
+  

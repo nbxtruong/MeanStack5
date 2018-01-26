@@ -1,0 +1,61 @@
+<div class="app-container">
+  <div class="col-12-sm">
+    <table class="button-datatable">
+      <thead>
+        <tr>
+          <td>
+            <h1>
+              <p class="namepage">All Devices</p>
+            </h1>
+          </td>
+          <td style="text-align: right; padding-top:18px">
+            <button class="create-button">
+              <b>CREATE DEVICE</b>
+            </button>
+            <button class="export-button">
+              <b>EXPORT</b>
+            </button>
+          </td>
+        </tr>
+      </thead>
+    </table>
+    <div class="inputicon">
+      <table id="datatable">
+        <p class="fa fa-search" aria-hidden="true"></p>
+        <p class="refresh" ng-click="">
+          <a class="fa fa-repeat"></a> Refresh</p>
+        <thead style="background-image: linear-gradient(339deg, #ff3355, #ee3731);">
+          <tr>
+            <th>
+              <input type="checkbox" name="select_all" value="1" class="select-all-checkbox">
+            </th>
+            <th>Device ID</th>
+            <th>Type</th>
+            <th>Firmware</th>
+            <th>Device Name</th>
+            <th>Last Updated</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let device of devices">
+            <td></td>
+            <td>
+              <a href="#" [routerLink]="['/devices',device.id]" (click)="util.setCurrentDevicePage('properties');util.setCurrentDevice(device)">{{device.id}}</a>
+            </td>
+            <td>{{device.type}}</td>
+            <td>{{device.firmware}}</td>
+            <td>{{device.name}}</td>
+            <td>{{util.timeConverter(device.lastupdate)}}</td>
+            <td>
+              <button class="trash" (click)="deleteDevice(device.id)">
+                <a class="fa fa-trash-o"></a>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

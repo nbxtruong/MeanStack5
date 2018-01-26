@@ -1,0 +1,57 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#ee3731;
+.layout-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: $primary-color;
+  margin-bottom: 25px;
+}
+
+.app-content {
+  border-top: 1px solid #e6e6e6;
+  height: 100%;
+  .side-menu {
+    height: 100%;
+    float: left;
+    width: 15%;
+    border-right: 1px solid #e6e6e6;
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      li {
+        a {
+          text-decoration: none;
+          text-transform: uppercase;
+          color: $primary-color;
+          font-size: 18px;
+          font-weight: bold;
+          display: block;
+          padding: 0;
+          padding-left: 50px;
+          line-height: 50px;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        &.active {
+          border-left: 3px solid $red-color;          
+          a {
+            padding-left:47px;
+            background-color: #fdeceb;
+            color: $red-color;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  .main-content {
+    width: 85%;
+    height: 100%;
+    float: left;
+    padding: 20px 40px;
+    background: #fafafa;
+  }
+}
