@@ -5,9 +5,9 @@ import { AuthService } from '../../services/auth.service';
 import { UtilService } from '../../services/util.service';
 
 @Component({
-  selector: 'device-edit',
+  selector: 'app-device-edit',
   templateUrl: './device-edit.component.html',
-  styleUrls: ['./device-edit.component.css']
+  styleUrls: ['./device-edit.component.scss']
 })
 export class DeviceEditComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class DeviceEditComponent implements OnInit {
 
   ngOnInit() {
     this.getDevice();
-    console.log("route:"+this.route.snapshot.paramMap.get('name'));
+    console.log('route:' + this.route.snapshot.paramMap.get('name'));
   }
 
   getDevice() {
@@ -35,6 +35,6 @@ export class DeviceEditComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
+    );
   }
 }

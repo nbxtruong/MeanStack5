@@ -5,7 +5,7 @@ declare var jquery: any;
 declare var $: any;
 
 @Component({
-  selector: 'devices',
+  selector: 'app-devices',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss']
 })
