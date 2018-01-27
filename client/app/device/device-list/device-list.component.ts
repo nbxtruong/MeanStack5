@@ -7,7 +7,7 @@ import { UtilService } from '../../services/util.service';
 import { Device } from '../../shared/models/device.model';
 
 @Component({
-  selector: 'device-list',
+  selector: 'app-device-list',
   templateUrl: './device-list.component.html',
   styleUrls: ['./device-list.component.scss']
 })
@@ -19,7 +19,7 @@ export class DeviceListComponent implements OnInit {
   constructor(
     private deviceService: DeviceService,
     private auth: AuthService,
-    private util:UtilService
+    private util: UtilService
   ) { }
 
   initDatatable() {
@@ -73,17 +73,17 @@ export class DeviceListComponent implements OnInit {
     );
   }
 
-  deleteLocal(deviceID:String){
-    return this.devices.filter(device=>{
-      return device.id!=deviceID
+  deleteLocal(deviceID: String) {
+    return this.devices.filter(device => {
+      return device.id !== deviceID;
     });
   }
 
-  deleteDevice(deviceID){
-    console.log("deleting");
+  deleteDevice(deviceID) {
+    console.log('deleting');
     this.deviceService.softDeleteDevice(deviceID).subscribe(
       res => {
-        this.devices=this.deleteLocal(deviceID);
+        this.devices = this.deleteLocal(deviceID);
       },
       error => {
         console.log(error);
