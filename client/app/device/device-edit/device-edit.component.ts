@@ -12,7 +12,7 @@ import { UtilService } from '../../services/util.service';
 export class DeviceEditComponent implements OnInit {
 
   token: String = localStorage.getItem('token');
-  deviceID: String;
+  deviceID: String = this.util.getCurrentDeviceID();
 
   constructor(
     private deviceService: DeviceService,
@@ -24,7 +24,6 @@ export class DeviceEditComponent implements OnInit {
 
   ngOnInit() {
     this.getDevice();
-    console.log('route:' + this.route.snapshot.paramMap.get('name'));
   }
 
   getDevice() {

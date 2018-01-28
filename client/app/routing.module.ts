@@ -32,7 +32,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'devices/:name', component: DeviceComponent,
+    path: 'devices/:id', component: DeviceComponent,
     children: [
       { path: '', redirectTo: 'properties', pathMatch: 'full' },
       { path: 'properties', component: DeviceEditComponent }

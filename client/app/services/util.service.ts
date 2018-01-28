@@ -8,7 +8,7 @@ export class UtilService {
 
   currentPage: String;
   currentDevicePage: String;
-  currentDevice: Device;
+  private currentDeviceID: String;
   API_URL = 'http://192.168.129.137:3000';
   MOCK_DATA = [
     new Device({
@@ -54,15 +54,27 @@ export class UtilService {
     return time;
   }
 
+  getCurrentPage() {
+    return this.currentPage;
+  }
+
   setCurrentPage(currentPage) {
     this.currentPage = currentPage;
+  }
+
+  getCurrentDevicePage() {
+    return this.currentDevicePage;
   }
 
   setCurrentDevicePage(currentDevicePage) {
     this.currentDevicePage = currentDevicePage;
   }
 
-  setCurrentDevice(currentDevice: Device) {
-    this.currentDevice = currentDevice;
+  getCurrentDeviceID() {
+    return this.currentDeviceID;
+  }
+
+  setCurrentDeviceID(currentDeviceID: String) {
+    this.currentDeviceID = currentDeviceID;
   }
 }

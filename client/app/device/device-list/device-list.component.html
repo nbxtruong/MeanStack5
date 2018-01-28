@@ -34,7 +34,6 @@
             <th>Firmware</th>
             <th>Device Name</th>
             <th>Last Updated</th>
-
             <th>Action</th>
           </tr>
         </thead>
@@ -42,7 +41,7 @@
           <tr *ngFor="let device of devices">
             <td></td>
             <td>
-              <a href="#" [routerLink]="['/devices',device.id]" (click)="util.setCurrentDevicePage('properties');util.setCurrentDevice(device)">{{device.id}}</a>
+              <a href="#" [routerLink]="['/devices',device.id]">{{device.id}}</a>
             </td>
             <td>{{device.type}}</td>
             <td>{{device.firmware}}</td>

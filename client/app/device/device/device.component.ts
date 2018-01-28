@@ -17,7 +17,7 @@ export class DeviceComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.deviceName = this.route.snapshot.paramMap.get('name');
+    this.util.setCurrentDeviceID(this.route.snapshot.paramMap.get('id'));
   }
 
   ngAfterViewInit() {
