@@ -2,31 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import { UserService } from '../services/user.service';
-
+import { AuthService } from '../services/auth.service';
+import { UtilService } from '../services/util.service';
+import { User } from '../shared/models/users.model';
 @Component({
-  selector: 'app-user',
+  selector: 'user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  constructor(private userService: UserService) { }
+  isLoading: boolean = true;
+  token: String = localStorage.getItem('token');
+  users: User[];
+  userToDelete: User;
+  idsToDelete: Set<String> = new Set<String>();
+  enableDeleteButton: Boolean = true;
+  tableInitiated: boolean = false;
+  table: any;
 
-  ngOnInit() {
+  constructor(private userService: UserService,
+    private auth: AuthService,
+    private util: UtilService
+  ) { }
+
+  initDatatable() {
+    const ngThis = this;
+    this.tableInitiated = true;
     $(document).ready(function () {
-      const table = $('#datatables').DataTable({
+      const table = $('#datatable').DataTable({
         stateSave: true,
         pagingType: 'full_numbers',
         dom: '<"top"fB>rt<"bottom"ipl>',
         columnDefs: [
-          { orderable: false, targets: [-1, 0, 4] },
+          { orderable: false, targets: [0, 4] },
           {
             targets: 0,
             searchable: false,
             orderable: false,
-            className: 'dt-body-center',
-            render: function (data, type, full, meta) {
-              return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-            },
+            className: 'dt-center'
           }
         ],
         language: {
@@ -43,21 +56,51 @@ export class UserListComponent implements OnInit {
           }
         },
       });
-      $('#select-all').on('click', function (event) {
-        const rows = table.rows({ 'search': 'applied' }).nodes();
-        $('input[type="checkbox"]', rows).prop('checked', event.target.click);
-      });
     });
   }
 
+  ngOnInit() {
+    this.getListUsers();
+  }
   getListUsers() {
     this.userService.getUsers().subscribe(
       res => {
-        console.log(res);
+        this.isLoading = false;
+        this.users = res;
+        if (!this.tableInitiated) {
+          this.initDatatable();
+        } else {
+          this.table.clear().draw();
+          this.table.destroy();
+          this.initDatatable();
+        }
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  checkAllChanged(event: any) {
+    const id = event.target.value;
+    if (event.target.checked) {
+      this.users.forEach((user: User) => {
+        this.idsToDelete.add(user.id);
+        $("input[value=" + user.id + "]").prop("checked", true);
+      });
+    } else {
+      this.users.forEach((user: User) => {
+        this.idsToDelete.delete(user.id);
+        $("input[value=" + user.id + "]").prop("checked", false);
+      });
+    }
+  }
+  checkboxChanged(event: any) {
+    const id = event.target.value;
+    if (event.target.checked) {
+      this.idsToDelete.add(id);
+    } else {
+      this.idsToDelete.delete(id);
+    }
   }
 }

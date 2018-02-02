@@ -1,0 +1,71 @@
+<div class="edit-pages">
+  <div class="device-tag">
+    <p class="title">
+      <strong> DEVICE OVERVIEW </strong>
+    </p>
+    <p>Device Name</p>
+    <input class="long-input" type="text" placeholder="Device 1">
+    <p>Device Description</p>
+    <textarea class="long-input"></textarea>
+  </div>
+
+  <div class="device-tag">
+    <p class="title">
+      <strong>DEVICE TYPE</strong>
+    </p>
+    <form>
+      <label class="radio-inline">
+        <input style="padding-top:10px" type="radio" name="optradio"> Sensor</label>
+      <label class="radio-inline column-right">
+        <input type="radio" name="optradio"> Gateway</label>
+    </form>
+  </div>
+
+  <div class="device-tag">
+    <p class="title">
+      <strong> DEVICE ATTRIBUTE</strong>
+    </p>
+    <div class="row">
+      <div class="col-sm-9">
+        <table>
+          <tr>
+            <td class="column-left">
+              <p>Data Type</p>
+              <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray"></i>
+              <select class="short-input" disabled>
+                <option>Number</option>
+                <option>String</option>
+              </select>
+            </td>
+            <td class="column-right">
+              <p>Name</p>
+              <input class="short-input" type="text" value="Temperature" readonly>
+            </td>
+          </tr>
+          <tr>
+            <td class="column-left">
+              <p>Data Type</p>
+              <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray"></i>
+              <select class="short-input" disabled>
+                <option>String</option>
+                <option>Number</option>
+              </select>
+            </td>
+            <td class="column-right">
+              <p>Name</p>
+              <input class="short-input" type="text" value="Notes" readonly>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <i class="fa fa-plus-circle" aria-hidden="true">
+        <span> Add device attribute</span>
+      </i>
+    </div>
+
+  </div>
+
+</div>

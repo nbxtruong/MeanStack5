@@ -1,33 +1,31 @@
-<div class="app-container">
+<app-loading [condition]="isLoading"></app-loading>
+<div class="app-container" *ngIf="!isLoading">
   <div class="col-12-sm">
     <table class="button-datatable" style="width:100%">
       <thead>
         <tr>
           <td>
             <h1>
-              <p class="namepage">All Devices</p>
+              <p class="namepage">All Users</p>
             </h1>
           </td>
           <td style="text-align: right; padding-top:18px">
-            <button class="create-button">
-              <b>CREATE DEVICE</b>
-            </button>
-            <button class="export-button">
-              <b>EXPORT</b>
-            </button>
+            <button class="app-btn">NEW</button>
+            <button class="app-btn-white">DISABLE</button>
+            <button class="app-btn-white">EXPORT</button>
           </td>
         </tr>
       </thead>
     </table>
     <div class="inputicon">
-      <table id="datatables">
+      <table id="datatable">
         <p class="fa fa-search" aria-hidden="true"></p>
         <p class="refresh" ng-click="">
           <a class="fa fa-repeat"></a> Refresh</p>
         <thead style="background-image: linear-gradient(339deg, #ff3355, #ee3731);">
           <tr>
             <th>
-              <input type="checkbox" name="select_all" value="1" class="select-all-checkbox">
+              <input type="checkbox" name="checkUser" value="selectAll" class="select-all-checkbox" (change)=checkAllChanged($event)>
             </th>
             <th>Email</th>
             <th>Name</th>
@@ -36,55 +34,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td class="email">nbxtruong@tma.com.vn</td>
-            <td>Truong</td>
-            <td *ngIf="1==1">
+          <tr *ngFor="let user of users">
+            <td>
+              <input type="checkbox" name="checkUser" value="{{user.id}}" (change)=checkboxChanged($event)>
+            </td>
+            <td class="email">{{user.email}}</td>
+            <td>{{user.name}}</td>
+            <td *ngIf="user.activated==true">
               <li class="status-active">Active</li>
             </td>
-            <td>
-              <button class="trash">
-                <a class="fa fa-trash-o"></a>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="email">lnkhang@tma.com.vn</td>
-            <td>Khang</td>
-            <td *ngIf="1==1">
+            <td *ngIf="user.activated==false">
               <li class="status-disable">Disable</li>
             </td>
             <td>
               <button class="trash">
-                <a class="fa fa-trash-o"></a>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="email">tai@tma.com.vn</td>
-            <td>Tai</td>
-            <td *ngIf="1==1">
-              <li class="status-active">Active</li>
-            </td>
-            <td>
-              <button class="trash">
-                <a class="fa fa-trash-o"></a>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="email">vtnghia@tma.com.vn</td>
-            <td>Nghia</td>
-            <td *ngIf="1==1">
-              <li class="status-active">Active</li>
-            </td>
-            <td>
-              <button class="trash">
-                <a class="fa fa-trash-o"></a>
+                <a class="fa fa-pencil"></a>
               </button>
             </td>
           </tr>

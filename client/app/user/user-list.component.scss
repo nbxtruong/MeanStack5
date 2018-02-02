@@ -24,6 +24,13 @@
   margin-left: 15px;
 }
 
+.app-btn,
+.app-btn-white {
+  width: 110px;
+  text-align: center;
+  margin: 0px 2px;
+}
+
 .inputicon p {
   position: absolute;
   color: #444444;
@@ -57,7 +64,9 @@
 .status-active {
   color: #0ba200;
 }
-
+.status-disable {
+  color: #444444;
+}
 .email {
   color: #ee3731;
 }

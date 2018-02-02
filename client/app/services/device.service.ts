@@ -5,32 +5,33 @@ import { of } from 'rxjs/observable/of';
 
 import { Device } from '../shared/models/device.model';
 import { UtilService } from './util.service';
+import { AppHttpClient } from './app-http.service';
 
 @Injectable()
 export class DeviceService {
 
   constructor(
-    private http: HttpClient,
+    private http: AppHttpClient,
     private util: UtilService
   ) { }
 
-  // createHeader(authentication: String) {
-  //   const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': '' + authentication + '' }) };
-  //   return options;
-  // }
-
   getListDevices(): Observable<Device[]> {
-    // return this.http.get<Device[]>(this.API_URL + '/devices', this.createHeader(authentication));
-    return of(this.util.MOCK_DATA);
+    return this.http.get('devices');
   }
 
   getDeviceInfo(device_id: String): Observable<Device> {
-    // return this.http.get<Device[]>(this.API_URL + '/devices/' + device_id, this.createHeader(authentication));
-    return of(this.util.MOCK_DATA[0]);
+    return this.http.get('devices/' + device_id);
   }
 
-  softDeleteDevice(device_id: String): Observable<Device> {
-    // return this.http.delete<Device[]>(this.API_URL + '/devices/' + device_id, this.createHeader(authentication));
-    return of(this.util.MOCK_DATA[0]);
+  deleteDevice(device_id: String): Observable<any> {
+    return this.http.delete('devices/' + device_id);
+  }
+
+  deleteDevices(devicesID: String[]): Observable<any> {
+    let deleteIDs: any[] = [];
+    devicesID.forEach(deviceID => {
+      deleteIDs.push({ "id": deviceID });
+    });
+    return this.http.post('devices/deleteByIds', deleteIDs);
   }
 }

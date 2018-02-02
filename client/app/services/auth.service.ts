@@ -3,21 +3,21 @@ import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 
 import { UserService } from './user.service';
-import { User } from '../shared/models/user.model';
+import { User } from '../shared/models/users.model';
 
 import 'rxjs/add/operator/map';
-
+import { environment } from '../../environments/environment';
+import { constants } from '../constants';
 @Injectable()
 export class AuthService {
   loggedIn = false;
   isAdmin = false;
 
   jwtHelper: JwtHelper = new JwtHelper();
-
   currentUser: User = new User();
 
   constructor(private userService: UserService,
-              private router: Router) {
+    private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);
@@ -50,11 +50,10 @@ export class AuthService {
 
   setCurrentUser(decodedUser) {
     this.loggedIn = true;
-    this.currentUser._id = decodedUser._id;
-    this.currentUser.username = decodedUser.username;
-    this.currentUser.role = decodedUser.role;
-    decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
-    delete decodedUser.role;
+    this.currentUser.id = decodedUser.id;
+    this.currentUser.email = decodedUser.email;
+    this.currentUser.name = decodedUser.name;
+    this.isAdmin = (decodedUser.role === constants.ROLE_ADMIN);
   }
 
 }

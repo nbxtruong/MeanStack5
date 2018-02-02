@@ -1,18 +1,38 @@
-<app-toast [message]="toast.message"></app-toast>
-
-<div class="card">
-  <h4 class="card-header">Login</h4>
-  <div class="card-block">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="input-group" [ngClass]="setClassEmail()">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
+<div class="login-section">
+  <div class="container-fluid">
+    <div class="login">
+      <h2 class="login-title">Login</h2>
+      <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="group">
+            <input class="inputMaterial" required type="email" name="email" formControlName="email">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="login-label">Username</label>
+          </div>
+          <div class="group">
+            <input class="inputMaterial" required type="password" name="password" formControlName="password">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="login-label">Password</label>
+          </div>
+          <div class="login-addition">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Remember password</span>
+            </label>
+            <a class="forgot-password" routerLink="/forgot-password">Forgot Password?</a>
+          </div>
+          <button class="login-btn" type="submit" [disabled]="!loginForm.valid">Login</button>
+        </form>
       </div>
-      <div class="input-group" [ngClass]="setClassPassword()">
-        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-        <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
-      </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
-    </form>
+    </div>
+  </div>
+</div>
+<div class="title-section">
+  <div class="welcome">
+    <h2 class="welcome-to">Welcome to</h2>
+    <h2 class="welcome-title">Smart Sprinkler</h2>
   </div>
 </div>

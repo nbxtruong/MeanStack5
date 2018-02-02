@@ -4,14 +4,16 @@ export class Device {
   name?: string;
   battery?: number;
   firmware?: string;
-  lastupdate?:string;
+  last_updated?: string;
+  model?: string;
 
-  constructor(data){
-    this.id=data.id;
-    this.type= data.type;
-    this.name= data.name;
-    this.battery= data.battery;
-    this.firmware= data.firmware;
-    this.lastupdate= data.lastupdate;
+  constructor(data) {
+    this.id = data.id;
+    this.type = data.type;
+    this.name = data.name;
+    this.battery = data.battery;
+    this.firmware = data.firmware;
+    this.last_updated = data.last_updated;
+    this.model = data.model;
   }
 }

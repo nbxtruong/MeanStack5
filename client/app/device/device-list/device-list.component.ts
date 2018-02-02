@@ -7,14 +7,21 @@ import { UtilService } from '../../services/util.service';
 import { Device } from '../../shared/models/device.model';
 
 @Component({
-  selector: 'app-device-list',
+  selector: 'device-list',
   templateUrl: './device-list.component.html',
   styleUrls: ['./device-list.component.scss']
 })
 export class DeviceListComponent implements OnInit {
 
+  isLoading: boolean = true;
   token: String = localStorage.getItem('token');
-  devices: Array<Device>;
+  devices: Device[];
+  deviceToDelete: Device;
+  idsToDelete: Set<String> = new Set<String>();
+  enableDeleteButton: Boolean = true;
+  dummyDevice: Device = new Device({});
+  tableInitiated: boolean = false;
+  table: any;
 
   constructor(
     private deviceService: DeviceService,
@@ -23,21 +30,24 @@ export class DeviceListComponent implements OnInit {
   ) { }
 
   initDatatable() {
+    let ngThis = this;
+    this.tableInitiated = true;
     $(document).ready(function () {
-      $('#datatable').DataTable({
+      ngThis.table = $('#datatable').DataTable({
         stateSave: true,
         pagingType: 'full_numbers',
         dom: '<"top"fB>rt<"bottom"ipl>',
         columnDefs: [
-          { orderable: false, targets: [-1, 0] },
           {
-            targets: 0,
+            orderable: false,
+            targets: [0, 6],
+            className: 'dt-center'
+          },
+          {
+            targets: [0],
             searchable: false,
             orderable: false,
-            className: 'dt-body-center',
-            render: function (data, type, full, meta) {
-              return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-            },
+            className: 'dt-center'
           }
         ],
         language: {
@@ -58,15 +68,22 @@ export class DeviceListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getListDevices();
+    this.getDevices();
+    this.deviceToDelete = this.dummyDevice;
   }
 
-  getListDevices() {
-    console.log(this.token);
+  getDevices() {
     this.deviceService.getListDevices().subscribe(
       res => {
+        this.isLoading = false;
         this.devices = res;
-        this.initDatatable();
+        if (!this.tableInitiated) {
+          this.initDatatable();
+        } else {
+          this.table.clear().draw();
+          this.table.destroy();
+          this.initDatatable();
+        }
       },
       error => {
       }
@@ -74,20 +91,67 @@ export class DeviceListComponent implements OnInit {
   }
 
   deleteLocal(deviceID: String) {
-    return this.devices.filter(device => {
+    this.devices = this.devices.filter(device => {
       return device.id !== deviceID;
     });
   }
 
-  deleteDevice(deviceID) {
-    console.log('deleting');
-    this.deviceService.softDeleteDevice(deviceID).subscribe(
+  deleteMultipleLocal(devices: String[]) {
+    for (let i = 0; i < devices.length; i++) {
+      this.deleteLocal(devices[i]);
+    }
+  }
+
+  deleteDevice() {
+    this.isLoading = true;
+    this.deviceService.deleteDevice(this.deviceToDelete.id).subscribe(
       res => {
-        this.devices = this.deleteLocal(deviceID);
+        this.getDevices();
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  deleteDevices() {
+    this.isLoading = true;
+    let deletedDeviceIds: String[] = Array.from(this.idsToDelete);
+    this.deviceService.deleteDevices(deletedDeviceIds).subscribe(
+      res => {
+        this.getDevices();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setDeleteDevice(device) {
+    this.deviceToDelete = device;
+  }
+
+  checkAllChanged(event: any) {
+    let id = event.target.value;
+    if (event.target.checked) {
+      this.devices.forEach((device: Device) => {
+        this.idsToDelete.add(device.id);
+        $("input[value=" + device.id + "]").prop("checked", true);
+      });
+    } else {
+      this.devices.forEach((device: Device) => {
+        this.idsToDelete.delete(device.id);
+        $("input[value=" + device.id + "]").prop("checked", false);
+      });
+    }
+  }
+
+  checkboxChanged(event: any) {
+    let id = event.target.value;
+    if (event.target.checked) {
+      this.idsToDelete.add(id);
+    } else {
+      this.idsToDelete.delete(id);
+    }
   }
 }

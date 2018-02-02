@@ -5,22 +5,21 @@ declare var jquery: any;
 declare var $: any;
 
 @Component({
-  selector: 'app-navigation-bar',
+  selector: 'navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent implements OnInit, AfterViewInit {
 
-  email: String;
+  ngAfterViewInit(): void {
+  }
 
+  email: String;
   constructor(
-    private auth: AuthService,
-    private util: UtilService
+    public auth: AuthService,
+    public util: UtilService
   ) { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
   }
 }

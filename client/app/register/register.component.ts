@@ -47,8 +47,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
     this.userService.register(this.registerForm.value).subscribe(
       res => {
-        console.log(res);
-        this.toast.setMessage('you successfully registered!', 'success');
+        this.toast.setMessage('You successfully registered!', 'success');
         this.router.navigate(['/login']);
       },
       error => this.toast.setMessage('email already exists', 'danger')

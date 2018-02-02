@@ -2,6 +2,7 @@ $primary-color: #454545;
 $second-color: #939393;
 $red-color:#ee3731;
 .app-nav {
+  height: 81px;
   padding: 0px 50px;
   box-shadow: 0px 2px 10px 0 rgba(150, 150, 150, 0.2);
   background: white;
@@ -31,6 +32,7 @@ $red-color:#ee3731;
     padding: 0px 40px;
     font-size: 18px;
     color: #454545;
+    display: inline-block;
   }
   .nav-item.active {
     .nav-link {
@@ -38,6 +40,21 @@ $red-color:#ee3731;
       font-weight: bold;
     }
     border-bottom: 3px solid $red-color;
+  }
+  .nav-item.split-dropdown {
+    .nav-link {
+      padding-right: 0;
+    }
+    .dropdown-toggle-split {
+      display: inline-block;
+      padding-right: 20px;
+      cursor: pointer;
+    }
+    &.active {
+      .dropdown-toggle-split {
+        color: $red-color;
+      }
+    }
   }
 }
 
@@ -55,4 +72,10 @@ $red-color:#ee3731;
     text-decoration: none;
     color: $primary-color;
   }
+}
+
+.dropdown-item .app-btn {
+  line-height: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
 }

@@ -1,35 +1,68 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded app-nav">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded app-nav" *ngIf="auth.loggedIn">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand app-title" href="#">Smart sprinkler</a>
+  <a class="navbar-brand app-title" routerLink="">Smart sprinkler</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto app-nav-ul">
-      <li class="nav-item" [class.active]="util.currentPage=='dashboard'">
+      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='dashboard'">
         <a class="nav-link" routerLink="/dashboard" (click)="util.setCurrentPage('dashboard')">Dashboard</a>
+        <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <div class="dropdown-menu">
+          <h6 class="dropdown-header">Recent Dashboard</h6>
+          <a class="dropdown-item" href="#">Dashboard 1</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/dashboard">View All Dashboard</a>
+          <a class="dropdown-item">
+            <button class="app-btn">Create dashboard</button>
+          </a>
+        </div>
       </li>
-      <li class="nav-item" [class.active]="util.currentPage=='device-list'">
-        <a routerLink="/device-list" class="nav-link" (click)="util.setCurrentPage('device-list')">Devices</a>
+      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='device-list'">
+        <a class="nav-link" routerLink="/device-list" (click)="util.setCurrentPage('device-list')">Devices</a>
+        <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <div class="dropdown-menu">
+          <h6 class="dropdown-header">Recent Devices</h6>
+          <a class="dropdown-item" href="#">Sprinkler 1</a>
+          <a class="dropdown-item" href="#">Sprinkler 2</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" routerLink="/device-list">View All Devices</a>
+          <a class="dropdown-item" href="#">
+            <button class="app-btn">Create device</button>
+          </a>
+        </div>
       </li>
       <li class="nav-item" [class.active]="util.currentPage=='users'">
-        <a routerLink="/users" class="nav-link" (click)="util.setCurrentPage('users')">Users </a>
+        <a routerLink="/users" class="nav-link" (click)="util.setCurrentPage('users')">Users</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Rules
-        </a>
-        <div class="dropdown-menu" aria-labelledby="rulesDropdown">
-          <a class="dropdown-item" href="#">Rules dropdown</a>
+        <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rules</a>
+        <div class="dropdown-menu">
+          <h6 class="dropdown-header">Recent Rules</h6>
+          <a class="dropdown-item" href="#">No Recent Rules</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">View All Rules</a>
+          <a class="dropdown-item" href="#">
+            <button class="app-btn">Create rule</button>
+          </a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="eventDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Events
-        </a>
-        <div class="dropdown-menu" aria-labelledby="eventDropdown">
-          <a class="dropdown-item" href="#">Events dropdown</a>
+        <a class="nav-link dropdown-toggle" href="#" id="eventDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events</a>
+        <div class="dropdown-menu">
+          <h6 class="dropdown-header">Recent Events</h6>
+          <a class="dropdown-item" href="#">No Recent Events</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">View All Events</a>
+          <a class="dropdown-item" href="#">
+            <button class="app-btn">Create event</button>
+          </a>
         </div>
       </li>
     </ul>
@@ -40,7 +73,7 @@
         </div>
         <div class="dropdown user-dropdown">
           <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hi! Gim Le
+            Hi! {{auth.currentUser.name}}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#" routerLink="/account">Account Settings</a>

@@ -1,39 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DeviceService } from '../../services/device.service';
-import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { UtilService } from '../../services/util.service';
+import { Device } from '../../shared/models/device.model';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
-  selector: 'app-device-edit',
+  selector: 'device-edit',
   templateUrl: './device-edit.component.html',
   styleUrls: ['./device-edit.component.scss']
 })
 export class DeviceEditComponent implements OnInit {
 
-  token: String = localStorage.getItem('token');
-  deviceID: String = this.util.getCurrentDeviceID();
-
+  device: Device = new Device({ name: "Loading..." });
   constructor(
-    private deviceService: DeviceService,
-    private auth: AuthService,
-    private router: Router,
-    private util: UtilService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public util: UtilService,
+    private deviceService: DeviceService
   ) { }
 
   ngOnInit() {
-    this.getDevice();
+    let deviceID = this.route.snapshot.paramMap.get('id');
+    this.getDevice(deviceID);
   }
 
-  getDevice() {
-    this.deviceService.getDeviceInfo(this.deviceID).subscribe(
+  getDevice(deviceID: String) {
+    this.deviceService.getDeviceInfo(deviceID).subscribe(
       res => {
         console.log(res);
+        this.device = res;
       },
       error => {
         console.log(error);
       }
-    );
+    )
   }
 }

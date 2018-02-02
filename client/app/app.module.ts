@@ -18,14 +18,15 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { UserListComponent } from './user/user-list.component';
-import { DeviceEditComponent } from './device/device-edit/device-edit.component';
+import { DeviceEditPropertiesComponent } from './device/device-edit-properties/device-edit-properties.component';
 import { AccountProfileComponent } from './account/account-profile/account-profile.component';
 import { AccountPasswordComponent } from './account/account-password/account-password.component';
 import { AccountComponent } from './account/account/account.component';
 import { DeviceListComponent } from './device/device-list/device-list.component';
-import { DeviceComponent } from './device/device/device.component';
 import { DeviceService } from './services/device.service';
 import { UtilService } from './services/util.service';
+import { AppHttpClient } from './services/app-http.service';
+import { DeviceEditComponent } from './device/device-edit/device-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,12 @@ import { UtilService } from './services/util.service';
     BreadcrumbComponent,
     MainLayoutComponent,
     UserListComponent,
-    DeviceEditComponent,
+    DeviceEditPropertiesComponent,
     AccountProfileComponent,
     AccountPasswordComponent,
     AccountComponent,
     DeviceListComponent,
-    DeviceComponent
+    DeviceEditComponent
   ],
   imports: [
     RoutingModule,
@@ -58,7 +59,8 @@ import { UtilService } from './services/util.service';
     CatService,
     UserService,
     DeviceService,
-    UtilService
+    UtilService,
+    AppHttpClient
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
