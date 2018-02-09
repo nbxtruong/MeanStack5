@@ -1,5 +1,7 @@
-<app-loading [condition]="isLoading"></app-loading>
-<div class="app-container" *ngIf="!isLoading">
+<app-loading [content]="'Loading devices'"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="app-container" *ngIf="!util.isLoading">
   <div class="col-12-sm">
     <table class="button-datatable">
       <thead>

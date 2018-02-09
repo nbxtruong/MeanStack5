@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Device } from '../shared/models/device.model';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class UtilService {
@@ -9,36 +10,7 @@ export class UtilService {
   currentPage: String;
   currentDevicePage: String;
   currentDevice: Device;
-  MOCK_DATA = [
-    new Device({
-      id: "1111",
-      type: "1",
-      name: "Sprinkler 1111",
-      battery: "50",
-      firmware: "Ardruino",
-      last_updated: "1516955861"
-    }), new Device({
-      id: "2222",
-      type: "1",
-      name: "Sprinkler 2222",
-      battery: "50",
-      firmware: "Ardruino",
-      last_updated: "1516955861"
-    }), new Device({
-      id: "3333",
-      type: "1",
-      name: "Sprinkler 3333",
-      battery: "50",
-      firmware: "Ardruino",
-      last_updated: "1516955861"
-    }), new Device({
-      id: "4444",
-      type: "1",
-      name: "Sprinkler 4444",
-      battery: "50",
-      firmware: "Ardruino",
-      last_updated: "1516955861"
-    })]
+  isLoading: boolean;
 
   getLocalDateTime(timestamp): String {
     let date = new Date(timestamp);

@@ -1,0 +1,30 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="dashboard-header">
+  <div class="app-container">
+    <h1 class="dashboard-name">
+      <i class="fas fa-th-large"></i>{{dashboardInfo.name}}</h1>
+    <div class="dashboard-function">
+      <button class="app-btn">Add widget</button>
+      <button class="dashboard-btn align-middle">
+        <i class="fas fa-sync" (click)="getDashboard()"></i>
+      </button>
+      <button class="dashboard-btn align-middle">
+        <i class="fas fa-edit" (click)="changeEditMode(true)" *ngIf="!editMode"></i>
+        <i class="fas fa-save" (click)="changeEditMode(false)" *ngIf="editMode"></i>
+      </button>
+      <button class="dashboard-btn align-middle">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </button>
+      <button class="dashboard-btn align-middle">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<gridster [options]="options">
+  <gridster-item [item]="item" *ngFor="let item of dashboard">
+    <line-graph [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='linegraph'"></line-graph>
+    <metric [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='metric'"></metric>
+  </gridster-item>
+</gridster>

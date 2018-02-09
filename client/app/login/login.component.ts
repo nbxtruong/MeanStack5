@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { AuthService } from '../services/auth.service';
 import { ToastComponent } from '../shared/toast/toast.component';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-login',
@@ -26,11 +27,13 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    public toast: ToastComponent) { }
+    public toast: ToastComponent,
+    public util: UtilService
+  ) { }
 
   ngOnInit() {
     if (this.auth.loggedIn) {
-      this.router.navigate(['/device-list']);
+      this.router.navigate(['/dashboard']);
     }
     this.loginForm = this.formBuilder.group({
       email: this.email,
@@ -47,8 +50,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.util.isLoading = true;
     this.auth.login(this.loginForm.value).subscribe(
-      res => this.router.navigate(['/device-list']),
+      res => {
+        this.router.navigate(['/dashboard']);
+        this.util.isLoading = false;
+      },
       error => {
         this.loginForm.reset();
         this.toast.setMessage('invalid email or password!', 'danger');

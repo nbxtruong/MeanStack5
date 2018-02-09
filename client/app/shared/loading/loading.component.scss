@@ -1,0 +1,16 @@
+.card-header {
+  text-align: center;
+}
+
+.loading-card {
+  width: 20%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+.loading-text {
+  margin-top: 15px;
+}

@@ -19,7 +19,12 @@ export class AppHttpClient {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': '' + token + '' });
     return headers
   }
-
+  put(url, data): Observable<any> {
+    let headers = this.createHeader();
+    return this.http.put(this.apiUrl + url, data, {
+      headers: headers
+    });
+  }
   get(url): Observable<any> {
     let headers = this.createHeader();
     return this.http.get(this.apiUrl + url, {

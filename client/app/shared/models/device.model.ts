@@ -6,6 +6,7 @@ export class Device {
   firmware?: string;
   last_updated?: string;
   model?: string;
+  description?: string;
 
   constructor(data) {
     this.id = data.id;
@@ -15,5 +16,6 @@ export class Device {
     this.firmware = data.firmware;
     this.last_updated = data.last_updated;
     this.model = data.model;
+    this.description = data.description;
   }
 }

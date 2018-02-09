@@ -4,6 +4,7 @@ import { UtilService } from '../../services/util.service';
 import { Device } from '../../shared/models/device.model';
 import { DeviceService } from '../../services/device.service';
 
+
 @Component({
   selector: 'device-edit',
   templateUrl: './device-edit.component.html',
@@ -11,7 +12,8 @@ import { DeviceService } from '../../services/device.service';
 })
 export class DeviceEditComponent implements OnInit {
 
-  device: Device = new Device({ name: "Loading..." });
+  device: Device = new Device({});
+  devices: Device[] = [];
   constructor(
     private route: ActivatedRoute,
     public util: UtilService,
@@ -24,9 +26,8 @@ export class DeviceEditComponent implements OnInit {
   }
 
   getDevice(deviceID: String) {
-    this.deviceService.getDeviceInfo(deviceID).subscribe(
+    this.deviceService.getDevice(deviceID).subscribe(
       res => {
-        console.log(res);
         this.device = res;
       },
       error => {

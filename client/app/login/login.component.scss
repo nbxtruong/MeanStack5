@@ -6,7 +6,7 @@ $red-color:#ee3731;
   position: fixed;
   width: 50%;
   height: 100%;
-  padding:100px 150px;
+  padding: 100px 150px;
   .login-title {
     margin-top: 80px;
     font-size: 35px;
@@ -48,8 +48,8 @@ $red-color:#ee3731;
   top: 0;
   right: 0;
   background-position: right top;
-  background-repeat: repeat-y;
-  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   .welcome {
     position: absolute;
     top: 30%;
@@ -63,6 +63,20 @@ $red-color:#ee3731;
       font-size: 62px;
       font-weight: bold;
       color: white;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .title-section {
+    .welcome {
+      right: 5%;
+      .welcome-to {
+        font-size: 18px;
+      }
+      .welcome-title {
+        font-size: 48px;
+      }
     }
   }
 }
@@ -234,7 +248,7 @@ label.login-label {
   width: 0;
   bottom: 1px;
   position: absolute;
-  background: #009688;
+  background: $red-color;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;

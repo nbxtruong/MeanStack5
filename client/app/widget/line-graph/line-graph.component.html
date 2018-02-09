@@ -1,0 +1,26 @@
+<div class="card widget-card">
+  <div class="card-header widget-header">
+    <p class="widget-name">{{widgetName}}</p>
+    <div class="widget-function">
+      <a>
+        <i class="fas fa-download"></i>
+      </a>
+      <a>
+        <i class="fas fa-edit"></i>
+      </a>
+      <a>
+        <i class="fas fa-trash-alt"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-block widget-content">
+    <ul class="legend">
+      <li *ngFor="let legend of legends">
+        <i class="fas fa-circle align-middle" [style.color]="legend.color"></i>
+        {{legend.name}}
+      </li>
+    </ul>
+    <div class="svg-container">
+    </div>
+  </div>
+</div>

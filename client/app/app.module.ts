@@ -27,6 +27,14 @@ import { DeviceService } from './services/device.service';
 import { UtilService } from './services/util.service';
 import { AppHttpClient } from './services/app-http.service';
 import { DeviceEditComponent } from './device/device-edit/device-edit.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LineGraphComponent } from './widget/line-graph/line-graph.component';
+import { GridsterModule } from 'angular-gridster2';
+import { MetricComponent } from './widget/metric/metric.component';
+import { RuleComponent } from './rule/rule.component';
+import { DashboardService } from './services/dashboard.service';
+import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
+import { WeatherService } from './services/weather-forecast.service';
 
 @NgModule({
   declarations: [
@@ -46,11 +54,17 @@ import { DeviceEditComponent } from './device/device-edit/device-edit.component'
     AccountPasswordComponent,
     AccountComponent,
     DeviceListComponent,
-    DeviceEditComponent
+    DeviceEditComponent,
+    DashboardComponent,
+    LineGraphComponent,
+    MetricComponent,
+    RuleComponent,
+    WeatherComponent,
   ],
   imports: [
     RoutingModule,
-    SharedModule
+    SharedModule,
+    GridsterModule
   ],
   providers: [
     AuthService,
@@ -60,7 +74,9 @@ import { DeviceEditComponent } from './device/device-edit/device-edit.component'
     UserService,
     DeviceService,
     UtilService,
-    AppHttpClient
+    AppHttpClient,
+    DashboardService,
+    WeatherService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

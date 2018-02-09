@@ -3,22 +3,22 @@
     <p class="title">
       <strong> DEVICE OVERVIEW </strong>
     </p>
-    <p>Device Name</p>
-    <input class="long-input" type="text" placeholder="Device 1">
-    <p>Device Description</p>
-    <textarea class="long-input"></textarea>
+    <form>
+      <p>Device Name</p>
+      <input class="long-input form-control" type="text" [(ngModel)]="device.name" name="device-name">
+      <p>Device Description</p>
+      <textarea class="long-input" [(ngModel)]="device.description" name="description"></textarea>
+    </form>
   </div>
 
   <div class="device-tag">
     <p class="title">
       <strong>DEVICE TYPE</strong>
     </p>
-    <form>
-      <label class="radio-inline">
-        <input style="padding-top:10px" type="radio" name="optradio"> Sensor</label>
-      <label class="radio-inline column-right">
-        <input type="radio" name="optradio"> Gateway</label>
-    </form>
+    <label class="radio-inline">
+      <input style="padding-top:10px" type="radio" disabled name="device-type" value="sensor" [checked]="device.type=='Sensor'"> Sensor</label>
+    <label class="radio-inline column-right">
+      <input type="radio" name="device-type" disabled value="gateway" [checked]="device.type=='Gateway'"> Gateway</label>
   </div>
 
   <div class="device-tag">
@@ -66,6 +66,12 @@
       </i>
     </div>
 
+  </div>
+  <div class="bottom-bar">
+    <div class="bottom-bar-button">
+      <button class="app-btn" (click)="saveDevice()">Save Device</button>
+      <button class="app-btn-white" routerLink="/device-list">Cancel</button>
+    </div>
   </div>
 
 </div>

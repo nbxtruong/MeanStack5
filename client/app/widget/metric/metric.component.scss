@@ -1,0 +1,35 @@
+.widget-card {
+  height: 100%;
+  border: none;
+  .widget-header {
+    padding: 0 20px;
+    .widget-name {
+      font-weight: bold;
+      float: left;
+      margin: 0;
+      line-height: 50px;
+    }
+    .widget-function {
+      float: right;
+      a {
+        padding: 0 10px;
+        line-height: 50px;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .widget-content {
+    align-items: center;
+    display: flex;
+    .metric-number {
+      width: 100%;
+      font-size: 5vw;
+      text-align: center;
+      .unit {
+        font-size: 5vw;
+      }
+    }
+  }
+}

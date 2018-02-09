@@ -1,0 +1,29 @@
+.widget-card {
+  border: none;
+  .widget-header {
+    padding: 0 20px;
+    .widget-name {
+      font-weight: bold;
+      float: left;
+      margin: 0;
+      line-height: 50px;
+    }
+    .widget-function {
+      float: right;
+      a {
+        padding: 0 10px;
+        line-height: 50px;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+.widget-content {
+  .row {
+    text-align: center;
+    padding: 0px;
+  }
+}

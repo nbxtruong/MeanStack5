@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import { UtilService } from '../../services/util.service';
 import { Device } from '../../shared/models/device.model';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
   selector: 'device-list',
@@ -13,7 +14,6 @@ import { Device } from '../../shared/models/device.model';
 })
 export class DeviceListComponent implements OnInit {
 
-  isLoading: boolean = true;
   token: String = localStorage.getItem('token');
   devices: Device[];
   deviceToDelete: Device;
@@ -26,7 +26,8 @@ export class DeviceListComponent implements OnInit {
   constructor(
     private deviceService: DeviceService,
     private auth: AuthService,
-    private util: UtilService
+    public util: UtilService,
+    public toast: ToastComponent
   ) { }
 
   initDatatable() {
@@ -68,6 +69,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.util.isLoading = true;
     this.getDevices();
     this.deviceToDelete = this.dummyDevice;
   }
@@ -75,7 +77,7 @@ export class DeviceListComponent implements OnInit {
   getDevices() {
     this.deviceService.getListDevices().subscribe(
       res => {
-        this.isLoading = false;
+        this.util.isLoading = false;
         this.devices = res;
         if (!this.tableInitiated) {
           this.initDatatable();
@@ -103,7 +105,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   deleteDevice() {
-    this.isLoading = true;
+    this.util.isLoading = true;
     this.deviceService.deleteDevice(this.deviceToDelete.id).subscribe(
       res => {
         this.getDevices();
@@ -115,7 +117,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   deleteDevices() {
-    this.isLoading = true;
+    this.util.isLoading = true;
     let deletedDeviceIds: String[] = Array.from(this.idsToDelete);
     this.deviceService.deleteDevices(deletedDeviceIds).subscribe(
       res => {

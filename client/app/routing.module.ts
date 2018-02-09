@@ -15,14 +15,22 @@ import { AccountPasswordComponent } from './account/account-password/account-pas
 import { AccountComponent } from './account/account/account.component';
 import { DeviceListComponent } from './device/device-list/device-list.component';
 import { DeviceEditComponent } from './device/device-edit/device-edit.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RuleComponent } from './rule/rule.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
-
+import { LineGraphComponent } from './widget/line-graph/line-graph.component';
+import { MetricComponent } from './widget/metric/metric.component';
+import { WeatherComponent } from './../app/widget/weather-forecast/weather-forecast.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'device-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: "Dashboard" }, canActivate: [AuthGuardLogin] },
+  { path: 'widget', component: MetricComponent, canActivate: [AuthGuardLogin] },
   { path: 'device-list', component: DeviceListComponent, data: { breadcrumb: "Device list" }, canActivate: [AuthGuardLogin] },
   { path: 'users', component: UserListComponent, data: { breadcrumb: "User" }, canActivate: [AuthGuardLogin] },
+  { path: 'widget', component: LineGraphComponent },
+  { path: 'rule', component: RuleComponent, canActivate: [AuthGuardLogin] },
   {
     path: 'account', component: AccountComponent, children:
       [
@@ -43,7 +51,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardLogin] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardLogin] },
   { path: 'notfound', component: NotFoundComponent },
-  { path: '**', redirectTo: '/notfound' },
+  { path: 'weather', component: WeatherComponent },
+  { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({

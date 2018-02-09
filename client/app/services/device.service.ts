@@ -3,14 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastComponent } from '../shared/toast/toast.component';
+import { environment } from '../../environments/environment';
 import { Device } from '../shared/models/device.model';
 import { UtilService } from './util.service';
 import { AppHttpClient } from './app-http.service';
 
 @Injectable()
 export class DeviceService {
+  apiUrl: String = environment.apiUrl;
 
   constructor(
+    private router: Router,
+    public toast: ToastComponent,
     private http: AppHttpClient,
     private util: UtilService
   ) { }
@@ -19,7 +25,11 @@ export class DeviceService {
     return this.http.get('devices');
   }
 
-  getDeviceInfo(device_id: String): Observable<Device> {
+  updateDevice(device_id: String, device_data: Object): Observable<Device> {
+    return this.http.put('devices/' + device_id, device_data);
+  }
+
+  getDevice(device_id: String): Observable<Device> {
     return this.http.get('devices/' + device_id);
   }
 
@@ -33,5 +43,9 @@ export class DeviceService {
       deleteIDs.push({ "id": deviceID });
     });
     return this.http.post('devices/deleteByIds', deleteIDs);
+  }
+
+  getDeviceData(dataRequest: any): Observable<any> {
+    return this.http.post("deviceData", dataRequest);
   }
 }
