@@ -5,7 +5,7 @@
     <h1 class="dashboard-name">
       <i class="fas fa-th-large"></i>{{dashboardInfo.name}}</h1>
     <div class="dashboard-function">
-      <button class="app-btn">Add widget</button>
+      <button class="app-btn" (click)="addItem('weather-forecast')" *ngIf="editMode">Add widget</button>
       <button class="dashboard-btn align-middle">
         <i class="fas fa-sync" (click)="getDashboard()"></i>
       </button>
@@ -23,8 +23,9 @@
   </div>
 </div>
 <gridster [options]="options">
-  <gridster-item [item]="item" *ngFor="let item of dashboard">
+  <gridster-item [item]="item" *ngFor="let item of dashboardInfo.content">
     <line-graph [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='linegraph'"></line-graph>
     <metric [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='metric'"></metric>
+    <weather-app *ngIf="item.template=='weather-forecast'"></weather-app>
   </gridster-item>
 </gridster>

@@ -62,8 +62,22 @@ export class DashboardComponent implements OnInit {
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
-  addItem() {
-    this.dashboard.push({});
+  addItem(type: String) {
+    if (type === 'weather-forecast') {
+      this.dashboardInfo.content.push({
+        cols: 5,
+        rows: 3,
+        minItemCols: 5,
+        minItemRows: 3,
+        name: "weather-forecast 1",
+        template: "weather-forecast",
+        x: 0,
+        y: 0
+      });
+      console.log(this.dashboard);
+    } else {
+      console.log('widget type error!!!');
+    }
   }
 
   changeEditMode(state) {
@@ -86,24 +100,6 @@ export class DashboardComponent implements OnInit {
     this.dashboard.length = 0;
     this.dashboardService.getDashboards().subscribe(res => {
       this.dashboardInfo = res[0];
-      this.dashboardInfo.content.forEach(widget => {
-        let gridsterItem = widget.gridster;
-        switch (widget.template) {
-          case "metric":
-            gridsterItem.minItemCols = 3;
-            gridsterItem.minItemRows = 2;
-            break;
-          case "linegraph":
-            gridsterItem.minItemCols = 5;
-            gridsterItem.minItemRows = 3;
-            break;
-        }
-        gridsterItem.template = widget.template;
-        gridsterItem.name = widget.name;
-        gridsterItem.data = widget.data;
-        this.dashboard.push(gridsterItem);
-      });
-
     }, error => {
       console.log(error);
     });
