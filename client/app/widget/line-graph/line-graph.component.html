@@ -8,7 +8,7 @@
       <a>
         <i class="fas fa-edit"></i>
       </a>
-      <a>
+      <a (click)="setDelete(true)">
         <i class="fas fa-trash-alt"></i>
       </a>
     </div>
@@ -21,6 +21,19 @@
       </li>
     </ul>
     <div class="svg-container">
+    </div>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this Widget</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
     </div>
   </div>
 </div>

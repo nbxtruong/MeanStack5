@@ -10,7 +10,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 @Component({
   selector: 'device-edit-properties',
   templateUrl: './device-edit-properties.component.html',
-  styleUrls: ['./device-edit-properties.component.css']
+  styleUrls: ['./device-edit-properties.component.scss']
 })
 export class DeviceEditPropertiesComponent implements OnInit {
 

@@ -15,15 +15,15 @@ describe('LogoutComponent', () => {
   beforeEach(async(() => {
     authServiceStub = {
       loggedIn: true,
-      logout: (function() {
+      logout: (function () {
         this.loggedIn = false;
       })
     };
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ],
-      providers: [ { provide: AuthService, useValue: authServiceStub } ],
+      declarations: [LogoutComponent],
+      providers: [{ provide: AuthService, useValue: authServiceStub }],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

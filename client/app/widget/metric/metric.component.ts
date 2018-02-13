@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UtilService } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 import { Observable } from 'rxjs/Rx';
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./metric.component.scss']
 })
 export class MetricComponent implements OnInit {
+  isDeleting: boolean;
+  @Output() deleteEvent = new EventEmitter();
 
   constructor(
     public util: UtilService,
@@ -55,6 +57,14 @@ export class MetricComponent implements OnInit {
       fields: [this.widgetData.field]
     });
     return dataRequest;
+  }
+
+  setDelete(value: boolean) {
+    this.isDeleting = value;
+  }
+
+  deleteWidget() {
+    this.deleteEvent.emit();
   }
 
 }

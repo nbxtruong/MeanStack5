@@ -3,6 +3,7 @@ import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { DashboardService } from '../services/dashboard.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Observable } from 'rxjs/Rx';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +14,11 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    public toast: ToastComponent
+    public toast: ToastComponent,
+    public util: UtilService
   ) { }
 
   options: GridsterConfig;
-  dashboard: Array<GridsterItem> = [];
   dashboardInfo: any = { name: "Loading..." };
   editMode: Boolean = false;
 
@@ -59,7 +60,11 @@ export class DashboardComponent implements OnInit {
   }
 
   removeItem(item) {
-    this.dashboard.splice(this.dashboard.indexOf(item), 1);
+    this.dashboardInfo.content.splice(this.dashboardInfo.content.indexOf(item), 1);
+  }
+
+  removeIndex(idx: number) {
+    this.dashboardInfo.content.splice(idx, 1);
   }
 
   addItem(type: String) {
@@ -74,13 +79,18 @@ export class DashboardComponent implements OnInit {
         x: 0,
         y: 0
       });
-      console.log(this.dashboard);
     } else {
       console.log('widget type error!!!');
     }
   }
 
   changeEditMode(state) {
+    if (!state) {
+      this.util.isLoading = true;
+    } else {
+      this.util.isLoading = false;
+    }
+
     this.editMode = state;
     this.options.draggable.enabled = state;
     this.options.resizable.enabled = state;
@@ -90,6 +100,7 @@ export class DashboardComponent implements OnInit {
       this.dashboardService.saveDashboards(this.dashboardInfo.id, this.dashboardInfo).subscribe(
         res => {
           this.toast.setMessage('Device updated successfully!', 'success');
+          this.util.isLoading = false;
         },
         error => this.toast.setMessage('Failed to update device', 'danger')
       );
@@ -97,12 +108,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getDashboard() {
-    this.dashboard.length = 0;
     this.dashboardService.getDashboards().subscribe(res => {
       this.dashboardInfo = res[0];
     }, error => {
       console.log(error);
     });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import * as d3 from "d3";
 import { UtilService } from '../../services/util.service';
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./line-graph.component.scss']
 })
 export class LineGraphComponent implements OnInit, AfterViewInit {
+  isDeleting: boolean;
+  @Output() deleteEvent = new EventEmitter();
 
   constructor(
     public util: UtilService,
@@ -58,11 +60,6 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
   getInitData(contentWidth, contentHeight) {
     this.deviceService.getDeviceData(this.dataRequest).subscribe(res => {
       this.data = res;
-      this.data.forEach(element => {
-        element.data.forEach(i => {
-          i.created_at = (new Date(i.created_at)).getSeconds();
-        });
-      });
       this.drawLineGraph(contentWidth, contentHeight);
     }, error => {
       console.log(error);
@@ -71,6 +68,7 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
 
   reloadData(contentWidth, contentHeight) {
     Observable.interval(this.refreshInterval).subscribe(x => {
+      d3.select(".svg-container svg").remove();
       this.getInitData(contentWidth, contentHeight);
     });
   }
@@ -80,15 +78,13 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
       width = graphWidth - margin.left - margin.right,
       height = graphHeight - margin.top - margin.bottom;
 
-    let parseTime = d3.timeParse("%Y");
-
     let x = d3.scaleTime().range([0, width]);
     let y = d3.scaleLinear().range([height, 0]);
 
     let svg = d3.select(".svg-container")
       .attr(
-      "style",
-      "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
+        "style",
+        "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
       )
       .append("svg")
       .attr("preserveAspectRatio", "xMinYMin meet")
@@ -100,7 +96,7 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
       .style("left", "0")
       .append("g")
       .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + margin.left + "," + margin.top + ")");
 
     function draw(Data) {
       let maxY = 0;
@@ -109,7 +105,6 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
         let field = lineData.fields[0];
         let data = lineData.data;
         data.forEach(function (d) {
-          d.created_at = parseTime(d.created_at);
           d[field] = +d[field];
         });
 
@@ -149,5 +144,14 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
         .call(d3.axisLeft(y));
     }
     draw(this.data);
+  }
+
+  setDelete(value: boolean) {
+    this.isDeleting = value;
+    console.log(this.isDeleting);
+  }
+
+  deleteWidget() {
+    this.deleteEvent.emit();
   }
 }

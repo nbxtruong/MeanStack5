@@ -1,29 +1,56 @@
 .widget-card {
-  border: none;
-  .widget-header {
-    padding: 0 20px;
-    .widget-name {
-      font-weight: bold;
-      float: left;
-      margin: 0;
-      line-height: 50px;
-    }
-    .widget-function {
-      float: right;
-      a {
-        padding: 0 10px;
-        line-height: 50px;
-        i {
-          font-size: 18px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #e5e5e5;
+    font-family: "Poppins";
+    .widget-header {
+        padding: 0 20px;
+        .widget-name {
+            font-weight: bold;
+            float: left;
+            margin: 0;
+            line-height: 50px;
         }
-      }
+        .widget-function {
+            float: right;
+            a {
+                padding: 0 10px;
+                line-height: 50px;
+                i {
+                    font-size: 18px;
+                }
+            }
+        }
     }
-  }
-}
-
-.widget-content {
-  .row {
-    text-align: center;
-    padding: 0px;
-  }
+    .widget-content {
+        text-align: center;
+        vertical-align: middle !important;
+        padding: 0px;
+        table {
+            width: 100%;
+            p {
+                margin: 0px;
+                font-size: 1vw;
+            }
+            tr {
+                height: 7.8vw;
+            }
+            td.weather-today {
+                width: 50%;
+                padding-left: 100px;
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+            td.weather-nextdays {
+                width: 33.33%;
+                border: solid 1px #e5e5e5;
+                img {
+                    width: 65px;
+                    height: 65px;
+                }
+            }
+        }
+    }
 }

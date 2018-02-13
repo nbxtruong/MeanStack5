@@ -8,9 +8,9 @@ describe('DeviceEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeviceEditComponent ]
+      declarations: [DeviceEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

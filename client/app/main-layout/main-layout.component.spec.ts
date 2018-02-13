@@ -8,9 +8,9 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainLayoutComponent ]
+      declarations: [MainLayoutComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
