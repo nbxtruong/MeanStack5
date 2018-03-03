@@ -1,0 +1,35 @@
+<div class="card widget-card">
+  <div class="card-header widget-header">
+    <p class="widget-name">Switch Widget</p>
+    <div class="widget-function">
+      <a>
+        <i class="fas fa-download"></i>
+      </a>
+      <a>
+        <i class="fas fa-edit"></i>
+      </a>
+      <a (click)="setDelete(true)">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-block widget-content">
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this Widget</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>

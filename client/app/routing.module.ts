@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -23,14 +22,16 @@ import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { LineGraphComponent } from './widget/line-graph/line-graph.component';
 import { MetricComponent } from './widget/metric/metric.component';
 import { WeatherComponent } from './../app/widget/weather-forecast/weather-forecast.component';
+import { SwitchWidgetComponent } from './../app/widget/switch-widget/switch-widget.component';
+import { AddWidgetComponent } from './add-widget/add-widget.component';
+import { MqttComponent } from './mqtt/mqtt.component';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: "Dashboard" }, canActivate: [AuthGuardLogin] },
-  { path: 'widget', component: MetricComponent, canActivate: [AuthGuardLogin] },
-  { path: 'device-list', component: DeviceListComponent, data: { breadcrumb: "Device list" }, canActivate: [AuthGuardLogin] },
+  { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
+  { path: 'dashboards', component: DashboardComponent, data: { breadcrumb: "Dashboard" }, canActivate: [AuthGuardLogin] },
+  { path: 'devices', component: DeviceListComponent, data: { breadcrumb: "Device list" }, canActivate: [AuthGuardLogin] },
   { path: 'users', component: UserListComponent, data: { breadcrumb: "User" }, canActivate: [AuthGuardLogin] },
-  { path: 'widget', component: LineGraphComponent },
-  { path: 'rule', component: RuleComponent, canActivate: [AuthGuardLogin] },
+  { path: 'rules', component: RuleComponent, canActivate: [AuthGuardLogin] },
   {
     path: 'account', component: AccountComponent, children:
       [
@@ -51,12 +52,12 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardLogin] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardLogin] },
   { path: 'notfound', component: NotFoundComponent },
-  { path: 'weather', component: WeatherComponent },
+  { path: 'add-widget', component: AddWidgetComponent },
   { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 

@@ -1,0 +1,121 @@
+<app-loading [content]="'Saving ...'"></app-loading>
+
+<div class="page-header">
+  <div class="app-container">
+    <h1 class="page-name">New {{chosenTemplate}} widget</h1>
+  </div>
+</div>
+<div class="main" *ngIf="chosenTemplate==null">
+  <div class="app-container">
+    <h1 class="select-widget">Select Widget to Add</h1>
+    <div class="row">
+
+      <!-- Gauge chart template -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Gauge
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a gauge chart">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/graph1.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric chart template -->
+      <div class="col-md-4">
+        <div class="card" (click)="chosenTemplate='metric'">
+          <div class="card-header">
+            Metric
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a metric">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/graph2.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linegraph template -->
+      <div class="col-md-4">
+        <div class="card" (click)="chosenTemplate='linegraph'">
+          <div class="card-header">
+            Line chart
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a line chart">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/graph4.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- weather-forecast template -->
+      <div class="col-md-4">
+        <div class="card" (click)="chosenTemplate='weather-forecast'">
+          <div class="card-header">
+            Weather Forecast
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a weather forecast">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/weather-forecast.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Switch template -->
+      <div class="col-md-4">
+        <div class="card" (click)="chosenTemplate='switch-widget'">
+          <div class="card-header">
+            Switch widget
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a switch widget">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/switch.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- High-charts template -->
+      <div class="col-md-4">
+        <div class="card" (click)="chosenTemplate='high-charts'">
+          <div class="card-header">
+            High Charts
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a switch widget">
+              <i class="fas fa-exclamation-circle"></i>
+            </button>
+          </div>
+          <div class="card-block">
+            <div class="img-wrapper">
+              <img class="img-fluid" src="assets/chart/high-charts.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="app-container">
+  <widget-form *ngIf="chosenTemplate!=null" [template]="chosenTemplate" (cancel)="chosenTemplate=null" (complete)="onComplete($event)"></widget-form>
+</div>

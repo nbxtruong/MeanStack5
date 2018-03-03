@@ -21,56 +21,42 @@
       <input type="radio" name="device-type" disabled value="gateway" [checked]="device.type=='Gateway'"> Gateway</label>
   </div>
 
-  <div class="device-tag">
+  <div class="device-tag" *ngIf="device.attributes != null">
     <p class="title">
       <strong> DEVICE ATTRIBUTE</strong>
     </p>
     <div class="row">
       <div class="col-sm-9">
         <table>
-          <tr>
+          <tr *ngFor="let attribute of device.attributes; let idx = index">
             <td class="column-left">
               <p>Data Type</p>
-              <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray"></i>
-              <select class="short-input" disabled>
+              <!-- <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray" (click)="removeAttribute(idx)"></i> -->
+              <select [(ngModel)]="attribute.type" class="short-input" disabled>
                 <option>Number</option>
                 <option>String</option>
               </select>
             </td>
             <td class="column-right">
               <p>Name</p>
-              <input class="short-input" type="text" value="Temperature" readonly>
-            </td>
-          </tr>
-          <tr>
-            <td class="column-left">
-              <p>Data Type</p>
-              <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray"></i>
-              <select class="short-input" disabled>
-                <option>String</option>
-                <option>Number</option>
-              </select>
-            </td>
-            <td class="column-right">
-              <p>Name</p>
-              <input class="short-input" type="text" value="Notes" readonly>
+              <input class="short-input" type="text" [(ngModel)]="attribute.name" readonly>
             </td>
           </tr>
         </table>
       </div>
     </div>
 
-    <div>
+    <!-- <div (click)="addAttribute()">
       <i class="fa fa-plus-circle" aria-hidden="true">
         <span> Add device attribute</span>
       </i>
-    </div>
+    </div> -->
 
   </div>
   <div class="bottom-bar">
     <div class="bottom-bar-button">
       <button class="app-btn" (click)="saveDevice()">Save Device</button>
-      <button class="app-btn-white" routerLink="/device-list">Cancel</button>
+      <button class="app-btn-white" routerLink="/devices">Cancel</button>
     </div>
   </div>
 

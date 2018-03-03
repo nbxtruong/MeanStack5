@@ -1,3 +1,138 @@
-<p>
-  rule works!
-</p>
+<div class="app-container col-sm-12 ">
+  <div class="container col-12 row my-4 ">
+    <div class="col-4">
+      <h1 class="rule-header"> <i class="fas fa-tasks"></i>All Rules</h1>
+    </div>
+    <div class="col-8" style="display:flex;justify-content:flex-end;">
+      <button class="btn float create-rule-btn" data-toggle="modal" data-target="#createRuleModal">
+        <label style="position:relative;top:-7px;" class="create-rule">Create Rule</label>
+      </button>
+    </div>
+  </div>
+  <div class="container col-12 row">
+    <div class="search-box  col-11 col-md-3 ml-3">
+      <div class="input-group py-1">
+        <input type="text" class="col-10 search-input" [(ngModel)]="searchRule" placeholder="Rule Name" />
+        <div class="col-2 px-2 mx-2 float-right">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container px-0 mx-0 col-sm-12">
+    <div class="card mx-2 my-2 px-0" *ngFor="let rule of ruleList;let i=index" [attr.data-index]="i">
+      <div class="card-header">
+        <div class="rule-headerCell col-10 float-left my-2 py-0 px-0 mx-0">
+          <label class="rule-header-label row-12" >{{rule.name}}</label>
+        </div>
+        <div class="rule-headerCell float-right col-2 my-2 py-0 mx-0 px-0 mx-0">
+        <button (click)="editRule(i)" data-toggle="modal" data-target="#createRuleModal" class="card-header-icon fas fa-edit mx-0 px-0 border-0"></button>
+        <button (click)="deleteRule(i)" class="card-header-icon fas fa-trash-alt ml-1 mr-0 px-0 border-0" ></button>
+        </div>
+      </div>
+      <div class="card-body row mx-0 px-0 my-1">
+        <div class="col-2 px-2 condition-type-box">
+          <div class="row">
+            <div for="When" class="col-12 when-condition-box ">When</div>
+            <div for="Then" class="col-12 then-condition-box ">Then</div>
+          </div>
+        </div>
+        <div class="col-1 px-0 mx-0 eclipse-box">
+          <div class="col center" style="margin-top:13px;">
+            <div class="when-eclipse-1 rounded-circle"></div>
+            <div class="line-gap line mx-1 my-1"></div>
+            <div class="when-eclipse-2 rounded-circle"></div>
+          </div>
+        </div>
+        <div class="col-1 px-0 mx-0 eclipse-box">
+          <div class="col center" style="margin-top:13px;">
+            <div class="mt-1">
+              <img src="/assets/img/switch.png" srcset="/assets/img/switch@2x.png 2x,/assets/img/switch@3x.png 3x" class="switch-icon">
+            </div>
+            <div class="line-gap mx-1 my-1"></div>
+            <div class="my-2">
+              <img src="/assets/img/mail.png" srcset="/assets/img/mail@2x.png 2x,/assets/img/mail@3x.png 3x" class="mail-icon">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8 condition-box">
+          <div class="col-12 px-0 mx-0">
+            <div class="col px-0 mx-0 when-conditions " style="margin-top:10px;">{{rule.device_id}} {{rule.attribute}}&nbsp;{{rule.operator}}&nbsp;{{rule.value}}&nbsp;
+            </div>
+            <div for="Then" class="col px-0 mx-0 then-conditions">
+              <div style="color:black;font-weight: normal;display: table-cell;vertical-align: bottom;">
+                <span class="then-conditions-span" style="color:gray;font-weight:normal;">to&nbsp;</span> {{rule.contact}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card createRuleTemplate mx-2 my-2">
+      <button style="background-color: transparent;border:none;" data-toggle="modal" data-target="#createRuleModal">
+        <img src="/assets/img/add-icon.png" srcset="/assets/img/add-icon@2x.png 2x,/assets/img/add-icon@3x.png 3x">
+      </button>
+      <p>Create Rule</p>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fade" id="createRuleModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Create A Rule</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card-block col-12">
+            <div class="row col-12">
+              <input class=" col-12 col-md-12 mx-1 mb-1" [(ngModel)]="ruleInput.name" placeholder="Rule Name">
+            </div>
+            <div class="row col-12">
+              <label for="When" class="col-12 col-md-2 mx-1 mb-1">When</label>
+              <p class="when-eclipse-1 rounded-circle my-2 mx-2"></p>
+              <select class="btn-info col-12 col-md-2 mx-1 mb-1" [(ngModel)]="ruleInput.device_id" name="deviceSelectBox">
+                <option disabled>Device</option>
+                <option *ngFor="let device of ruleProperties.deviceList" value="{{device}}">{{device}}</option>
+              </select>
+              <select class="btn-info col-12 col-md-2 mx-1 mb-1" [(ngModel)]="ruleInput.attribute" name="attributeSelectBox">
+                <option disabled>Attribute</option>
+                <option *ngFor="let attr of ruleProperties.attributeList" value="{{attr}}">{{attr}}</option>
+              </select>
+              <select class="btn-info col-12 col-md-2 mx-1 mb-1" [(ngModel)]="ruleInput.operator" name="operatorSelectBox">
+                <option disabled>Operator</option>
+                <option *ngFor="let op of ruleProperties.operatorList" value="{{op}}">{{op}}</option>
+              </select>
+              <input type="number" class=" col-12 col-md-2 mx-1 mb-1 pl-1 pr-0" [(ngModel)]="ruleInput.value" placeholder="Value" name="valueSelectBox">
+            </div>
+            <div class="row col-12">
+              <label for="Then" class="col-12 col-md-2 mx-1 mb-1">Then</label>
+              <p class="when-eclipse-2 rounded-circle my-2 mx-2"></p>
+              <select class="btn-info col-12 col-md-9 mx-1 mb-1" [(ngModel)]="ruleInput.action" name="actionSelectBox">
+                <option disabled>Notify User By</option>
+                <option *ngFor="let act of ruleProperties.actionInfo" value="{{act}}">{{act}}</option>
+              </select>
+              <input class="col-12 mx-1 mb-1" [(ngModel)]="ruleInput.contact" placeholder="Contact" *ngIf="ruleInput.action==='email'">
+              <input class="col-12 mx-1 mb-1" [(ngModel)]="ruleInput.subject" placeholder="Subject" *ngIf="ruleInput.action==='email'">
+              <textarea rows="4" class="col-12 mx-1 mb-1" [(ngModel)]="ruleInput.content" placeholder="Content" *ngIf="ruleInput.action==='email'"></textarea>
+              <input class="col-12 mx-1 mb-1" [(ngModel)]="ruleInput.contact" placeholder="Phone Number" *ngIf="ruleInput.action==='sms'">
+              <textarea rows="4" class="col-12 mx-1 mb-1" [(ngModel)]="ruleInput.content" placeholder="Message" *ngIf="ruleInput.action==='sms'"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createRule()" [hidden]="editting >= 0">Create</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateRule()" [hidden]="editting<0">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="resetCreateRuleBindings()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

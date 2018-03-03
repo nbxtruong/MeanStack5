@@ -8,7 +8,6 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -28,18 +27,30 @@ import { UtilService } from './services/util.service';
 import { AppHttpClient } from './services/app-http.service';
 import { DeviceEditComponent } from './device/device-edit/device-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LineGraphComponent } from './widget/line-graph/line-graph.component';
 import { GridsterModule } from 'angular-gridster2';
-import { MetricComponent } from './widget/metric/metric.component';
 import { RuleComponent } from './rule/rule.component';
 import { DashboardService } from './services/dashboard.service';
-import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
 import { WeatherService } from './services/weather-forecast.service';
+import { RuleService } from './services/rule.service';
+import { AddWidgetComponent } from './add-widget/add-widget.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { WidgetFormComponent } from './add-widget/widget-form/widget-form.component';
+import { MqttComponent } from './mqtt/mqtt.component';
+import { AppMqttService } from './services/app-mqtt.service';
+import { LinechartFormComponent } from './widget-form/linechart-form/linechart-form.component';
+import { ChartModule } from 'angular2-highcharts';
+
+// Import widgets component
+import { LineGraphComponent } from './widget/line-graph/line-graph.component';
+import { MetricComponent } from './widget/metric/metric.component';
+import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
+import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
+import { HightChartComponent } from './widget/high-charts/high-charts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
@@ -60,11 +71,19 @@ import { WeatherService } from './services/weather-forecast.service';
     MetricComponent,
     RuleComponent,
     WeatherComponent,
+    SwitchWidgetComponent,
+    AddWidgetComponent,
+    WidgetFormComponent,
+    MqttComponent,
+    LinechartFormComponent,
+    HightChartComponent
   ],
   imports: [
     RoutingModule,
     SharedModule,
-    GridsterModule
+    GridsterModule,
+    ColorPickerModule,
+    ChartModule.forRoot(require('highcharts'))
   ],
   providers: [
     AuthService,
@@ -76,7 +95,9 @@ import { WeatherService } from './services/weather-forecast.service';
     UtilService,
     AppHttpClient,
     DashboardService,
-    WeatherService
+    WeatherService,
+    AppMqttService,
+    RuleService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

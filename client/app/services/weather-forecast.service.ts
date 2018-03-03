@@ -7,11 +7,14 @@ import { constants } from '../constants';
 export class WeatherService {
 
   weatherAPI = constants.WEATHER_API;
+  country: String;
+  cityName: String;
+
   constructor(
     private httpClient: HttpClient
   ) { }
 
   getWeather() {
-    return this.httpClient.get(this.weatherAPI);
+    return this.httpClient.get(this.weatherAPI + this.country + '/' + this.cityName + '.json');
   }
 }

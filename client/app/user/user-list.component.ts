@@ -11,7 +11,6 @@ import { User } from '../shared/models/users.model';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  isLoading: boolean = true;
   token: String = localStorage.getItem('token');
   users: User[];
   userToDelete: User;
@@ -22,14 +21,14 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService,
     private auth: AuthService,
-    private util: UtilService
+    public util: UtilService
   ) { }
 
   initDatatable() {
     const ngThis = this;
     this.tableInitiated = true;
     $(document).ready(function () {
-      const table = $('#datatable').DataTable({
+      ngThis.table = $('#datatable').DataTable({
         stateSave: true,
         pagingType: 'full_numbers',
         dom: '<"top"fB>rt<"bottom"ipl>',
@@ -60,12 +59,13 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.util.isLoading = true;
     this.getListUsers();
   }
   getListUsers() {
     this.userService.getUsers().subscribe(
       res => {
-        this.isLoading = false;
+        this.util.isLoading = false;
         this.users = res;
         if (!this.tableInitiated) {
           this.initDatatable();

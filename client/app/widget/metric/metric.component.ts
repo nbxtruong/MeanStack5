@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UtilService } from '../../services/util.service';
+import { UtilService, Widget } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 import { Observable } from 'rxjs/Rx';
 
@@ -8,26 +8,45 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './metric.component.html',
   styleUrls: ['./metric.component.scss']
 })
-export class MetricComponent implements OnInit {
+export class MetricComponent implements OnInit, Widget {
+  getInvolvedDevices(): string[] {
+    return [this.getDataRequest()[0].device_id];
+  }
+  update(): void {
+    let dataRequest = this.getDataRequest();
+    this.getInitData(dataRequest);
+  }
+
   isDeleting: boolean;
+  isEditing: boolean;
   @Output() deleteEvent = new EventEmitter();
+  @Output() editEvent = new EventEmitter();
 
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
   ) { }
 
-  @Input('data') widgetData: any;
+  @Input('data') widgetInfo: any;
   @Input('name') widgetName: string = "No widget";
   @Input('refreshInterval') refreshInterval: number;
 
+  widgetData: any;
   data: any = {};
   field: string;
+  model: any = {
+    name: "N/A",
+    data: {
+      field: "N/A",
+      unit: "N/A"
+    }
+  };
 
   ngOnInit() {
+    this.widgetData = this.widgetInfo.data;
+    this.model = this.widgetInfo;
     this.field = this.widgetData.field;
     let dataRequest = this.getDataRequest();
-
     this.getInitData(dataRequest);
     this.reloadData(dataRequest);
   }
@@ -50,7 +69,7 @@ export class MetricComponent implements OnInit {
     });
   }
 
-  getDataRequest() {
+  getDataRequest(): any {
     let dataRequest: Array<any> = [];
     dataRequest.push({
       device_id: this.widgetData.device_id,
@@ -63,8 +82,16 @@ export class MetricComponent implements OnInit {
     this.isDeleting = value;
   }
 
+  setEdit(value: boolean) {
+    this.isEditing = value;
+  }
+
   deleteWidget() {
     this.deleteEvent.emit();
+  }
+
+  onSubmit() {
+    this.editEvent.emit(this.model);
   }
 
 }

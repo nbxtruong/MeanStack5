@@ -1,0 +1,128 @@
+.widget-card {
+    height: 100%;
+    border: none;
+    .widget-header {
+        padding: 0 20px;
+        .widget-name {
+            font-weight: bold;
+            float: left;
+            margin: 0;
+            line-height: 50px;
+            font-size: 14px;
+        }
+        .widget-function {
+            float: right;
+            a {
+                padding: 0 10px;
+                line-height: 50px;
+                i {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    .widget-content {
+        padding: 15px !important;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            margin-bottom: 0px;
+        }
+        /* Hide default HTML checkbox */
+        .switch input {
+            display: none;
+        }
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 92px;
+            width: 100px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        input:checked+.slider:before {
+            -webkit-transform: translateX(44px);
+            -ms-transform: translateX(44px);
+            transform: translateX(92px);
+        }
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 50px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    }
+}
+
+.app-modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.app-modal-content {
+    border-radius: 5px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 40%;
+    .message {
+        text-align: center;
+        font-size: 22px;
+        margin: 35px 0;
+    }
+    .app-modal-header {
+        padding: 25px;
+        border-bottom: 1px solid #e5e5e5;
+        .title {
+            font-weight: 600;
+            margin: 0;
+            font-size: 22px;
+            color: #ee3731;
+            text-transform: uppercase;
+        }
+    }
+    .app-modal-footer {
+        text-align: center;
+        padding-bottom: 30px;
+        .app-btn,
+        .app-btn-white {
+            margin: 0px 15px;
+        }
+    }
+}

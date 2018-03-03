@@ -3,22 +3,25 @@
 
 <div class="app-container" *ngIf="!util.isLoading">
   <div class="col-12-sm">
-    <table class="button-datatable">
-      <thead>
-        <tr>
-          <td>
-            <h1>
-              <p class="namepage">All Devices</p>
-            </h1>
-          </td>
-          <td style="text-align: right; padding-top:18px">
-            <button class="app-btn">New</button>
-            <button class="app-btn-white" [disabled]="idsToDelete.size==0" data-toggle="modal" data-target="#deleteMultipleModal">Delete</button>
-            <button class="app-btn-white">Export</button>
-          </td>
-        </tr>
-      </thead>
-    </table>
+    <div class="devices-header">
+      <table class="button-datatable">
+        <thead>
+          <tr>
+            <td>
+              <h1 class="devices-name">
+                <img class="img-fluid" src="assets/img/device.png">
+                <span> Devices</span>
+              </h1>
+            </td>
+            <td style="text-align: right; padding-top:18px">
+              <button class="app-btn">New</button>
+              <button class="app-btn-white" [disabled]="idsToDelete.size==0" data-toggle="modal" data-target="#deleteMultipleModal">Delete</button>
+              <button class="app-btn-white">Export</button>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
     <div class="inputicon">
       <table id="datatable">
         <p class="fa fa-search" aria-hidden="true"></p>

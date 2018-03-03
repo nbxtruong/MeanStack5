@@ -8,8 +8,8 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto app-nav-ul">
 
-      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='dashboard'">
-        <a class="nav-link" routerLink="/dashboard" (click)="util.setCurrentPage('dashboard')">Dashboard</a>
+      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='dashboards'">
+        <a class="nav-link" routerLink="/dashboards" (click)="util.setCurrentPage('dashboards')">Dashboard</a>
         <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="sr-only">Toggle Dropdown</span>
         </a>
@@ -17,15 +17,15 @@
           <h6 class="dropdown-header">Recent Dashboard</h6>
           <a class="dropdown-item" href="#">Dashboard 1</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" routerLink="/dashboard">View All Dashboard</a>
+          <a class="dropdown-item" routerLink="/dashboards">View All Dashboard</a>
           <a class="dropdown-item">
             <button class="app-btn">Create dashboard</button>
           </a>
         </div>
       </li>
 
-      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='device-list'">
-        <a class="nav-link" routerLink="/device-list" (click)="util.setCurrentPage('device-list')">Devices</a>
+      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='devices'">
+        <a class="nav-link" routerLink="/devices" (click)="util.setCurrentPage('devices')">Devices</a>
         <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="sr-only">Toggle Dropdown</span>
         </a>
@@ -34,7 +34,7 @@
           <a class="dropdown-item" href="#">Sprinkler 1</a>
           <a class="dropdown-item" href="#">Sprinkler 2</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" routerLink="/device-list">View All Devices</a>
+          <a class="dropdown-item" href="#" routerLink="/devices">View All Devices</a>
           <a class="dropdown-item" href="#">
             <button class="app-btn">Create device</button>
           </a>
@@ -45,8 +45,8 @@
         <a routerLink="/users" class="nav-link" (click)="util.setCurrentPage('users')">Users</a>
       </li>
 
-      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='rule'">
-        <a class="nav-link" routerLink="/rule" (click)="util.setCurrentPage('rule')">Rules</a>
+      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='rules'">
+        <a class="nav-link" routerLink="/rules" (click)="util.setCurrentPage('rules')">Rules</a>
         <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="sr-only">Toggle Dropdown</span>
         </a>

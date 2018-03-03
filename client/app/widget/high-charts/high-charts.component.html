@@ -1,0 +1,39 @@
+<div class="card widget-card">
+  <div class="card-header widget-header">
+    <p class="widget-name">{{widgetInfo.name}}</p>
+    <div class="widget-function">
+      <a>
+        <i class="fas fa-download"></i>
+      </a>
+      <a (click)="setEdit(true)">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a (click)="setDelete(true)">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-block widget-content" #content>
+    <chart [options]="options"></chart>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this Widget</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="app-modal edit-modal" *ngIf="isEditing==true">
+  <div class="app-modal-content">
+    <linechart-form [model]="widgetInfo" (cancel)="setEdit(false)" (complete)="onSubmit($event)"></linechart-form>
+  </div>
+</div>

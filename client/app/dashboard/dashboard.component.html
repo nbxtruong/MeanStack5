@@ -6,13 +6,13 @@
     <h1 class="dashboard-name">
       <i class="fas fa-th-large"></i>{{dashboardInfo.name}}</h1>
     <div class="dashboard-function">
-      <button class="app-btn add-widget" (click)="addItem('')" *ngIf="editMode">Add widget</button>
+      <button class="app-btn add-widget" routerLink="/add-widget" *ngIf="util.editMode">Add widget</button>
       <button class="dashboard-btn align-middle">
         <i class="fas fa-sync" (click)="getDashboard()"></i>
       </button>
       <button class="dashboard-btn align-middle">
-        <i class="fas fa-edit" (click)="changeEditMode(true)" *ngIf="!editMode"></i>
-        <i class="fas fa-save" (click)="changeEditMode(false)" *ngIf="editMode"></i>
+        <i class="fas fa-edit" (click)="changeEditMode(true)" *ngIf="!util.editMode"></i>
+        <i class="fas fa-save" (click)="changeEditMode(false)" *ngIf="util.editMode"></i>
       </button>
       <button class="dashboard-btn align-middle">
         <i class="fas fa-expand-arrows-alt"></i>
@@ -25,8 +25,13 @@
 </div>
 <gridster [options]="options">
   <gridster-item [item]="item" *ngFor="let item of dashboardInfo.content; let idx = index">
-    <line-graph (deleteEvent)="removeIndex(idx)" [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='linegraph'"></line-graph>
-    <metric (deleteEvent)="removeIndex(idx)" [name]="item.name" [data]="item.data" [refreshInterval]=30000 *ngIf="item.template=='metric'"></metric>
-    <weather-app *ngIf="item.template=='weather-forecast'"></weather-app>
+    <line-graph #widget (editEvent)="editIndex($event,idx)" (deleteEvent)="removeIndex(idx)" [name]="item.name" [data]="item"
+      [index]="idx" [refreshInterval]=30000 *ngIf="item.template=='linegraph'"></line-graph>
+    <metric #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" [name]="item.name" [data]="item" [refreshInterval]=30000
+      *ngIf="item.template=='metric'"></metric>
+    <weather-app #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" *ngIf="item.template=='weather-forecast'"
+      [name]="item.name" [country]="item.data.country" [city]="item.data.city"></weather-app>
+    <switch-widget #widget (deleteEvent)="removeIndex(idx)" *ngIf="item.template=='switch-widget'" [name]="item.name"></switch-widget>
+    <high-charts #widget *ngIf="item.template=='high-charts'" [data]="item" (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)"></high-charts>
   </gridster-item>
 </gridster>

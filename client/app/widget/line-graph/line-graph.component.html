@@ -5,7 +5,7 @@
       <a>
         <i class="fas fa-download"></i>
       </a>
-      <a>
+      <a (click)="setEdit(true)">
         <i class="fas fa-edit"></i>
       </a>
       <a (click)="setDelete(true)">
@@ -20,7 +20,7 @@
         {{legend.name}}
       </li>
     </ul>
-    <div class="svg-container">
+    <div class="svg-container svg-{{idx}}">
     </div>
   </div>
 </div>
@@ -35,5 +35,11 @@
       <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
       <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
     </div>
+  </div>
+</div>
+
+<div class="app-modal edit-modal" *ngIf="isEditing==true">
+  <div class="app-modal-content">
+    <linechart-form [model]="widgetInfo" (cancel)="setEdit(false)" (complete)="onSubmit($event)"></linechart-form>
   </div>
 </div>

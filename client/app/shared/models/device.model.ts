@@ -7,6 +7,7 @@ export class Device {
   last_updated?: string;
   model?: string;
   description?: string;
+  attributes?: any;
 
   constructor(data) {
     this.id = data.id;
@@ -17,5 +18,6 @@ export class Device {
     this.last_updated = data.last_updated;
     this.model = data.model;
     this.description = data.description;
+    this.attributes = data.attributes;
   }
 }

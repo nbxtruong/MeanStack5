@@ -11,6 +11,8 @@ export class UtilService {
   currentDevicePage: String;
   currentDevice: Device;
   isLoading: boolean;
+  editMode: boolean = false;
+  newWidget: any = null;
 
   getLocalDateTime(timestamp): String {
     let date = new Date(timestamp);
@@ -28,4 +30,13 @@ export class UtilService {
   setCurrentDevice(currentDevice: Device) {
     this.currentDevice = currentDevice;
   }
+
+  runCallback(callback){
+    callback();
+  }
+}
+
+export interface Widget{
+  update():void;
+  getInvolvedDevices():string[];
 }

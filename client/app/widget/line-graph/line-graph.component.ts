@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import * as d3 from "d3";
-import { UtilService } from '../../services/util.service';
+import { UtilService, Widget } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 import { Observable } from 'rxjs/Rx';
 
@@ -10,24 +10,52 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './line-graph.component.html',
   styleUrls: ['./line-graph.component.scss']
 })
-export class LineGraphComponent implements OnInit, AfterViewInit {
+export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
+  getInvolvedDevices(): string[] {
+    let deviceIds: string[] = [];
+    this.dataRequest.forEach((device) => {
+      if (device.device_id)
+        deviceIds.push(device.device_id);
+    });
+    return deviceIds;
+  }
+  update(): void {
+    d3.select(".svg-container.svg-" + this.idx + " svg").remove();
+    this.drawGraph();
+  }
   isDeleting: boolean;
+  isEditing: boolean;
   @Output() deleteEvent = new EventEmitter();
+  @Output() editEvent = new EventEmitter();
 
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
   ) { }
 
-  @Input('data') widgetData: any;
+  @Input('data') widgetInfo: any;
   @Input('name') widgetName: string;
   @Input('refreshInterval') refreshInterval: number;
+  @Input('index') idx: number;
 
+  widgetData: any;
   data: Array<any>;
   legends: Array<any> = [];
   dataRequest: Array<any> = [];
+  model: any = {};
 
   ngOnInit() {
+    this.init();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.drawGraph();
+    }, 500);
+  }
+
+  init() {
+    this.widgetData = this.widgetInfo.data;
     let range = this.widgetData.range;
     this.widgetData.lines.forEach(line => {
       this.legends.push({
@@ -43,18 +71,10 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.drawGraph();
-    }, 500);
-  }
-
   drawGraph() {
     let contentWidth = d3.select('.widget-content').node().offsetWidth - 40;
     let contentHeight = d3.select('.widget-content').node().offsetHeight / 2 - 40;
-
     this.getInitData(contentWidth, contentHeight);
-    this.reloadData(contentWidth, contentHeight);
   }
 
   getInitData(contentWidth, contentHeight) {
@@ -66,13 +86,6 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
     });
   }
 
-  reloadData(contentWidth, contentHeight) {
-    Observable.interval(this.refreshInterval).subscribe(x => {
-      d3.select(".svg-container svg").remove();
-      this.getInitData(contentWidth, contentHeight);
-    });
-  }
-
   drawLineGraph(graphWidth: number, graphHeight: number) {
     let margin = { top: 20, right: 0, bottom: 20, left: 40 },
       width = graphWidth - margin.left - margin.right,
@@ -80,11 +93,10 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
 
     let x = d3.scaleTime().range([0, width]);
     let y = d3.scaleLinear().range([height, 0]);
-
-    let svg = d3.select(".svg-container")
+    let svg = d3.select(".svg-container.svg-" + this.idx)
       .attr(
-        "style",
-        "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
+      "style",
+      "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
       )
       .append("svg")
       .attr("preserveAspectRatio", "xMinYMin meet")
@@ -96,7 +108,7 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
       .style("left", "0")
       .append("g")
       .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+      "translate(" + margin.left + "," + margin.top + ")");
 
     function draw(Data) {
       let maxY = 0;
@@ -148,10 +160,22 @@ export class LineGraphComponent implements OnInit, AfterViewInit {
 
   setDelete(value: boolean) {
     this.isDeleting = value;
-    console.log(this.isDeleting);
   }
 
   deleteWidget() {
     this.deleteEvent.emit();
+  }
+
+  onSubmit($event) {
+    this.legends = [];
+    this.widgetInfo = $event;
+    this.init();
+    this.update();
+    this.editEvent.emit($event);
+    this.isEditing = false;
+  }
+
+  setEdit(value: boolean) {
+    this.isEditing = value;
   }
 }

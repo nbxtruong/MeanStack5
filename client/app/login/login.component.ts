@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.loggedIn) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboards']);
     }
     this.loginForm = this.formBuilder.group({
       email: this.email,
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.util.isLoading = true;
     this.auth.login(this.loginForm.value).subscribe(
       res => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboards']);
         this.util.isLoading = false;
       },
       error => {

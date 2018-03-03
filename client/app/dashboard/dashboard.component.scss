@@ -1,6 +1,7 @@
 $primary-color: #454545;
 $second-color: #939393;
 $red-color:#ee3731;
+::-webkit-scrollbar { display: none; } // Hide scrollbar of gridster when use 'scrollVertical' mode
 .dashboard-header {
     height: 50px;
     margin-bottom: 1rem;

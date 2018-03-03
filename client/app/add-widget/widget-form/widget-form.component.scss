@@ -1,0 +1,58 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#ee3731;
+.app-modal-content {
+  .message {
+    text-align: center;
+    font-size: 22px;
+    margin: 35px 0;
+  }
+  .app-modal-header {
+    padding: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    .title {
+      font-weight: 600;
+      margin: 0;
+      font-size: 22px;
+      color: $red-color;
+      text-transform: uppercase;
+    }
+  }
+  .app-modal-footer {
+    text-align: center;
+    padding-bottom: 30px;
+    .app-btn,
+    .app-btn-white {
+      margin: 0px 15px;
+    }
+  }
+}
+
+.edit-modal {
+  .app-modal-body {
+    padding: 25px;
+    .edit-section {
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
+
+.form-add {
+  i {
+    margin-right: 8px;
+  }
+  font-size:18px;
+  color:$red-color !important;
+}
+
+.child-section {
+  font-size: 18px;
+  .form-remove {
+    color: #c2c2c2;
+    i {
+      margin-right: 8px;
+    }
+  }
+}

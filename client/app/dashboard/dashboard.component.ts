@@ -1,26 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { DashboardService } from '../services/dashboard.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Observable } from 'rxjs/Rx';
-import { UtilService } from '../services/util.service';
+import { UtilService, Widget } from '../services/util.service';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AppMqttService } from '../services/app-mqtt.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
+
+  @ViewChildren('widget') widgets: QueryList<Widget>;
+
+  ngAfterViewInit(): void {
+    this.widgets.changes.subscribe(() => {
+      console.log(this.widgets.toArray());
+      this.widgets.forEach((widget) => {
+        widget.getInvolvedDevices().forEach(deviceId => {
+          let topic = this.mqtt.getUpdateTopic(deviceId);
+          this.mqtt.subscribe(topic, widget);
+        });
+      });
+    })
+  }
 
   constructor(
     private dashboardService: DashboardService,
     public toast: ToastComponent,
-    public util: UtilService
+    public util: UtilService,
+    private mqtt: AppMqttService
   ) { }
 
   options: GridsterConfig;
   dashboardInfo: any = { name: "Loading..." };
-  editMode: Boolean = false;
 
   static itemChange(item, itemComponent) {
   }
@@ -30,18 +46,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.initDashboardOption();
+    this.mqtt.connect();
   }
 
   initDashboardOption() {
-    this.editMode = false;
+    this.util.editMode = false;
     this.options = {
       itemChangeCallback: DashboardComponent.itemChange,
       itemResizeCallback: DashboardComponent.itemResize,
       gridType: 'scrollVertical',
       mobileBreakpoint: 0,
       margin: 4,
-      minCols: 16,
-      maxCols: 16,
+      minCols: 20,
+      maxCols: 20,
       outerMargin: true,
       draggable: {
         enabled: false
@@ -65,53 +82,55 @@ export class DashboardComponent implements OnInit {
 
   removeIndex(idx: number) {
     this.dashboardInfo.content.splice(idx, 1);
+    this.saveDashboards();
   }
 
-  addItem(type: String) {
-    if (type === 'weather-forecast') {
-      this.dashboardInfo.content.push({
-        cols: 5,
-        rows: 3,
-        minItemCols: 5,
-        minItemRows: 3,
-        name: "weather-forecast 1",
-        template: "weather-forecast",
-        x: 0,
-        y: 0
-      });
-    } else {
-      console.log('widget type error!!!');
+  addUtilWidget() {
+    if (this.util.newWidget != null) {
+      this.dashboardInfo.content.push(this.util.newWidget);
+      this.util.newWidget = null;
+      this.saveDashboards();
     }
   }
 
   changeEditMode(state) {
     if (!state) {
       this.util.isLoading = true;
+      this.saveDashboards();
     } else {
       this.util.isLoading = false;
     }
 
-    this.editMode = state;
+    this.util.editMode = state;
     this.options.draggable.enabled = state;
     this.options.resizable.enabled = state;
     this.changedOptions();
+  }
 
-    if (!state) {
-      this.dashboardService.saveDashboards(this.dashboardInfo.id, this.dashboardInfo).subscribe(
-        res => {
-          this.toast.setMessage('Device updated successfully!', 'success');
-          this.util.isLoading = false;
-        },
-        error => this.toast.setMessage('Failed to update device', 'danger')
-      );
-    }
+  saveDashboards() {
+    this.dashboardService.saveDashboards(this.dashboardInfo.id, this.dashboardInfo).subscribe(
+      res => {
+        this.toast.setMessage('Device updated successfully!', 'success');
+        this.util.isLoading = false;
+      },
+      error => this.toast.setMessage('Failed to update device', 'danger')
+    );
   }
 
   getDashboard() {
     this.dashboardService.getDashboards().subscribe(res => {
       this.dashboardInfo = res[0];
+      this.addUtilWidget();
     }, error => {
       console.log(error);
     });
+  }
+
+  editIndex(event, idx) {
+    this.dashboardInfo.content[idx] = event;
+    this.dashboardInfo.content[idx].name = event.name;
+    this.dashboardInfo.content[idx].data.country = event.country;
+    this.dashboardInfo.content[idx].data.city = event.city;
+    this.saveDashboards();
   }
 }

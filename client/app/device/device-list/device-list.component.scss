@@ -1,82 +1,102 @@
 .button-datatable td {
-    border-bottom: none solid white;
+  border-bottom: none solid white;
 }
 
 .button-datatable {
-    width: 100%;
+  width: 100%;
 }
 
 .create-button {
-    width: 145px !important;
-    height: 30px !important;
-    color: white;
-    border-radius: 20px;
-    background-image: linear-gradient(202deg, #ff3355, #ee3731) !important;
-    border-color: white;
-    padding: 0px;
-    border-width: 0px;
+  width: 145px !important;
+  height: 30px !important;
+  color: white;
+  border-radius: 20px;
+  background-image: linear-gradient(202deg, #ff3355, #ee3731) !important;
+  border-color: white;
+  padding: 0px;
+  border-width: 0px;
 }
 
 .export-button {
-    width: 93px !important;
-    height: 30px !important;
-    color: #ee3731;
-    border-radius: 20px;
-    background-color: white;
-    border: 1px solid #ee3731;
-    margin-left: 15px;
+  width: 93px !important;
+  height: 30px !important;
+  color: #ee3731;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid #ee3731;
+  margin-left: 15px;
 }
 
 .inputicon p {
-    position: absolute;
-    color: #444444;
-    margin-left: 275px;
-    top: 10px;
-    z-index: 1;
+  position: absolute;
+  color: #444444;
+  margin-left: 275px;
+  top: 10px;
+  z-index: 1;
 }
 
 .refresh {
-    border: none;
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    font-style: normal;
-    font-family: Poppins;
-    font-size: 14px;
-    cursor: pointer;
+  border: none;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  font-style: normal;
+  font-family: Poppins;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .inputicon .fa {
-    color: #ee3731;
+  color: #ee3731;
 }
 
 .select-all-checkbox {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .trash .fa {
-    color: black;
-    width: 10% !important;
+  color: black;
+  width: 10% !important;
 }
 
 .status-active {
-    color: #0ba200;
+  color: #0ba200;
 }
 
 .email {
-    color: #ee3731;
+  color: #ee3731;
 }
 
 button:disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .app-btn,
 .app-btn-white {
-    width: 110px;
-    text-align: center;
-    margin: 0px 2px;
+  width: 110px;
+  text-align: center;
+  margin: 0px 2px;
+}
+
+.deivces-header {
+  height: 50px;
+  margin-bottom: 2rem;
+}
+
+.devices-name {
+  line-height: 50px;
+  margin: 18px 0px;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  img {
+    width: 46px;
+    height: 34px;
+  }
+  span {
+    padding-left: 7px;
+  }
 }
 
 @media screen and (max-width:1920px) {}

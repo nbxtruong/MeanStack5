@@ -1,0 +1,340 @@
+@media (min-width: 100px) {
+  select {
+    font-size: 14px;
+  }
+  label {
+    font-size: 14px;
+    padding-top: 3px;
+  }
+  .card {
+    width: 90% !important;
+  }
+  
+  .rule-headerCell {
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis;
+    max-height: 30px!important;
+    min-height: 30px!important;
+  }
+  .rule-header-label {
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    max-height: 28px!important;
+    min-height: 28px!important;
+    
+  }
+  .card-header-icon {
+    font-size: 14px;
+    background-color:transparent!important;
+    min-height: 24px!important;
+    max-height: 24px!important;
+  }
+}
+
+@media (min-width: 576px) {
+  select {
+    font-size: 16px;
+  }
+  label {
+    font-size: 16px;
+    padding-top: 3px;
+  }
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .card {
+    width: 90% !important;
+  }
+  .rule-headerCell {
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis;
+  }
+  .rule-header-label {
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    max-height: 28px!important;
+    min-height: 28px!important;
+  }
+    
+  .card-header-icon {
+    font-size: 14px;
+    background-color:transparent!important;
+    max-height: 24px!important;
+    min-height: 24px!important;
+  }
+
+}
+
+@media (min-width: 1000px) {
+  .card {
+    width: 31% !important;
+  }
+  
+  .rule-headerCell {
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis;
+  }
+  .rule-header-label {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    max-height: 28px!important;
+    min-height: 28px!important;
+  }
+
+  .card-header-icon {
+    font-size: 18px;
+    background-color:transparent!important;
+    min-height: 30px!important;
+    max-height: 30px!important;
+  }
+}
+option{
+  color:black;
+}
+.rule-header {
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  max-height: 28px!important;
+  min-height: 28px!important;
+}
+.rule-header i {
+  margin-right: 20px;
+  color: #ee3731;
+}
+.card-body{
+  max-height:500px!important;
+}
+
+.card-header{
+  max-height: 70px!important;
+}
+.modal {
+  text-align: center;
+}
+
+.when-eclipse-1 {
+  width: 10px;
+  height: 10px;
+  border: solid 2px #ee3731;
+}
+
+.when-eclipse-2 {
+  width: 10px;
+  height: 10px;
+  background-color: #ee3731;
+  border: solid 2px #ee3731;
+}
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+/* align glyph */
+
+.left-addon .glyphicon {
+  left: 0px;
+}
+
+.right-addon .glyphicon {
+  right: 0px;
+}
+
+/* add padding  */
+
+.left-addon input {
+  padding-left: 30px;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.search-input {
+  background-color: transparent;
+  border: none !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.fa-search {
+  color: #ee3731;
+}
+
+.search-box {
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-radius: 15px !important;
+  border-color: #dadada;
+  height: 35px;
+}
+
+.create-rule-btn {
+  width: 145px;
+  height: 30px;
+  mix-blend-mode: undefined;
+  border-radius: 25px;
+  background-image: linear-gradient(202deg, #ff3355, #ee3731);
+}
+
+.create-rule {
+  width: 90px;
+  mix-blend-mode: undefined;
+  font-family: Poppins;
+  font-size: 14.9px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: transparent;
+}
+
+
+.enable-background-blue {
+  background-color: blue !important;
+}
+
+.enable-background-green {
+  background-color: green !important;
+}
+
+.enable-background-red {
+  background-color: red;
+}
+
+.card {
+  height: 250px !important;
+}
+
+.condition-box {
+  align-items: center;
+  display: flex;
+}
+
+.condition-type-box {
+  align-items: center;
+  display: flex;
+  min-height: 100%;
+}
+
+.eclipse-box {
+  align-items: center;
+  display: flex;
+  text-align: center;
+}
+
+.line-gap {
+  height: 75px;
+  width: 2px;
+}
+
+.line {
+  height: 90px;
+  border: 1px dashed red;
+}
+
+.center {
+  align-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.then-condition-box {
+  height: 60px !important;
+  line-height: 120px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.when-condition-box {
+  height: 60px !important;
+}
+
+.when-conditions {
+  height: 75px !important;
+  overflow: hidden!important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.then-conditions {
+  height: 60px !important;
+  display: table;
+  vertical-align: bottom;
+}
+
+.then-conditions-span {
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow:ellipsis;
+}
+
+.switch-icon {
+  width: 20px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.mail-icon {
+  width: 20px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.createRuleTemplate {
+  border: 3px dashed red;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  border-image-slice: 2;
+}

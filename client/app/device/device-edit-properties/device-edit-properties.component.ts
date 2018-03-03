@@ -37,7 +37,7 @@ export class DeviceEditPropertiesComponent implements OnInit {
     this.deviceService.updateDevice(this.device.id, deviceData).subscribe(
       res => {
         this.toast.setMessage('Device updated successfully!', 'success');
-        this.router.navigate(['/device-list']);
+        this.router.navigate(['/devices']);
       },
       error => this.toast.setMessage('Failed to update device', 'danger')
     )
@@ -51,5 +51,19 @@ export class DeviceEditPropertiesComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  removeAttribute(attributeIdx: number) {
+    this.device.attributes.splice(attributeIdx, 1);
+  }
+
+  addAttribute() {
+    if (this.device.attributes == null) {
+      this.device.attributes = [];
+    }
+    this.device.attributes.push({
+      name: "Name",
+      type: "Number"
+    });
   }
 }
