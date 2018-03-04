@@ -1,13 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+// Import pages component
+import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
-import { CatService } from './services/cat.service';
-import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
-import { AuthGuardLogin } from './services/auth-guard-login.service';
-import { AuthGuardAdmin } from './services/auth-guard-admin.service';
-import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -22,26 +16,27 @@ import { AccountProfileComponent } from './account/account-profile/account-profi
 import { AccountPasswordComponent } from './account/account-password/account-password.component';
 import { AccountComponent } from './account/account/account.component';
 import { DeviceListComponent } from './device/device-list/device-list.component';
+import { DeviceEditComponent } from './device/device-edit/device-edit.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RuleComponent } from './rule/rule.component';
+import { AddWidgetComponent } from './add-widget/add-widget.component';
+import { WidgetFormComponent } from './add-widget/widget-form/widget-form.component';
+import { MqttComponent } from './mqtt/mqtt.component';
+import { LinechartFormComponent } from './widget-form/linechart-form/linechart-form.component';
+
+// Import service
+import { CatService } from './services/cat.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardLogin } from './services/auth-guard-login.service';
+import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { DeviceService } from './services/device.service';
 import { UtilService } from './services/util.service';
 import { AppHttpClient } from './services/app-http.service';
-import { DeviceEditComponent } from './device/device-edit/device-edit.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { GridsterModule } from 'angular-gridster2';
-import { RuleComponent } from './rule/rule.component';
 import { DashboardService } from './services/dashboard.service';
 import { WeatherService } from './services/weather-forecast.service';
 import { RuleService } from './services/rule.service';
-import { AddWidgetComponent } from './add-widget/add-widget.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { WidgetFormComponent } from './add-widget/widget-form/widget-form.component';
-import { MqttComponent } from './mqtt/mqtt.component';
 import { AppMqttService } from './services/app-mqtt.service';
-import { LinechartFormComponent } from './widget-form/linechart-form/linechart-form.component';
-import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
-import more from 'highcharts/highcharts-more.src';
-import exporting from 'highcharts/modules/exporting.src';
 
 // Import widgets component
 import { LineGraphComponent } from './widget/line-graph/line-graph.component';
@@ -49,6 +44,15 @@ import { MetricComponent } from './widget/metric/metric.component';
 import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
 import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
 import { HightChartComponent } from './widget/high-charts/high-charts.component';
+
+// Import library
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { GridsterModule } from 'angular-gridster2';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import more from 'highcharts/highcharts-more.src';
+import exporting from 'highcharts/modules/exporting.src';
 
 export function highchartsModules() {
   // apply Highcharts Modules to this array

@@ -2,9 +2,6 @@
   <div class="card-header widget-header">
     <p class="widget-name">{{model.name}}</p>
     <div class="widget-function">
-      <a>
-        <i class="fas fa-download"></i>
-      </a>
       <a (click)="setEdit(true)">
         <i class="fas fa-edit"></i>
       </a>
@@ -13,11 +10,10 @@
       </a>
     </div>
   </div>
-  <div class="card-block widget-content">
+  <div class="card-block widget-content" #content>
     <div [chart]="options"></div>
   </div>
 </div>
-
 
 <div class="app-modal" *ngIf="isDeleting==true">
   <div class="app-modal-content">

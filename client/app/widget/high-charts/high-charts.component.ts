@@ -89,7 +89,10 @@ export class HightChartComponent implements OnInit, Widget {
                     text: 'Value'
                 },
                 min: 0
-            }
+            },
+            credits: {
+                enabled: false
+            },
         });
 
         data.forEach(line => {

@@ -1,93 +1,90 @@
 <div class="card widget-card">
-    <div class="card-header widget-header">
-      <p class="widget-name">{{widgetName}}</p>
-      <div class="widget-function">
-        <a>
-          <i class="fas fa-download"></i>
-        </a>
-        <a (click)="setEdit(true)">
-          <i class="fas fa-edit"></i>
-        </a>
-        <a (click)="setDelete(true)">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </div>
+  <div class="card-header widget-header">
+    <p class="widget-name">{{widgetName}}</p>
+    <div class="widget-function">
+      <a (click)="setEdit(true)">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a (click)="setDelete(true)">
+        <i class="fas fa-trash-alt"></i>
+      </a>
     </div>
-    <div class="card-block widget-content">
-      <table>
-        <tr>
-          <td class="weather-today">
-            <img src="{{weatherToday.icon}}">
-          </td>
-          <td>
-            <p>{{weatherToday.temp}} ℃</p>
-            <p>{{weatherToday.status}}</p>
-          </td>
-        </tr>
-      </table>
-      <table>
-        <tr>
-          <td class="weather-nextdays" *ngFor="let weather of weatherNextDays">
-            <p>{{weather.day}}</p>
-            <div class="row">
-              <div class="col-sm-6 col-lg-6 col-md-6">
-                <p style="padding-top:25px">{{weather.temp}} ℃</p>
-              </div>
-              <div class="col-sm-6">
-                <img src="{{weather.icon}}">
-              </div>
+  </div>
+  <div class="card-block widget-content">
+    <table>
+      <tr>
+        <td class="weather-today">
+          <img src="{{weatherToday.icon}}">
+        </td>
+        <td>
+          <p>{{weatherToday.temp}} ℃</p>
+          <p>{{weatherToday.status}}</p>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td class="weather-nextdays" *ngFor="let weather of weatherNextDays">
+          <p>{{weather.day}}</p>
+          <div class="row">
+            <div class="col-sm-6 col-lg-6 col-md-6">
+              <p style="padding-top:25px">{{weather.temp}} ℃</p>
             </div>
-          </td>
-        </tr>
-      </table>
+            <div class="col-sm-6">
+              <img src="{{weather.icon}}">
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this Widget</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
     </div>
   </div>
-  
-  <div class="app-modal" *ngIf="isDeleting==true">
-    <div class="app-modal-content">
-      <div class="app-modal-header">
-        <p class="title">Warning message</p>
+</div>
+
+<div class="app-modal edit-modal" *ngIf="isEditing==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Edit widget</p>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="app-modal-body">
+        <p class="edit-section">Weather overview</p>
+        <div class="form-group">
+          <label>Name</label>
+          <input [(ngModel)]="widgetName" type="text" class="form-control" placeholder="Widget Name" name="name">
+        </div>
+        <p class="edit-section">
+          Local
+        </p>
+        <div class="form-group">
+          <label>Country</label>
+          <select class="form-control" [(ngModel)]="country" [ngModelOptions]="{standalone: true}">
+            <option *ngFor='let country of countryList' [ngValue]="country.code">
+              {{country.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input [(ngModel)]="city" type="text" class="form-control" placeholder="City" name="city">
+        </div>
       </div>
-      <p class="message">Are you sure want to delete this Widget</p>
       <div class="app-modal-footer">
-        <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
-        <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+        <button class="app-btn" type="submit">Save</button>
+        <button class="app-btn-white" (click)="setEdit(false)">Cancel</button>
       </div>
-    </div>
+    </form>
   </div>
-  
-  <div class="app-modal edit-modal" *ngIf="isEditing==true">
-    <div class="app-modal-content">
-      <div class="app-modal-header">
-        <p class="title">Edit widget</p>
-      </div>
-      <form (ngSubmit)="onSubmit()">
-        <div class="app-modal-body">
-          <p class="edit-section">Weather overview</p>
-          <div class="form-group">
-            <label>Name</label>
-            <input [(ngModel)]="widgetName" type="text" class="form-control" placeholder="Widget Name" name="name">
-          </div>
-          <p class="edit-section">
-            Local
-          </p>
-          <div class="form-group">
-            <label>Country</label>
-            <select class="form-control" [(ngModel)]="country" [ngModelOptions]="{standalone: true}">
-              <option *ngFor='let country of countryList' [ngValue]="country.code">
-                {{country.name}}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>City</label>
-            <input [(ngModel)]="city" type="text" class="form-control" placeholder="City" name="city">
-          </div>
-        </div>
-        <div class="app-modal-footer">
-          <button class="app-btn" type="submit">Save</button>
-          <button class="app-btn-white" (click)="setEdit(false)">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
+</div>

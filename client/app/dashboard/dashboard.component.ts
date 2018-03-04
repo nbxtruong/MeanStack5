@@ -120,6 +120,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   getDashboard() {
     this.dashboardService.getDashboards().subscribe(res => {
       this.dashboardInfo = res[0];
+      console.log(this.dashboardInfo);
       this.addUtilWidget();
     }, error => {
       console.log(error);
