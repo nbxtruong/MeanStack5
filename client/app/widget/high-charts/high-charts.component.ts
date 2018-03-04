@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild }
 import { UtilService, Widget } from '../../services/util.service';
 import { Observable } from 'rxjs/Rx';
 import { DeviceService } from '../../services/device.service';
+import { Chart } from 'angular-highcharts';
 
 @Component({
     selector: 'high-charts',
@@ -66,7 +67,7 @@ export class HightChartComponent implements OnInit, Widget {
     }
 
     drawChart(data: Array<any>) {
-        let drawOptions = {
+        let drawOptions = new Chart({
             chart: {
                 height: this.contentView.nativeElement.offsetHeight,
                 width: this.contentView.nativeElement.offsetWidth
@@ -89,14 +90,15 @@ export class HightChartComponent implements OnInit, Widget {
                 },
                 min: 0
             }
-        };
+        });
+
         data.forEach(line => {
             let fieldName = line.fields[0];
             let drawData: Array<any> = [];
             line.data.forEach(d => {
                 drawData.push([d.created_at, d[fieldName]]);
             });
-            drawOptions.series.push(
+            drawOptions.options.series.push(
                 {
                     name: line.legend,
                     data: drawData,
@@ -104,6 +106,7 @@ export class HightChartComponent implements OnInit, Widget {
                 }
             )
         });
+
         this.options = drawOptions;
     }
 

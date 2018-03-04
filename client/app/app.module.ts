@@ -39,7 +39,9 @@ import { WidgetFormComponent } from './add-widget/widget-form/widget-form.compon
 import { MqttComponent } from './mqtt/mqtt.component';
 import { AppMqttService } from './services/app-mqtt.service';
 import { LinechartFormComponent } from './widget-form/linechart-form/linechart-form.component';
-import { ChartModule } from 'angular2-highcharts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import more from 'highcharts/highcharts-more.src';
+import exporting from 'highcharts/modules/exporting.src';
 
 // Import widgets component
 import { LineGraphComponent } from './widget/line-graph/line-graph.component';
@@ -47,6 +49,11 @@ import { MetricComponent } from './widget/metric/metric.component';
 import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
 import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
 import { HightChartComponent } from './widget/high-charts/high-charts.component';
+
+export function highchartsModules() {
+  // apply Highcharts Modules to this array
+  return [more, exporting];
+}
 
 @NgModule({
   declarations: [
@@ -83,7 +90,7 @@ import { HightChartComponent } from './widget/high-charts/high-charts.component'
     SharedModule,
     GridsterModule,
     ColorPickerModule,
-    ChartModule.forRoot(require('highcharts'))
+    ChartModule
   ],
   providers: [
     AuthService,
@@ -97,7 +104,8 @@ import { HightChartComponent } from './widget/high-charts/high-charts.component'
     DashboardService,
     WeatherService,
     AppMqttService,
-    RuleService
+    RuleService,
+    { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
