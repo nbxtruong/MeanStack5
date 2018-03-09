@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       itemChangeCallback: DashboardComponent.itemChange,
       itemResizeCallback: DashboardComponent.itemResize,
       gridType: 'scrollVertical',
-      mobileBreakpoint: 0,
+      mobileBreakpoint: 640,
       margin: 4,
       minCols: 20,
       maxCols: 20,
