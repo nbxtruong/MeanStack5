@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { UtilService, Widget } from '../services/util.service';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { AppMqttService } from '../services/app-mqtt.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as screenfull from 'screenfull';
 
 @Component({
@@ -30,14 +30,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     public toast: ToastComponent,
     public util: UtilService,
     private mqtt: AppMqttService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.sub = this.route.params
       .subscribe(params => {
         if (!params.id) {
-          this.getDashboards();
+          this.getDashboards(false);
         } else {
           this.dashboardID = params.id;
           this.getDashboard(this.dashboardID);
@@ -123,9 +124,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   saveDashboards() {
     this.isEdit = false;
     this.isDeleting = false;
+    this.util.isLoading = true;
+
     this.dashboardService.saveDashboards(this.dashboardInfo.id, this.dashboardInfo).subscribe(
       res => {
         this.toast.setMessage('Dashboard updated successfully!', 'success');
+        this.getDashboards(true);
         this.util.isLoading = false;
       },
       error => this.toast.setMessage('Failed to update dashboard', 'danger')
@@ -135,12 +139,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getDashboards() {
+  getDashboards(afterRename: boolean) {
     this.util.dashboards.length = 0;
     this.dashboardService.getDashboards().subscribe(res => {
-      this.dashboardInfo = res[0];
-      this.util.dashboards = res;
-      this.addUtilWidget();
+      if (afterRename === true) {
+        this.util.dashboards = res;
+        this.addUtilWidget();
+      } else {
+        this.util.dashboards = res;
+        this.addUtilWidget();
+        this.dashboardInfo = res[0];
+      }
     }, error => {
       console.log(error);
     });
@@ -173,9 +182,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   deleteDashboard() {
+    this.isEdit = false;
+    this.isDeleting = false;
+    this.util.isLoading = true;
+    
     this.dashboardService.deleteDashboards((this.dashboardInfo.id)).subscribe(res => {
-      this.getDashboards();
-      this.isDeleting = false;
+      this.util.isLoading = false;
+      this.router.navigate(['./dashboards']);
     }, error => {
       console.log(error);
     });

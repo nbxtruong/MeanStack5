@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Location } from '@angular/common';
 import { ToastComponent } from '../shared/toast/toast.component';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add-dashboard',
@@ -17,7 +18,8 @@ export class AddDashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private location: Location,
-    public toast: ToastComponent
+    public toast: ToastComponent,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class AddDashboardComponent implements OnInit {
       this.dashboardService.createDashboards(this.dashboardData).subscribe(
         res => {
           this.toast.setMessage('Dashboard created successfully!', 'success');
-          this.location.back();
+          this.router.navigate(['./dashboards/' + res.id]);
         },
         error => {
           this.toast.setMessage('Failed to update device', 'danger')
@@ -40,7 +42,7 @@ export class AddDashboardComponent implements OnInit {
   }
 
   onCancel() {
-    this.location.back();
+    this.router.navigate(['./dashboards']);
   }
 
 }
