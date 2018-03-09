@@ -48,4 +48,12 @@ export class DeviceService {
   getDeviceData(dataRequest: any): Observable<any> {
     return this.http.post("deviceData", dataRequest);
   }
+
+  getSprinklers(): Observable<any> {
+    return this.http.get("devices/getAttributes/Sprinkler");
+  }
+  
+  getSensors() {
+    return this.http.get("devices/getAttributes/Sensor");
+  }
 }

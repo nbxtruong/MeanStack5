@@ -3,6 +3,7 @@ import { UtilService } from '../services/util.service';
 import { Router } from '@angular/router';
 import { Device } from '../shared/models/device.model';
 import { DeviceService } from '../services/device.service';
+import { Location } from '@angular/common';
 declare var jquery: any;
 declare var $: any;
 
@@ -23,7 +24,8 @@ export class AddWidgetComponent implements OnInit {
   constructor(
     public util: UtilService,
     private router: Router,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private location:Location
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,6 @@ export class AddWidgetComponent implements OnInit {
 
   onComplete(result) {
     this.util.newWidget = result;
-    this.router.navigate(['/dashboards']);
+    this.location.back();
   }
 }

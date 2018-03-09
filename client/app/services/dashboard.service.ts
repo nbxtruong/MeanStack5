@@ -15,8 +15,20 @@ export class DashboardService {
     return this.http.get("dashboards");
   }
 
+  getDashboard(id: string) {
+    return this.http.get("dashboards/" + id);
+  }
+
   saveDashboards(dashboardID: String, dashboardData: Object) {
     return this.http.put("dashboards/" + dashboardID, dashboardData);
+  }
+
+  createDashboards(dashboardData: Object) {
+    return this.http.post("dashboards/", dashboardData);
+  }
+
+  deleteDashboards(dashboardID: String) {
+    return this.http.delete("dashboards/" + dashboardID);
   }
 
 }

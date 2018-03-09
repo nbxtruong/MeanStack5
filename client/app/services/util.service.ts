@@ -13,6 +13,8 @@ export class UtilService {
   isLoading: boolean;
   editMode: boolean = false;
   newWidget: any = null;
+  dashboards: Array<any> = [];
+  topicPrefixed: String = 'smart_sprinkler';
 
   getLocalDateTime(timestamp): String {
     let date = new Date(timestamp);
@@ -31,12 +33,12 @@ export class UtilService {
     this.currentDevice = currentDevice;
   }
 
-  runCallback(callback){
+  runCallback(callback) {
     callback();
   }
 }
 
-export interface Widget{
-  update():void;
-  getInvolvedDevices():string[];
+export interface Widget {
+  update(message: any): void;
+  getInvolvedDevices(): string[];
 }

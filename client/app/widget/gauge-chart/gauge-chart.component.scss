@@ -25,9 +25,10 @@ $red-color:#ee3731;
     }
   }
   .widget-content {
-    align-items: center;
     display: flex;
-    padding: 0px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     .metric-number {
       width: 100%;
       font-size: 5vw;

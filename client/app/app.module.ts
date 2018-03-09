@@ -20,9 +20,11 @@ import { DeviceEditComponent } from './device/device-edit/device-edit.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RuleComponent } from './rule/rule.component';
 import { AddWidgetComponent } from './add-widget/add-widget.component';
-import { WidgetFormComponent } from './add-widget/widget-form/widget-form.component';
+import { AddWidgetFormComponent } from './add-widget/add-widget-form/add-widget-form.component';
 import { MqttComponent } from './mqtt/mqtt.component';
-import { LinechartFormComponent } from './widget-form/linechart-form/linechart-form.component';
+import { LinechartFormComponent } from './edit-widget-form/linechart-form/linechart-form.component';
+import { GaugechartFormComponent } from './edit-widget-form/gaugechart-form/gaugechart-from.component';
+import { AddDashboardComponent } from './add-dashboard/add-dashboard.component';
 
 // Import service
 import { CatService } from './services/cat.service';
@@ -40,7 +42,7 @@ import { AppMqttService } from './services/app-mqtt.service';
 
 // Import widgets component
 import { LineGraphComponent } from './widget/line-graph/line-graph.component';
-import { MetricComponent } from './widget/metric/metric.component';
+import { GaugeSeriesComponent } from './widget/gauge-series/gauge-series.component';
 import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
 import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
 import { HightChartComponent } from './widget/high-charts/high-charts.component';
@@ -53,11 +55,23 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import more from 'highcharts/highcharts-more.src';
 import exporting from 'highcharts/modules/exporting.src';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { GaugeChartComponent } from './widget/gauge-chart/gauge-chart.component';
+import { WidgetHeaderComponent } from './widget/widget-header/widget-header.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { SwitchFormComponent } from './edit-widget-form/switch-form/switch-form.component';
+
 
 export function highchartsModules() {
   // apply Highcharts Modules to this array
   return [more, exporting];
 }
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -79,22 +93,29 @@ export function highchartsModules() {
     DeviceEditComponent,
     DashboardComponent,
     LineGraphComponent,
-    MetricComponent,
+    GaugeSeriesComponent,
     RuleComponent,
     WeatherComponent,
     SwitchWidgetComponent,
     AddWidgetComponent,
-    WidgetFormComponent,
+    AddWidgetFormComponent,
     MqttComponent,
     LinechartFormComponent,
-    HightChartComponent
+    HightChartComponent,
+    GaugeChartComponent,
+    GaugechartFormComponent,
+    WidgetHeaderComponent,
+    SwitchFormComponent,
+    AddDashboardComponent
   ],
   imports: [
     RoutingModule,
     SharedModule,
     GridsterModule,
     ColorPickerModule,
-    ChartModule
+    ChartModule,
+    NgxGaugeModule,
+    PerfectScrollbarModule
   ],
   providers: [
     AuthService,
@@ -109,7 +130,9 @@ export function highchartsModules() {
     WeatherService,
     AppMqttService,
     RuleService,
-    { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }
+    { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules },
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

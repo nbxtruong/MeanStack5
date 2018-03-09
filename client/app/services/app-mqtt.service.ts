@@ -3,13 +3,16 @@ import * as mqtt from 'mqtt';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Widget } from './util.service';
+import { Widget, UtilService } from './util.service';
+import { AppHttpClient } from './app-http.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AppMqttService {
 
   constructor(
-    private http: HttpClient,
+    private http: AppHttpClient,
+    private util: UtilService
   ) { }
 
   topicAndWidgetMap: Map<string, Widget[]> = new Map();
@@ -17,44 +20,63 @@ export class AppMqttService {
   client = null;
 
   getUpdateTopic(deviceId: string) {
-    return "ss/devices/" + deviceId + "/update";
+    return this.util.topicPrefixed + "/devices/" + deviceId + "/update";
+  }
+
+  getControlTopic(deviceId: string) {
+    return this.util.topicPrefixed + "/devices/" + deviceId + "/control";
   }
 
   getPresignedUrl(): Observable<any> {
-    return this.http.get("http://localhost:3000");
+    return this.http.get("presignedURL");
   }
 
   publish(topic: any, message: any) {
-    this.client.publish(topic, message);
+    if (this.client != null) {
+      this.client.publish(topic, message);
+    }
+    else {
+      console.log("mqtt is not ready");
+    }
   }
 
   subscribe(topic: any, widget) {
-    this.client.subscribe(topic);
     if (!this.topicAndWidgetMap.has(topic)) {
       this.topicAndWidgetMap.set(topic, [widget]);
     }
-    else
+    else if (!this.topicAndWidgetMap.get(topic).includes(widget))
       this.topicAndWidgetMap.get(topic).push(widget);
+    if (this.client != null) {
+      this.client.subscribe(topic);
+    } else {
+      console.log("mqtt is not ready");
+    }
   }
 
   connect() {
     this.getPresignedUrl()
       .subscribe(
       response => {
-        console.log(response.url);
         this.client = mqtt.connect(response.url);
         this.client.on('connect', () => {
           console.log('Connected to AWS IoT Broker');
-          this.client.subscribe("message");
+          let count = 0;
+          this.topicAndWidgetMap.forEach((value, key) => {
+            this.client.subscribe(key);
+            count += value.length;
+          })
+          console.log(count + " widgets reconnected");
         });
         this.client.on('close', () => {
           console.log('Connection to AWS IoT Broker closed');
           this.client.end();
           this.client = null;
+          this.connect();
+          console.log('Reconnecting to AWS IoT Broker');
         });
         this.client.on('message', (topic, message) => {
           this.topicAndWidgetMap.get(topic).forEach((widget) => {
-            widget.update();
+            widget.update(message);
           });
         });
       },

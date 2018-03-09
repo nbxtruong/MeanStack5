@@ -6,32 +6,75 @@
     <h1 class="dashboard-name">
       <i class="fas fa-th-large"></i>{{dashboardInfo.name}}</h1>
     <div class="dashboard-function">
-      <button class="app-btn add-widget" routerLink="/add-widget" *ngIf="util.editMode">Add widget</button>
-      <button class="dashboard-btn align-middle">
-        <i class="fas fa-sync" (click)="getDashboard()"></i>
-      </button>
-      <button class="dashboard-btn align-middle">
-        <i class="fas fa-edit" (click)="changeEditMode(true)" *ngIf="!util.editMode"></i>
+      <button class="dashboard-btn align-middle" *ngIf="util.editMode">
         <i class="fas fa-save" (click)="changeEditMode(false)" *ngIf="util.editMode"></i>
       </button>
       <button class="dashboard-btn align-middle">
-        <i class="fas fa-expand-arrows-alt"></i>
+        <i class="fas fa-expand-arrows-alt" (click)="fullScreenArea()"></i>
       </button>
-      <button class="dashboard-btn align-middle">
-        <i class="fas fa-cog"></i>
+      <button class="dropdown dashboard-btn align-middle">
+        <i class="fas fa-cog dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"></i>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" routerLink="/add-widget">
+            <i class="fas fa-plus-square" style="margin-right:10px"></i>Add widget</a>
+          <a class="dropdown-item" (click)="changeEditMode(true)">
+            <i class="fas fa-edit" style="margin-right:5px"></i>Edit</a>
+          <a class="dropdown-item" (click)="setEdit(true)">
+            <i class="fas fa-text-width" style="margin-right:10px"></i>Rename</a>
+          <a class="dropdown-item" (click)="setDelete(true)">
+            <i class="fas fa-trash" style="margin-right:10px"></i>Delete</a>
+        </ul>
       </button>
     </div>
   </div>
 </div>
-<gridster [options]="options">
+<gridster id="fullScreenArea" [options]="options">
   <gridster-item [item]="item" *ngFor="let item of dashboardInfo.content; let idx = index">
     <line-graph #widget (editEvent)="editIndex($event,idx)" (deleteEvent)="removeIndex(idx)" [name]="item.name" [data]="item"
-      [index]="idx" [refreshInterval]=30000 *ngIf="item.template=='linegraph'"></line-graph>
-    <metric #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" [name]="item.name" [data]="item" [refreshInterval]=30000
-      *ngIf="item.template=='metric'"></metric>
+      [index]="idx" *ngIf="item.template=='linegraph'"></line-graph>
+    <gauge-series #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" [name]="item.name" [data]="item"
+      *ngIf="item.template=='gauge-series'"></gauge-series>
     <weather-app #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" *ngIf="item.template=='weather-forecast'"
       [name]="item.name" [country]="item.data.country" [city]="item.data.city"></weather-app>
-    <switch-widget #widget (deleteEvent)="removeIndex(idx)" *ngIf="item.template=='switch-widget'" [name]="item.name"></switch-widget>
+    <switch-widget #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" *ngIf="item.template=='switch-widget'"
+      [name]="item.name" [data]="item"></switch-widget>
     <high-charts #widget *ngIf="item.template=='high-charts'" [data]="item" (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)"></high-charts>
+    <gauge-chart #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" [name]="item.name" [data]="item"
+      *ngIf="item.template=='gauge'"></gauge-chart>
   </gridster-item>
 </gridster>
+
+<div class="app-modal delete-modal" *ngIf="isDeleting === true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this dashboard?</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteDashboard()">Yes</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="app-modal delete-modal" *ngIf="isEdit === true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Change dashboard's name</p>
+    </div>
+    <form class="renameDashboard" (ngSubmit)="saveDashboards()" #editDashboardForm="ngForm">
+      <div class="app-modal-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="dashboardInfo.name" class="form-control" placeholder="Dashboard's name" name="name" name="first"
+            required>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button class="app-btn" type="submit" [disabled]="!editDashboardForm.form.valid">Save</button>
+        <button class="app-btn-white" type="button" (click)="setEdit(false)">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

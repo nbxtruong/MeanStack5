@@ -52,9 +52,12 @@
     "morgan": "^1.9.0",
     "mqtt": "^2.15.3",
     "ngx-color-picker": "^5.3.2",
+    "ngx-gauge": "^1.0.0-beta.2",
     "ngx-mqtt": "^5.0.6",
+    "ngx-perfect-scrollbar": "^5.3.5",
     "npm": "^5.7.1",
     "rxjs": "^5.5.2",
+    "screenfull": "^3.3.2",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

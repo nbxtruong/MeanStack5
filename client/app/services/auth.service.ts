@@ -53,6 +53,7 @@ export class AuthService {
     this.currentUser.id = decodedUser.id;
     this.currentUser.email = decodedUser.email;
     this.currentUser.name = decodedUser.name;
+    this.currentUser.auth_key=decodedUser.auth_key;
     this.isAdmin = (decodedUser.role === constants.ROLE_ADMIN);
   }
 

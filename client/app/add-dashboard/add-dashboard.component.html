@@ -1,0 +1,27 @@
+<app-loading [content]="'Saving ...'"></app-loading>
+
+<div class="page-header">
+  <div class="app-container">
+    <h1 class="page-name">New Dashboard</h1>
+  </div>
+</div>
+<div class="main">
+  <div class="app-container">
+    <div class="app-modal edit-modal">
+      <div class="app-modal-content">
+        <form (ngSubmit)="onSubmit()" #metricForm="ngForm">
+          <div class="app-modal-body">
+            <div class="form-group">
+              <label>Name</label>
+              <input [(ngModel)]="dashboardData.name" type="text" class="form-control" placeholder="Name" name="first" required>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button class="app-btn" type="submit" [disabled]="!metricForm.form.valid">Save</button>
+            <button class="app-btn-white" type="button" (click)="onCancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

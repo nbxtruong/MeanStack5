@@ -1,35 +1,50 @@
-import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UtilService } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 import { Device } from '../../shared/models/device.model';
 import { constants } from '../../constants';
+import { read } from 'fs';
 
 @Component({
-  selector: 'widget-form',
-  templateUrl: './widget-form.component.html',
-  styleUrls: ['./widget-form.component.scss']
+  selector: 'add-widget-form',
+  templateUrl: './add-widget-form.component.html',
+  styleUrls: ['./add-widget-form.component.scss']
 })
-export class WidgetFormComponent implements OnInit {
+export class AddWidgetFormComponent implements OnInit {
 
   @Output('complete') complete = new EventEmitter();
   @Output('cancel') cancel = new EventEmitter();
 
   @Input('template') chosenTemplate: string = null;
   devices: Device[];
+  sprinklers: Device[] = [];
+  attributes: Array<any> = [];
   model: any = {};
   lines = [];
   periodValue: number;
   periodUnit: number;
   countryList = constants.countryList;
+  sensors = [];  
 
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
   ) { }
 
+  getControllerAttributes() {
+    let controller = this.sprinklers.find((element) => {
+      return element.id === this.model.data.device_id;
+    });
+    if (controller) {
+      this.attributes = controller.attributes;
+    }
+  }
+
   ngOnInit() {
     this.getDevices();
+    this.getSprinklers();
     this.setTemplate(this.chosenTemplate);
+    this.getSensors();
   }
 
   setTemplate(template: string) {
@@ -64,7 +79,7 @@ export class WidgetFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.chosenTemplate == "linegraph" || this.chosenTemplate=="high-charts") {
+    if (this.chosenTemplate == "linegraph" || this.chosenTemplate == "high-charts") {
       this.model.data.lines = this.lines;
       let today: number = new Date().getTime();
       this.model.data.range = {
@@ -78,6 +93,17 @@ export class WidgetFormComponent implements OnInit {
     this.cancel.emit();
   }
 
+  getSprinklers() {
+    this.deviceService.getSprinklers().subscribe(
+      res => {
+        this.sprinklers = res;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   getDevices() {
     this.deviceService.getListDevices().subscribe(
       res => {
@@ -89,4 +115,21 @@ export class WidgetFormComponent implements OnInit {
     )
   }
 
+  getSensors() {
+    this.deviceService.getSensors().subscribe(
+      res => {
+        this.sensors = res;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  getAttributesForGauge() {
+    this.attributes = Object.create(this.sensors.find(x => x.id === this.model.data.device_id).attributes);
+  }
+
+  getAttributesForChart(index) {
+    this.attributes = Object.create(this.sensors.find(x => x.id === this.lines[index].data.device_id).attributes);
+  }
 }

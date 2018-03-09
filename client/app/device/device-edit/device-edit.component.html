@@ -9,14 +9,8 @@
       <li class="active" [class.active]="util.currentDevicePage=='properties'">
         <a (click)="util.setCurrentDevicePage('properties')">Properties</a>
       </li>
-      <li [class.active]="util.currentDevicePage=='debug'">
-        <a (click)="util.setCurrentDevicePage('debug')">Debug</a>
-      </li>
       <li [class.active]="util.currentDevicePage=='data'">
         <a (click)="util.setCurrentDevicePage('data')">Data</a>
-      </li>
-      <li [class.active]="util.currentDevicePage=='simulator'">
-        <a (click)="util.setCurrentDevicePage('simulator')">Simulator</a>
       </li>
     </ul>
   </div>

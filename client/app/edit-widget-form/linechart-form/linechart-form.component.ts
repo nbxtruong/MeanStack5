@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UtilService } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 import { Device } from '../../shared/models/device.model';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'linechart-form',
@@ -9,9 +10,7 @@ import { Device } from '../../shared/models/device.model';
   styleUrls: ['./linechart-form.component.scss']
 })
 export class LinechartFormComponent implements OnInit {
-
   @Input('model') model: any;
-
   @Output('complete') complete = new EventEmitter();
   @Output('cancel') cancel = new EventEmitter();
 

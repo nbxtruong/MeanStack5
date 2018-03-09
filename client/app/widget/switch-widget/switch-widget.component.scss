@@ -26,6 +26,7 @@
         display: flex;
         flex-flow: column wrap;
         align-items: center;
+        justify-content: center;
         /* The switch - the box around the slider */
         .switch {
             position: relative;
@@ -126,3 +127,29 @@
         }
     }
 }
+
+.edit-modal {
+    .app-modal-content {
+      position: absolute;
+      right: 0;
+      margin: 0;
+      width: 30%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+    .app-modal-body {
+      padding: 25px;
+      .edit-section {
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+    .app-modal-footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+  

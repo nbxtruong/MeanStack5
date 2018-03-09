@@ -5,34 +5,28 @@ import { Observable } from 'rxjs/Rx';
 import { Chart } from 'angular-highcharts';
 
 @Component({
-  selector: 'metric',
-  templateUrl: './metric.component.html',
-  styleUrls: ['./metric.component.scss']
+  selector: 'gauge-series',
+  templateUrl: './gauge-series.component.html',
+  styleUrls: ['./gauge-series.component.scss']
 })
-export class MetricComponent implements OnInit, Widget {
-  getInvolvedDevices(): string[] {
-    return [this.getDataRequest()[0].device_id];
-  }
-  update(): void {
+export class GaugeSeriesComponent implements OnInit, Widget {
+  update(message = ""): void {
     let dataRequest = this.getDataRequest();
     this.getInitData(dataRequest);
   }
 
-  isDeleting: boolean;
-  isEditing: boolean;
+  getInvolvedDevices(): string[] {
+    return [this.getDataRequest()[0].device_id];
+  }
+
   @Output() deleteEvent = new EventEmitter();
   @Output() editEvent = new EventEmitter();
-
-  constructor(
-    public util: UtilService,
-    private deviceService: DeviceService
-  ) { }
-
   @ViewChild('content') contentView: ElementRef;
   @Input('data') widgetInfo: any;
   @Input('name') widgetName: string = "No widget";
-  @Input('refreshInterval') refreshInterval: number;
 
+  isDeleting: boolean;
+  isEditing: boolean;
   widgetData: any;
   data: any = {};
   field: string;
@@ -45,13 +39,17 @@ export class MetricComponent implements OnInit, Widget {
     }
   };
 
+  constructor(
+    public util: UtilService,
+    private deviceService: DeviceService
+  ) { }
+
   ngOnInit() {
     this.widgetData = this.widgetInfo.data;
     this.model = this.widgetInfo;
     this.field = this.widgetData.field;
     let dataRequest = this.getDataRequest();
     this.getInitData(dataRequest);
-    this.reloadData(dataRequest);
   }
 
   getInitData(dataRequest) {
@@ -65,12 +63,6 @@ export class MetricComponent implements OnInit, Widget {
       }
     }, error => {
       console.log(error);
-    });
-  }
-
-  reloadData(dataRequest) {
-    Observable.interval(this.refreshInterval).subscribe(x => {
-      this.getInitData(dataRequest);
     });
   }
 
@@ -166,6 +158,9 @@ export class MetricComponent implements OnInit, Widget {
       credits: {
         enabled: false
       },
+      exporting: {
+        enabled: false
+      }
     });
 
     drawOptions.options.series[0].name = unit;
@@ -187,6 +182,7 @@ export class MetricComponent implements OnInit, Widget {
   }
 
   onSubmit() {
+    this.ngOnInit();
     this.editEvent.emit(this.model);
   }
 

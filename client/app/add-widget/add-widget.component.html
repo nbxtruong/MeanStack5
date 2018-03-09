@@ -12,33 +12,33 @@
 
       <!-- Gauge chart template -->
       <div class="col-md-4">
-        <div class="card">
+        <div class="card" (click)="chosenTemplate='gauge'">
           <div class="card-header">
-            Gauge
+            Solid gauge
             <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a gauge chart">
               <i class="fas fa-exclamation-circle"></i>
             </button>
           </div>
           <div class="card-block">
             <div class="img-wrapper">
-              <img class="img-fluid" src="assets/chart/graph1.png">
+              <img class="img-fluid" src="assets/chart/solid-gauge.png">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Metric chart template -->
+      <!-- Gauge-series chart template -->
       <div class="col-md-4">
-        <div class="card" (click)="chosenTemplate='metric'">
+        <div class="card" (click)="chosenTemplate='gauge-series'">
           <div class="card-header">
-            Metric
-            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a metric">
+            Gauge series
+            <button class="widget-tooltip" data-toggle="tooltip" data-placement="top" title="Create a gauge-series">
               <i class="fas fa-exclamation-circle"></i>
             </button>
           </div>
           <div class="card-block">
             <div class="img-wrapper">
-              <img class="img-fluid" src="assets/chart/graph2.png">
+              <img class="img-fluid" src="assets/chart/gauge-series.png">
             </div>
           </div>
         </div>
@@ -117,5 +117,5 @@
 </div>
 
 <div class="app-container">
-  <widget-form *ngIf="chosenTemplate!=null" [template]="chosenTemplate" (cancel)="chosenTemplate=null" (complete)="onComplete($event)"></widget-form>
+  <add-widget-form *ngIf="chosenTemplate!=null" [template]="chosenTemplate" (cancel)="chosenTemplate=null" (complete)="onComplete($event)"></add-widget-form>
 </div>

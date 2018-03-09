@@ -10,10 +10,11 @@ import { Chart } from 'angular-highcharts';
     styleUrls: ['./high-charts.component.scss']
 })
 export class HightChartComponent implements OnInit, Widget {
-    update(): void {
+    update(message = ""): void {
         this.init();
         this.getInitData();
     }
+
     getInvolvedDevices(): string[] {
         let deviceIds: string[] = [];
         this.dataRequest.forEach((device) => {
@@ -25,17 +26,17 @@ export class HightChartComponent implements OnInit, Widget {
 
     @ViewChild('content') contentView: ElementRef;
     @Input('data') widgetInfo: any;
+    @Output() deleteEvent = new EventEmitter();
+    @Output() editEvent = new EventEmitter();
+
     widgetData: any;
     data: Array<any>;
     legends: Array<any> = [];
     dataRequest: Array<any> = [];
     model: any = {};
-
     isDeleting: boolean;
     isEditing: boolean;
     options: any;
-    @Output() deleteEvent = new EventEmitter();
-    @Output() editEvent = new EventEmitter();
 
     constructor(
         public util: UtilService,
@@ -55,6 +56,11 @@ export class HightChartComponent implements OnInit, Widget {
                 legend: line.legend
             })
         });
+    }
+
+    ngOnInit() {
+        this.init();
+        this.getInitData();
     }
 
     getInitData() {
@@ -86,20 +92,26 @@ export class HightChartComponent implements OnInit, Widget {
             },
             yAxis: {
                 title: {
-                    text: 'Value'
+                    text: 'Value ( % )'
                 },
                 min: 0
             },
             credits: {
                 enabled: false
             },
+            exporting: {
+                enabled: false
+            }
         });
 
         data.forEach(line => {
             let fieldName = line.fields[0];
             let drawData: Array<any> = [];
             line.data.forEach(d => {
-                drawData.push([d.created_at, d[fieldName]]);
+                let date = new Date();
+                date.setTime(d.created_at);
+                date.setHours(date.getHours() + 7);
+                drawData.push([date.getTime(), d[fieldName]]);
             });
             drawOptions.options.series.push(
                 {
@@ -111,11 +123,6 @@ export class HightChartComponent implements OnInit, Widget {
         });
 
         this.options = drawOptions;
-    }
-
-    ngOnInit() {
-        this.init();
-        this.getInitData();
     }
 
     setDelete(value: boolean) {

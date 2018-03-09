@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MetricComponent } from './metric.component';
+import { GaugeSeriesComponent } from './gauge-series.component';
 
-describe('MetricComponent', () => {
-  let component: MetricComponent;
-  let fixture: ComponentFixture<MetricComponent>;
+describe('GaugeSeriesComponent', () => {
+  let component: GaugeSeriesComponent;
+  let fixture: ComponentFixture<GaugeSeriesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MetricComponent]
+      declarations: [GaugeSeriesComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MetricComponent);
+    fixture = TestBed.createComponent(GaugeSeriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

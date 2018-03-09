@@ -1,0 +1,28 @@
+<div class="card widget-card">
+  <widget-header [name]="model.name" (editClick)="setEdit(true)" (deleteClick)="setDelete(true)"></widget-header>
+  <div class="card-block widget-content" #content>
+    <ngx-gauge [type]="options.type" [value]="options.value" [label]="options.label" [append]="options.append" [size]="gaugeSize"
+      [thick]="gaugeThick" [foregroundColor]="'#ff0000'">
+    </ngx-gauge>
+  </div>
+</div>
+
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete this Widget</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteWidget()">Delete widget</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="app-modal edit-modal" *ngIf="isEditing==true">
+  <div class="app-modal-content">
+    <gaugechart-from [model]="widgetInfo" (cancel)="setEdit(false)" (complete)="onSubmit()"></gaugechart-from>
+  </div>
+</div>

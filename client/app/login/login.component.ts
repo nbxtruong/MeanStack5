@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       error => {
         this.loginForm.reset();
         this.toast.setMessage('invalid email or password!', 'danger');
+        this.util.isLoading = false;
       }
     );
   }

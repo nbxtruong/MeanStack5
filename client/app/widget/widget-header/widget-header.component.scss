@@ -1,0 +1,32 @@
+.widget-header {
+  background: #f7f7f9;
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  padding: 0 10px;
+  height: 35px;
+  .widget-name {
+    font-weight: bold;
+    margin: 0;
+    line-height: 35px;
+    font-size: 14px;
+  }
+  .widget-function {
+    float: right;
+    a {
+      padding: 0 10px;
+      line-height: 35px;
+      i {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.dropdown-toggle::after {
+  display: none
+}

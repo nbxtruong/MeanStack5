@@ -1,7 +1,9 @@
 $primary-color: #454545;
 $second-color: #939393;
 $red-color:#ee3731;
-::-webkit-scrollbar { display: none; } // Hide scrollbar of gridster when use 'scrollVertical' mode
+::-webkit-scrollbar {
+    display: none;
+} // Hide scrollbar of gridster when use 'scrollVertical' mode
 .dashboard-header {
     height: 50px;
     margin-bottom: 1rem;
@@ -36,6 +38,65 @@ $red-color:#ee3731;
     }
 }
 
+.app-modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.delete-modal {
+    .app-modal-content {
+        border-radius: 5px;
+        background-color: #fefefe;
+        margin: 15% auto;
+        border: 1px solid #888;
+        width: 40%;
+        .message {
+            text-align: center;
+            font-size: 22px;
+            margin: 35px 0;
+        }
+        .app-modal-header {
+            padding: 25px;
+            border-bottom: 1px solid #e5e5e5;
+            .title {
+                font-weight: 600;
+                margin: 0;
+                font-size: 22px;
+                color: #ee3731;
+                text-transform: uppercase;
+            }
+        }
+        .app-modal-footer {
+            text-align: center;
+            padding-bottom: 30px;
+            .app-btn,
+            .app-btn-white {
+                margin: 0px 15px;
+            }
+        }
+    }
+}
+
+.renameDashboard {
+    margin: 25px !important;
+}
+
 gridster-item {
     z-index: auto !important;
+}
+
+gridster {
+    position: absolute;
+}
+
+.dropdown-toggle::after {
+    display: none
 }

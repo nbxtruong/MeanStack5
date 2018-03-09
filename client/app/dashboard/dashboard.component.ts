@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Rx';
 import { UtilService, Widget } from '../services/util.service';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { AppMqttService } from '../services/app-mqtt.service';
+import { ActivatedRoute } from '@angular/router';
+import * as screenfull from 'screenfull';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,40 +15,53 @@ import { AppMqttService } from '../services/app-mqtt.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-
   @ViewChildren('widget') widgets: QueryList<Widget>;
 
-  ngAfterViewInit(): void {
-    this.widgets.changes.subscribe(() => {
-      console.log(this.widgets.toArray());
-      this.widgets.forEach((widget) => {
-        widget.getInvolvedDevices().forEach(deviceId => {
-          let topic = this.mqtt.getUpdateTopic(deviceId);
-          this.mqtt.subscribe(topic, widget);
-        });
-      });
-    })
-  }
+  isDeleting: boolean = false;
+  isEdit: boolean = false;
+  options: GridsterConfig;
+  dashboardInfo: any = { name: "Loading..." };
+  widgetsComponent: Array<Widget> = [];
+  private sub: any;
+  dashboardID: string;
 
   constructor(
     private dashboardService: DashboardService,
     public toast: ToastComponent,
     public util: UtilService,
-    private mqtt: AppMqttService
+    private mqtt: AppMqttService,
+    private route: ActivatedRoute
   ) { }
 
-  options: GridsterConfig;
-  dashboardInfo: any = { name: "Loading..." };
+  ngOnInit() {
+    this.sub = this.route.params
+      .subscribe(params => {
+        if (!params.id) {
+          this.getDashboards();
+        } else {
+          this.dashboardID = params.id;
+          this.getDashboard(this.dashboardID);
+        }
+      });
+    this.initDashboardOption();
+  }
+
+  ngAfterViewInit(): void {
+    this.widgets.changes.subscribe(() => {
+      this.widgetsComponent = this.widgets.toArray();
+      this.widgets.forEach((widget) => {
+        widget.getInvolvedDevices().forEach(deviceId => {
+          let topic = this.mqtt.getUpdateTopic(deviceId);
+          setTimeout(() => { this.mqtt.subscribe(topic, widget); }, 1000);
+        });
+      });
+    })
+  }
 
   static itemChange(item, itemComponent) {
   }
 
   static itemResize(item, itemComponent) {
-  }
-
-  ngOnInit() {
-    this.initDashboardOption();
-    this.mqtt.connect();
   }
 
   initDashboardOption() {
@@ -68,8 +83,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       pushItems: true
     };
-
-    this.getDashboard();
   }
 
   changedOptions() {
@@ -108,19 +121,34 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   saveDashboards() {
+    this.isEdit = false;
+    this.isDeleting = false;
     this.dashboardService.saveDashboards(this.dashboardInfo.id, this.dashboardInfo).subscribe(
       res => {
-        this.toast.setMessage('Device updated successfully!', 'success');
+        this.toast.setMessage('Dashboard updated successfully!', 'success');
         this.util.isLoading = false;
       },
-      error => this.toast.setMessage('Failed to update device', 'danger')
+      error => this.toast.setMessage('Failed to update dashboard', 'danger')
     );
+    this.widgetsComponent.forEach(component => {
+      component.update("");
+    });
   }
 
-  getDashboard() {
+  getDashboards() {
+    this.util.dashboards.length = 0;
     this.dashboardService.getDashboards().subscribe(res => {
       this.dashboardInfo = res[0];
-      console.log(this.dashboardInfo);
+      this.util.dashboards = res;
+      this.addUtilWidget();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getDashboard(id) {
+    this.dashboardService.getDashboard(id).subscribe(res => {
+      this.dashboardInfo = res;
       this.addUtilWidget();
     }, error => {
       console.log(error);
@@ -133,5 +161,36 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.dashboardInfo.content[idx].data.country = event.country;
     this.dashboardInfo.content[idx].data.city = event.city;
     this.saveDashboards();
+  }
+
+  setDelete(value: boolean) {
+    this.isDeleting = value;
+  }
+
+  setEdit(value: boolean) {
+    this.isEdit = value;
+    console.log(value);
+  }
+
+  deleteDashboard() {
+    this.dashboardService.deleteDashboards((this.dashboardInfo.id)).subscribe(res => {
+      this.getDashboards();
+      this.isDeleting = false;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  fullScreenArea() {
+    const el = document.getElementById('fullScreenArea');
+
+    if (screenfull.enabled) {
+      screenfull.request(el);
+    }
+  }
+
+  // unsubscribe to avoid memory leaks
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

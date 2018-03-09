@@ -38,6 +38,7 @@ export class DeviceListComponent implements OnInit {
         stateSave: true,
         pagingType: 'full_numbers',
         dom: '<"top"fB>rt<"bottom"ipl>',
+        order: [[ 1, "asc" ]],
         columnDefs: [
           {
             orderable: false,

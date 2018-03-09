@@ -16,11 +16,9 @@ import { DeviceListComponent } from './device/device-list/device-list.component'
 import { DeviceEditComponent } from './device/device-edit/device-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RuleComponent } from './rule/rule.component';
-
+import { AddDashboardComponent } from './add-dashboard/add-dashboard.component';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
-import { LineGraphComponent } from './widget/line-graph/line-graph.component';
-import { MetricComponent } from './widget/metric/metric.component';
 import { WeatherComponent } from './../app/widget/weather-forecast/weather-forecast.component';
 import { SwitchWidgetComponent } from './../app/widget/switch-widget/switch-widget.component';
 import { AddWidgetComponent } from './add-widget/add-widget.component';
@@ -28,7 +26,9 @@ import { MqttComponent } from './mqtt/mqtt.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
-  { path: 'dashboards', component: DashboardComponent, data: { breadcrumb: "Dashboard" }, canActivate: [AuthGuardLogin] },
+  { path: 'dashboards', component: DashboardComponent, data: { breadcrumb: "Dashboards" }, canActivate: [AuthGuardLogin] },
+  { path: 'dashboards/:id', component: DashboardComponent, data: { breadcrumb: "Dashboard" }, canActivate: [AuthGuardLogin] },
+  { path: 'addDashboard', component: AddDashboardComponent, data: { breadcrumb: "Add Dashboard" }, canActivate: [AuthGuardLogin] },
   { path: 'devices', component: DeviceListComponent, data: { breadcrumb: "Device list" }, canActivate: [AuthGuardLogin] },
   { path: 'users', component: UserListComponent, data: { breadcrumb: "User" }, canActivate: [AuthGuardLogin] },
   { path: 'rules', component: RuleComponent, canActivate: [AuthGuardLogin] },

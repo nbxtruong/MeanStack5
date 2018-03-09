@@ -1,15 +1,5 @@
 <div class="card widget-card">
-  <div class="card-header widget-header">
-    <p class="widget-name">{{widgetInfo.name}}</p>
-    <div class="widget-function">
-      <a (click)="setEdit(true)">
-        <i class="fas fa-edit"></i>
-      </a>
-      <a (click)="setDelete(true)">
-        <i class="fas fa-trash-alt"></i>
-      </a>
-    </div>
-  </div>
+  <widget-header [name]="widgetInfo.name" (editClick)="setEdit(true)" (deleteClick)="setDelete(true)"></widget-header>
   <div class="card-block widget-content" #content>
     <div [chart]="options"></div>
   </div>
@@ -27,7 +17,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="app-modal edit-modal" *ngIf="isEditing==true">
   <div class="app-modal-content">

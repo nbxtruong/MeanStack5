@@ -13,10 +13,17 @@ export class WeatherComponent implements OnInit, Widget {
         console.log("updating weather-forecast");
         //TODO: write update function
     }
+
     getInvolvedDevices(): string[] {
         return [];
         //TODO: write get involved devices function
     }
+
+    @Output() deleteEvent = new EventEmitter();
+    @Output() editEvent = new EventEmitter();
+    @Input('name') widgetName: string;
+    @Input('country') country: string;
+    @Input('city') city: string;
 
     weather10Days;
     countryList = constants.countryList;
@@ -25,15 +32,8 @@ export class WeatherComponent implements OnInit, Widget {
     { "day": "", "icon": "", "status": "", "temp": 0 },
     { "day": "", "icon": "", "status": "", "temp": 0 }
     ];
-
     isDeleting: boolean;
     isEditing: boolean;
-    @Output() deleteEvent = new EventEmitter();
-    @Output() editEvent = new EventEmitter();
-    @Input('name') widgetName: string;
-    @Input('country') country: string;
-    @Input('city') city: string;
-
     model: any = {
         name: "",
         local: {

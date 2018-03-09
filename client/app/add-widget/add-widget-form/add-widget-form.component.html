@@ -10,17 +10,41 @@
           </div>
           <p class="edit-section">Widget data</p>
 
-          <!-- Setup option for create matric -->
-          <div *ngIf="chosenTemplate=='metric'">
+          <!-- Setup option for create gauge-series -->
+          <div *ngIf="chosenTemplate=='gauge-series'">
             <div class="form-group">
               <label>Device</label>
-              <select [(ngModel)]="model.data.device_id" class="form-control" placeholder="Device" name="deviceId" required>
-                <option *ngFor="let device of devices" [value]="device.id">{{device.id}}</option>
+              <select [(ngModel)]="model.data.device_id" (change)="getAttributesForGauge()" class="form-control" placeholder="Device" name="deviceId"
+                required>
+                <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Field</label>
-              <input [(ngModel)]="model.data.field" type="text" class="form-control" placeholder="Field" name="field" required>
+              <label>Attributes</label>
+              <select [(ngModel)]="model.data.field" class="form-control" placeholder="Attribute" name="Attribute" required>
+                <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Format</label>
+              <input [(ngModel)]="model.data.unit" type="text" class="form-control" placeholder="Unit" name="unit" required>
+            </div>
+          </div>
+
+          <!-- Setup option for create gauge -->
+          <div *ngIf="chosenTemplate=='gauge'">
+            <div class="form-group">
+              <label>Device</label>
+              <select [(ngModel)]="model.data.device_id" (change)="getAttributesForGauge()" class="form-control" placeholder="Device" name="deviceId"
+                required>
+                <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Attributes</label>
+              <select [(ngModel)]="model.data.field" class="form-control" placeholder="Attribute" name="Attribute" required>
+                <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+              </select>
             </div>
             <div class="form-group">
               <label>Format</label>
@@ -72,16 +96,18 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Device</label>
-                    <select [(ngModel)]="line.data.device_id" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}" required>
-                      <option *ngFor="let device of devices" [value]="device.id">{{device.id}}</option>
+                    <select [(ngModel)]="line.data.device_id" (change)="getAttributesForChart(idx)" class="form-control" placeholder="Device"
+                      name="{{'device'+idx+'_id'}}" required>
+                      <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Field</label>
-                    <input [(ngModel)]="line.data.field" type="text" class="form-control" placeholder="Field" name="{{'device'+idx+'_field'}}"
-                      required>
+                    <label>Attributes</label>
+                    <select [(ngModel)]="line.data.field" class="form-control" placeholder="Attribute" name="{{'device'+idx+'_field'}}" required>
+                      <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+                    </select>
                   </div>
                 </div>
 
@@ -111,8 +137,12 @@
           <div *ngIf="chosenTemplate=='switch-widget'">
             <div class="form-group">
               <label>Device</label>
-              <select [(ngModel)]="model.data.device_id" class="form-control" placeholder="Device" name="deviceId" required>
-                <option *ngFor="let device of devices" [value]="device.id">{{device.name}}</option>
+              <select [(ngModel)]="model.data.device_id" class="form-control" placeholder="Device" name="deviceId" required (change)="getControllerAttributes()">
+                <option *ngFor="let device of sprinklers" [value]="device.id">{{device.name}}</option>
+              </select>
+              <label>Attribute</label>
+              <select [(ngModel)]="model.attribute" class="form-control" placeholder="Device" name="deviceId" required>
+                <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
               </select>
             </div>
           </div>
@@ -161,16 +191,17 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Device</label>
-                    <select [(ngModel)]="line.data.device_id" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}" required>
-                      <option *ngFor="let device of devices" [value]="device.id">{{device.id}}</option>
+                    <select [(ngModel)]="line.data.device_id" (change)="getAttributesForChart(idx)" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}" required>
+                      <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Field</label>
-                    <input [(ngModel)]="line.data.field" type="text" class="form-control" placeholder="Field" name="{{'device'+idx+'_field'}}"
-                      required>
+                    <label>Attributes</label>
+                    <select [(ngModel)]="line.data.field" class="form-control" placeholder="Attribute" name="{{'device'+idx+'_field'}}" required>
+                      <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+                    </select>
                   </div>
                 </div>
 
@@ -182,8 +213,8 @@
 
         </div>
         <div class="app-modal-footer">
-          <button class="app-btn" type="submit" [disabled]="!metricForm.form.valid" (complete)="onSubmit()">Save</button>
-          <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+          <button class="app-btn" type="submit" [disabled]="!metricForm.form.valid">Save</button>
+          <button class="app-btn-white" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </form>
     </div>

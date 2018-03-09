@@ -4,6 +4,7 @@ export class User {
     email?: string;
     activated?: string;
     role?: string;
+    auth_key?: string;
     constructor() { }
 }
 

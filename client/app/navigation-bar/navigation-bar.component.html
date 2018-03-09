@@ -3,7 +3,7 @@
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand app-title" routerLink="">Smart sprinkler</a>
+  <a class="navbar-brand app-title" routerLink="/"><img class="img-fluid" src="assets/img/irrigation-logo.png"></a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto app-nav-ul">
@@ -14,12 +14,11 @@
           <span class="sr-only">Toggle Dropdown</span>
         </a>
         <div class="dropdown-menu">
-          <h6 class="dropdown-header">Recent Dashboard</h6>
-          <a class="dropdown-item" href="#">Dashboard 1</a>
+          <h6 class="dropdown-header">List Dashboards</h6>
+          <a class="dropdown-item" *ngFor="let dashboard of util.dashboards" [routerLink]="['/dashboards',dashboard.id]">{{dashboard.name}}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" routerLink="/dashboards">View All Dashboard</a>
           <a class="dropdown-item">
-            <button class="app-btn">Create dashboard</button>
+            <button class="app-btn" routerLink="/addDashboard">Create dashboard</button>
           </a>
         </div>
       </li>

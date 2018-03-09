@@ -1,0 +1,43 @@
+<perfect-scrollbar style=" max-height: 100%px;" [scrollIndicators]="true">
+  <div class="app-modal edit-modal">
+    <div class="app-modal-content">
+      <div class="app-modal-header">
+        <p class="title">Edit widget</p>
+      </div>
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="app-modal-body">
+          <p class="edit-section">
+            Device overview
+          </p>
+          <div class="form-group">
+            <label>Name</label>
+            <input [(ngModel)]="model.name" type="text" class="form-control" placeholder="Widget's name" name="name">
+          </div>
+          <p class="edit-section">
+            Widget data
+          </p>
+          <div class="form-group">
+            <label>Device</label>
+            <select [(ngModel)]="model.data.device_id" (change)="getAttributes()" class="form-control" placeholder="Device" name="first" required>
+              <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Attribute</label>
+            <select [(ngModel)]="model.data.field" class="form-control" placeholder="Attribute" name="Attribute" required>
+              <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Format</label>
+            <input [(ngModel)]="model.data.unit" type="text" class="form-control" placeholder="Unit" name="unit">
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button class="app-btn" type="submit" [disabled]="!form.form.valid">Save</button>
+          <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</perfect-scrollbar>

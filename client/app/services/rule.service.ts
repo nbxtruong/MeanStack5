@@ -27,10 +27,13 @@ export class RuleService {
   getRules(): Observable<any> {
     return this.http.get('rules');
   }
-  updateRule(ruleID,ruleContent):Observable<any>{
-    return this.http.put('rules/'+ruleID,ruleContent);
+  updateRule(ruleID, ruleContent): Observable<any> {
+    return this.http.put('rules/' + ruleID, ruleContent);
   }
-  deleteRule(ruleID):Observable<any>{
+  deleteRule(ruleID): Observable<any> {
     return this.http.delete('rules/' + ruleID);
+  }
+  getAttributes(): Observable<any> {
+    return this.http.get('devices/getAttributes/Sensor');
   }
 }

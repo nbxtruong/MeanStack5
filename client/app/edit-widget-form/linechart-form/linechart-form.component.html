@@ -1,0 +1,85 @@
+<perfect-scrollbar style=" max-height: 100%px;" [scrollIndicators]="true">
+  <div class="app-container">
+    <div class="app-modal edit-modal">
+      <div class="app-modal-content">
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+          <div class="app-modal-body">
+            <p class="edit-section"> Widget overview</p>
+            <div class="form-group">
+              <label>Name</label>
+              <input [(ngModel)]="model.name" type="text" class="form-control" placeholder="Widget's name" name="name" required>
+            </div>
+            <p class="edit-section">Widget data</p>
+            <!-- Setup option for create linegraph -->
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Period</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input [(ngModel)]="periodValue" type="text" class="form-control" placeholder="Period" name="periodValue" required>
+                      </div>
+                      <div class="col-md-6">
+                        <select [(ngModel)]="periodUnit" class="form-control" placeholder="Duration" name="periodUnit" value="d" required>
+                          <option value=86400>Days</option>
+                          <option value=3600>Hours</option>
+                          <option value="60">Minutes</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngFor="let line of model.data.lines; let idx = index">
+                <p class="child-section">
+                  <a class="form-remove" (click)="removeLine(idx)">
+                    <i class="fas fa-minus-circle"></i>
+                  </a>Line {{idx+1}}</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Color</label>
+                      <input class="form-control" [(ngModel)]="line.color" [(colorPicker)]="line.color" [style.background]="line.color" name="{{'device'+idx+'_color'}}"
+                        required />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Legend</label>
+                      <input [(ngModel)]="line.legend" type="text" class="form-control" placeholder="Legend" name="{{'device'+idx+'_legend'}}"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Device</label>
+                      <select [(ngModel)]="line.data.device_id" (change)="getAttributes(idx)" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}"
+                        required>
+                        <option *ngFor="let device of devices" [value]="device.id">{{device.id}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Field</label>
+                      <input [(ngModel)]="line.data.field" type="text" class="form-control" placeholder="Field" name="{{'device'+idx+'_field'}}"
+                      required>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <a class="form-add" (click)="addLine()">
+                <i class="fas fa-plus-circle"></i>Add new line</a>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button class="app-btn" type="submit" [disabled]="!form.form.valid">Save</button>
+            <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

@@ -11,6 +11,11 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./line-graph.component.scss']
 })
 export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
+  update(message=""): void {
+    d3.select(".svg-container.svg-" + this.idx + " svg").remove();
+    this.drawGraph();
+  }
+
   getInvolvedDevices(): string[] {
     let deviceIds: string[] = [];
     this.dataRequest.forEach((device) => {
@@ -19,39 +24,28 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
     });
     return deviceIds;
   }
-  update(): void {
-    d3.select(".svg-container.svg-" + this.idx + " svg").remove();
-    this.drawGraph();
-  }
-  isDeleting: boolean;
-  isEditing: boolean;
+
   @Output() deleteEvent = new EventEmitter();
   @Output() editEvent = new EventEmitter();
-
-  constructor(
-    public util: UtilService,
-    private deviceService: DeviceService
-  ) { }
-
   @Input('data') widgetInfo: any;
   @Input('name') widgetName: string;
-  @Input('refreshInterval') refreshInterval: number;
   @Input('index') idx: number;
 
+  isDeleting: boolean;
+  isEditing: boolean;
   widgetData: any;
   data: Array<any>;
   legends: Array<any> = [];
   dataRequest: Array<any> = [];
   model: any = {};
 
+  constructor(
+    public util: UtilService,
+    private deviceService: DeviceService
+  ) { }
+
   ngOnInit() {
     this.init();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.drawGraph();
-    }, 500);
   }
 
   init() {
@@ -69,6 +63,12 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
         range: range
       })
     });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.drawGraph();
+    }, 500);
   }
 
   drawGraph() {
@@ -95,8 +95,8 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
     let y = d3.scaleLinear().range([height, 0]);
     let svg = d3.select(".svg-container.svg-" + this.idx)
       .attr(
-      "style",
-      "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
+        "style",
+        "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
       )
       .append("svg")
       .attr("preserveAspectRatio", "xMinYMin meet")
@@ -108,7 +108,7 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
       .style("left", "0")
       .append("g")
       .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + margin.left + "," + margin.top + ")");
 
     function draw(Data) {
       let maxY = 0;

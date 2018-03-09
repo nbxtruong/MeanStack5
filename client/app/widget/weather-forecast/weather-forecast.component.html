@@ -1,42 +1,24 @@
 <div class="card widget-card">
-  <div class="card-header widget-header">
-    <p class="widget-name">{{widgetName}}</p>
-    <div class="widget-function">
-      <a (click)="setEdit(true)">
-        <i class="fas fa-edit"></i>
-      </a>
-      <a (click)="setDelete(true)">
-        <i class="fas fa-trash-alt"></i>
-      </a>
+  <widget-header [name]="widgetName" (editClick)="setEdit(true)" (deleteClick)="setDelete(true)"></widget-header>
+  <div class="card-block row widget-content">
+    <div class="weather-today col-sm-6 px-0 mx-0 py-0 my-0">
+      <img src="{{weatherToday.icon}}">
     </div>
-  </div>
-  <div class="card-block widget-content">
-    <table>
-      <tr>
-        <td class="weather-today">
-          <img src="{{weatherToday.icon}}">
-        </td>
-        <td>
-          <p>{{weatherToday.temp}} ℃</p>
-          <p>{{weatherToday.status}}</p>
-        </td>
-      </tr>
-    </table>
-    <table>
-      <tr>
-        <td class="weather-nextdays" *ngFor="let weather of weatherNextDays">
-          <p>{{weather.day}}</p>
-          <div class="row">
-            <div class="col-sm-6 col-lg-6 col-md-6">
-              <p style="padding-top:25px">{{weather.temp}} ℃</p>
-            </div>
-            <div class="col-sm-6">
-              <img src="{{weather.icon}}">
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div class="weather-today col-sm-6 px-0 mx-0 py-0 my-0">
+      <p>{{weatherToday.temp}} ℃</p>
+      <p>{{weatherToday.status}}</p>
+    </div>
+    <hr>
+    <div class="weather-nextdays col-sm-4 px-0 mx-0" *ngFor="let weather of weatherNextDays">
+      <div class="col px-1 mx-1 py-0 my-0">
+        <p class="py-0 my-0">{{weather.day}}</p>
+      </div>
+      <div class="row px-0 mx-0 py-0 my-0">
+        <p class="py-0 my-0" style="width:100%">{{weather.temp}} ℃
+          <img class="px-0 mx-0" src="{{weather.icon}}">
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
