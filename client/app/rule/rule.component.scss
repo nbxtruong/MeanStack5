@@ -1,21 +1,20 @@
-
 @media (min-width: 100px) {
   select {
     font-size: 16px;
-    background-color:transparent;
+    background-color: transparent;
   }
-  .form-control{
-    padding-top:0px;
-    padding-bottom:0px;
-    margin-top:0px;
-    margin-bottom:0px;
+  .form-control {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
-  .modal-element-border{
-    border-radius:5px;
-    border:1px solid#939393 !important;
+  .modal-element-border {
+    border-radius: 5px;
+    border: 1px solid#939393 !important;
   }
-  #ruleTitle{
-    padding-left:0.25rem!important;
+  #ruleTitle {
+    padding-left: 0.25rem !important;
   }
   label {
     font-size: 16px;
@@ -23,51 +22,47 @@
   }
   .card {
     width: 99.4% !important;
-    margin-left:0.2%;
+    margin-left: 0.2%;
     margin-right: 0.4%;
   }
-  
-  .modal-element-pullleft{
-    margin-left:0px;
-    margin-right:0px;
-    margin-bottom:0.5rem;
-    padding-left:0px!important;
-    padding-right:0!important;
+  .modal-element-pullleft {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0.5rem;
+    padding-left: 0px !important;
+    padding-right: 0 !important;
   }
-  .modal-element-pullright{
-    margin-left:0rem;
-    margin-right:0px;
-    margin-bottom:0.5rem;
-    padding-left:0px!important;
-    padding-right:0!important;
+  .modal-element-pullright {
+    margin-left: 0rem;
+    margin-right: 0px;
+    margin-bottom: 0.5rem;
+    padding-left: 0px !important;
+    padding-right: 0 !important;
   }
-  .modal-element-pullright > input{
-    padding-left:0.5rem!important;
+  .modal-element-pullright>input {
+    padding-left: 0.5rem !important;
   }
-
   .rule-headerCell-1 {
     white-space: nowrap;
-    overflow: hidden!important;
+    overflow: hidden !important;
     text-overflow: ellipsis;
-    max-height: 30px!important;
-    min-height: 30px!important;
-    width:75%;
-    margin-left:1%;
+    max-height: 30px !important;
+    min-height: 30px !important;
+    width: 75%;
+    margin-left: 1%;
   }
-  
   .rule-headerCell-2 {
     white-space: nowrap;
-    overflow: hidden!important;
+    overflow: hidden !important;
     text-overflow: ellipsis;
-    max-height: 30px!important;
-    min-height: 30px!important;
-    width:24%;
-    text-align:center;
-
+    max-height: 30px !important;
+    min-height: 30px !important;
+    width: 24%;
+    text-align: center;
   }
   .rule-header-label {
     white-space: nowrap;
-    overflow: hidden!important;
+    overflow: hidden !important;
     text-overflow: ellipsis;
     font-family: Poppins;
     font-size: 16px;
@@ -75,17 +70,15 @@
     font-style: normal;
     letter-spacing: normal;
     text-align: left;
-    max-height: 28px!important;
-    min-height: 28px!important;
-    
+    max-height: 28px !important;
+    min-height: 28px !important;
   }
   .card-header-icon {
     font-size: 18px;
-    background-color:transparent!important;
-    min-height: 30px!important;
-    max-height: 30px!important;
+    background-color: transparent !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
   }
-    
   .create-rule-btn {
     text-align: center;
     mix-blend-mode: undefined;
@@ -94,14 +87,14 @@
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
-    line-height: normal;   
+    line-height: normal;
     text-transform: uppercase;
     color: #ffffff;
-    border:1px solid #1aaa55; 
+    border: 1px solid #1aaa55;
     border-radius: 25px;
     background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
   }
-  .modal-body{
+  .modal-body {
     font-family: Poppins;
   }
 }
@@ -129,14 +122,12 @@
     width: 99.4% !important;
   }
   .rule-headerCell-1 {
-    width:88%;
-    margin-left:1%;
+    width: 88%;
+    margin-left: 1%;
   }
-  
   .rule-headerCell-2 {
-    width:11%;
+    width: 11%;
   }
-  
   .create-rule-btn {
     border-bottom: none solid white !important;
     width: 200px !important;
@@ -144,54 +135,50 @@
     margin: 0px 2px !important;
     height: 34px;
   }
-    
 }
 
 @media (min-width: 800px) {
   .card {
     width: 99.4% !important;
   }
-  
   .rule-headerCell-1 {
-    width:92%;
-    margin-left:1%;
+    width: 92%;
+    margin-left: 1%;
   }
-  
   .rule-headerCell-2 {
-    width:7%;
+    width: 7%;
   }
   .rule-header-label {
     font-size: 18px;
   }
-
   .card-header-icon {
     font-size: 18px;
-    background-color:transparent!important;
-    min-height: 30px!important;
-    max-height: 30px!important;
+    background-color: transparent !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
   }
   .create-rule-btn {
     font-size: 1rem;
   }
 }
-@media(min-width:992px)
-{
-  .modal-element-pullleft{
-    margin-left:0px;
-    margin-right:0px;
-    margin-bottom:0.25rem;
-    padding-left:0px!important;
-    padding-right:0.25rem!important;
+
+@media(min-width:992px) {
+  .modal-element-pullleft {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0.25rem;
+    padding-left: 0px !important;
+    padding-right: 0.25rem !important;
   }
-  .modal-element-pullright{
-    margin-left:0px!important;
-    margin-right:0px;
-    margin-bottom:0.25rem;
-    padding-left:0px!important;
-    padding-right:0!important;
+  .modal-element-pullright {
+    margin-left: 0px !important;
+    margin-right: 0px;
+    margin-bottom: 0.25rem;
+    padding-left: 0px !important;
+    padding-right: 0 !important;
   }
-  #ruleTitle{
-    padding-left:0.25rem!important;
+  #ruleTitle {
+    padding-left: 0.25rem !important;
   }
 }
 
@@ -199,53 +186,53 @@
   .card {
     width: 49.4% !important;
   }
-  
   .rule-headerCell-1 {
-    width:89%;
-    margin-left:1%;
+    width: 89%;
+    margin-left: 1%;
   }
-  
   .rule-headerCell-2 {
-    width:10%;
+    width: 10%;
   }
-  
 }
 
 @media (min-width: 1300px) {
   .card {
     width: 32.4% !important;
   }
-  
   .rule-headerCell-1 {
-    width:86%;
+    width: 86%;
   }
-  
   .rule-headerCell-2 {
-    width:12%;
+    width: 12%;
   }
 }
-option{
-  color:black;
+
+option {
+  color: black;
 }
+
 .rule-header {
   font-family: Poppins;
   font-size: 30px;
   font-weight: bold;
   text-align: left;
-  max-height: 28px!important;
-  min-height: 28px!important;
+  max-height: 28px !important;
+  min-height: 28px !important;
 }
+
 .rule-header i {
   margin-right: 20px;
   color: #1aaa55;
 }
-.card-body{
-  max-height:500px!important;
+
+.card-body {
+  max-height: 500px !important;
 }
 
-.card-header{
-  max-height: 70px!important;
+.card-header {
+  max-height: 70px !important;
 }
+
 .modal {
   text-align: center;
 }
@@ -315,8 +302,8 @@ button:focus {
   border-radius: 15px !important;
   border-color: #dadada;
   height: 35px;
-  margin-left:0.2%;
-  margin-right:0.4%;
+  margin-left: 0.2%;
+  margin-right: 0.4%;
 }
 
 .flex-container {
@@ -325,7 +312,7 @@ button:focus {
   background-color: transparent;
 }
 
-.rule-container{
+.rule-container {
   justify-content: center;
 }
 
@@ -341,8 +328,8 @@ button:focus {
   background-color: #1aaa55;
 }
 
-.b-0{
-  border:none!important;
+.b-0 {
+  border: none !important;
 }
 
 .card {
@@ -371,7 +358,7 @@ button:focus {
   width: 2px;
 }
 
-.popin{
+.popin {
   font-family: Poppins;
 }
 
@@ -386,44 +373,50 @@ button:focus {
   text-align: center !important;
 }
 
-.ellipse{
-  overflow: hidden!important;
-  text-overflow:ellipsis;
+.ellipse {
+  overflow: hidden !important;
+  text-overflow: ellipsis;
   word-wrap: break-word;
   white-space: nowrap;
 }
-.span-ellipse{
-  position:absolute!important;
-  overflow: hidden!important;
+
+.span-ellipse {
+  position: absolute !important;
+  overflow: hidden !important;
   text-overflow: ellipsis;
   word-wrap: break-word;
   white-space: initial;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
 }
-.top-then{
-  top:80%;
+
+.top-then {
+  top: 80%;
 }
-.top-when{
-  top:15%;
+
+.top-when {
+  top: 15%;
 }
-.rule-table-height{
-  height:110px!important;
+
+.rule-table-height {
+  height: 110px !important;
 }
-.span-ellipse:before{
+
+.span-ellipse:before {
   content: '';
-  display:inline-block;
+  display: inline-block;
 }
+
 .then-conditions {
   height: 60px !important;
-  overflow: hidden!important;
+  overflow: hidden !important;
   text-overflow: ellipsis;
   word-wrap: break-word;
   vertical-align: bottom;
 }
 
 .then-conditions-span {
-  overflow: hidden!important;
+  overflow: hidden !important;
   text-overflow: ellipsis;
   word-wrap: break-word;
 }
@@ -454,7 +447,6 @@ button:focus {
   }
 }
 
-
 .rules-name {
   line-height: 50px;
   margin: 18px 0px;
@@ -472,9 +464,10 @@ button:focus {
   margin-bottom: 2rem;
 }
 
-.bold{
-  font-weight:bold!important;
+.bold {
+  font-weight: bold !important;
 }
-.black{
-  color:black!important;
+
+.black {
+  color: black !important;
 }

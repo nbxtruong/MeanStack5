@@ -25,7 +25,7 @@ export class AddWidgetComponent implements OnInit {
     public util: UtilService,
     private router: Router,
     private deviceService: DeviceService,
-    private location:Location
+    private location: Location
   ) { }
 
   ngOnInit() {

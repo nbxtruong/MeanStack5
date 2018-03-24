@@ -14,7 +14,9 @@ export class DeviceCardComponent implements OnInit {
   @Output('onChange') onChange = new EventEmitter();
   @Output('onEdit') onEdit = new EventEmitter();
   @Output('onDelete') onDelete = new EventEmitter();
+
   isDeleting: boolean = false;
+  
   constructor(
     private router: Router,
     public util: UtilService
@@ -40,7 +42,7 @@ export class DeviceCardComponent implements OnInit {
   }
 
   TriggerDelete() {
-    this.isDeleting=false;
+    this.isDeleting = false;
     this.onDelete.emit(this.device);
   }
 }

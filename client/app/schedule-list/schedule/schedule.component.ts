@@ -9,13 +9,11 @@ import { ScheduleService } from '../../services/schedule.service';
 })
 export class ScheduleComponent implements OnInit {
 
-  constructor(
-    private scheduleService: ScheduleService
-  ) { }
   @ViewChild('normal') normal: ElementRef;
   @Input('schedule') schedule: Schedule
   @Output('onDelete') onDelete = new EventEmitter;
   @Output('onUpdate') onUpdate = new EventEmitter;
+
   isCollapsed: boolean = false;
   FIXED_DAILY: string = Schedule.FIXED_DAILY;
   FIXED_INTERVAL: string = Schedule.FIXED_INTERVAL;
@@ -23,6 +21,10 @@ export class ScheduleComponent implements OnInit {
   content: any;
   enabled: boolean;
   isDeleting: boolean = false;
+
+  constructor(
+    private scheduleService: ScheduleService
+  ) { }
 
   ngOnInit() {
     this.content = this.schedule.getContent();
@@ -54,6 +56,7 @@ export class ScheduleComponent implements OnInit {
       });
     }
   }
+
   setDelete(value: boolean) {
     this.isDeleting = value;
   }

@@ -2,144 +2,148 @@ $primary-color: #454545;
 $second-color: #939393;
 $red-color:#1aaa55;
 .layout-title {
-    font-size: 30px;
-    font-weight: bold;
-    color: $primary-color;
-    margin-bottom: 25px;
+  font-size: 30px;
+  font-weight: bold;
+  color: $primary-color;
+  margin-bottom: 25px;
 }
 
 .app-content {
-    border-top: 1px solid #e6e6e6;
-    border-bottom: 1px solid #e6e6e6;
-    height: 100%;
-    background-color: #fafafa!important;
-    .main-content {
-        background-color: transparent !important;
-    }
-
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  height: 100%;
+  background-color: #fafafa !important;
+  .main-content {
+    background-color: transparent !important;
+  }
 }
 
 .when-eclipse-1 {
-    width: 14px;
-    height: 14px;
-    border: solid 2px #1aaa55;
-  }
-  
-.when-eclipse-2 {
-    width: 14px;
-    height: 14px;
-    background-color: #1aaa55;
-    border: solid 2px #1aaa55;
+  width: 14px;
+  height: 14px;
+  border: solid 2px #1aaa55;
 }
+
+.when-eclipse-2 {
+  width: 14px;
+  height: 14px;
+  background-color: #1aaa55;
+  border: solid 2px #1aaa55;
+}
+
 .dashed-line {
-    border-left: 1px dashed #1aaa55;
-    width:2px!important;
-    left:7px;
-    position: relative;
-  }
+  border-left: 1px dashed #1aaa55;
+  width: 2px !important;
+  left: 7px;
+  position: relative;
+}
 
 .line-gap {
   height: 300px;
 }
-.line-gap-2{
-    height:270px;
+
+.line-gap-2 {
+  height: 270px;
 }
 
-.rule-table-height{
-    height:110px!important;
+.rule-table-height {
+  height: 110px !important;
 }
 
-
-.vertical-bar-head
-{
-  height:20px!important;
+.vertical-bar-head {
+  height: 20px !important;
 }
 
-.vertical-bar-body{
-  height:305px!important;
-}
-.vertical-bar-body-2{
-  height:275px!important;
-}
-.vertical-bar-foot{
-  height:100px!important;
+.vertical-bar-body {
+  height: 305px !important;
 }
 
-.vertical-bar-foot-2{
-    height:10px!important;
-  }
-.line-width{
-    width:20px!important;
-}
-.content-width{
-
+.vertical-bar-body-2 {
+  height: 275px !important;
 }
 
-.no-bg{
-    background-color:transparent!important;
-    border:none;
+.vertical-bar-foot {
+  height: 100px !important;
 }
-.font-size-18{
-    font-size:18px;
+
+.vertical-bar-foot-2 {
+  height: 10px !important;
 }
-.bold{
-    font-weight: bold;
+
+.line-width {
+  width: 20px !important;
 }
-.center{
-    align-content: center;
+
+.no-bg {
+  background-color: transparent !important;
+  border: none;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.center {
+  align-content: center;
 }
 
 .create-schedule-btn {
-    text-align: center;
-    mix-blend-mode: undefined;
-    font-family: Poppins;
-    font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;   
-    text-transform: uppercase;
-    color: #ffffff;
-    border:1px solid #ff3355; 
-    border-radius: 25px;
-    background-image: linear-gradient(202deg, #ff3355, #1aaa55);
-  }
-  
-  .cancel-schedule-btn {
-    text-align: center;
-    mix-blend-mode: undefined;
-    font-family: Poppins;
-    font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;   
-    text-transform: uppercase;
-    color: #ff3355;
-    border:1px solid #9d9d9d; 
-    border-radius: 25px;
-    background-color:transparent;
+  text-align: center;
+  mix-blend-mode: undefined;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: 1px solid #ff3355;
+  border-radius: 25px;
+  background-image: linear-gradient(202deg, #ff3355, #1aaa55);
 }
-.enabled{
-    background-color:transparent!important;
+
+.cancel-schedule-btn {
+  text-align: center;
+  mix-blend-mode: undefined;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  text-transform: uppercase;
+  color: #ff3355;
+  border: 1px solid #9d9d9d;
+  border-radius: 25px;
+  background-color: transparent;
+}
+
+.enabled {
+  background-color: transparent !important;
 }
 
 .schedule-header {
-    height: 50px;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    .schedule-name {
-      line-height: 50px;
-      margin: 0;
-      float: left;
-      i {
-        margin-right: 20px;
-        color: $red-color;
-      }
-      font-size: 30px;
-      font-weight: bold;
+  height: 50px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  .schedule-name {
+    line-height: 50px;
+    margin: 0;
+    float: left;
+    i {
+      margin-right: 20px;
+      color: $red-color;
     }
+    font-size: 30px;
+    font-weight: bold;
+  }
 }
-.table{
-    display:block!important;
+
+.table {
+  display: block !important;
 }

@@ -12,7 +12,6 @@ import { ToastComponent } from '../shared/toast/toast.component';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),

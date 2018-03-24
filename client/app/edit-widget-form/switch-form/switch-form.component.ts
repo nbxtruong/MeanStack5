@@ -10,18 +10,17 @@ import { Device } from '../../shared/models/device.model';
 })
 export class SwitchFormComponent implements OnInit {
 
-
   @Input('model') model: any;
   @Output('complete') complete = new EventEmitter();
   @Output('cancel') cancel = new EventEmitter();
+
+  controllers: Device[] = [];
+  attributes: Array<any> = [];
 
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
   ) { }
-
-  controllers: Device[] = [];
-  attributes: Array<any> = [];
 
   ngOnInit() {
     this.getSprinklers();

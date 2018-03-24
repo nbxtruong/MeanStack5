@@ -17,15 +17,22 @@ import { Page } from '../../shared/page';
   styleUrls: ['./device-edit-data.component.scss']
 })
 export class DeviceEditDataComponent implements OnInit {
+
   data: Array<any>;
   tableInitiated: boolean = false;
   table: any;
-
   rows = [];
   columns = [
     { prop: 'time' },
     { prop: 'data' }
   ];
+  start: number = 0;
+  end: number = 0;
+  current: number = 0;
+  limit: number = 10;
+  deviceId: string = "";
+  map: Map<number, number> = new Map();
+
   constructor(
     private deviceService: DeviceService,
     private auth: AuthService,
@@ -35,14 +42,7 @@ export class DeviceEditDataComponent implements OnInit {
     public util: UtilService,
     public toast: ToastComponent,
     private route: ActivatedRoute,
-  ) {
-  }
-  start: number = 0;
-  end: number = 0;
-  current: number = 0;
-  limit: number = 10;
-  deviceId: string = "";
-  map: Map<number, number> = new Map();
+  ) { }
 
   ngOnInit() {
     this.map.set(this.current, -1);

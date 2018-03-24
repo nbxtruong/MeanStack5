@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
 })
 export class DashboardListComponent implements OnInit {
 
-  constructor(
-    public util: UtilService,
-    private dashboardService: DashboardService,
-    private router: Router
-  ) { }
-
   rows: Array<{ name: string, last_updated: string, data: any }> = [];
   columns = [
     { prop: 'name' },
     { prop: 'last_updated', name: 'Last Updated' }
   ];
+
+  constructor(
+    public util: UtilService,
+    private dashboardService: DashboardService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getDashboards();

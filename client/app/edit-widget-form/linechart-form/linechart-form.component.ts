@@ -9,6 +9,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./linechart-form.component.scss']
 })
 export class LinechartFormComponent implements OnInit {
+  
   @Input('model') model: any;
   @Output('complete') complete = new EventEmitter();
   @Output('cancel') cancel = new EventEmitter();

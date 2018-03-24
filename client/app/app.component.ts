@@ -11,14 +11,6 @@ import { UtilService } from './services/util.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  ngOnInit(): void {
-    this.util.dashboards.length = 0;
-    this.dashboardService.getDashboards().subscribe(res => {
-      this.util.dashboards = res;
-    }, error => {
-      console.log(error);
-    })
-  }
 
   constructor(
     public auth: AuthService,
@@ -27,4 +19,12 @@ export class AppComponent implements OnInit {
     private dashboardService: DashboardService
   ) { }
 
+  ngOnInit(): void {
+    this.util.dashboards.length = 0;
+    this.dashboardService.getDashboards().subscribe(res => {
+      this.util.dashboards = res;
+    }, error => {
+      console.log(error);
+    })
+  }
 }

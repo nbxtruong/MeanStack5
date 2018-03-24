@@ -12,6 +12,7 @@ import { ScheduleService } from '../../services/schedule.service';
   styleUrls: ['./fixed-interval.component.scss']
 })
 export class FixedIntervalComponent implements OnInit {
+
   @Input('schedule') schedule: any;
   @Input('sprinklers') sprinklers: any;
   days = [];
@@ -23,6 +24,7 @@ export class FixedIntervalComponent implements OnInit {
   intervalTimeType: any;
   intervalTime: any;
   intervalDuration: any;
+
   constructor(
     private util: UtilService,
     private deviceService: DeviceService,
@@ -62,6 +64,7 @@ export class FixedIntervalComponent implements OnInit {
     this.scheduleService.schedule.name = "";
     this.scheduleService.isValidSchedule = false;
   }
+
   initializeFixedIntervalSchedule() {
     this.schedule = {
       "content": {
@@ -110,7 +113,6 @@ export class FixedIntervalComponent implements OnInit {
     }
   }
 
-
   setValve(_valve) {
     let idx = this.valves.indexOf(_valve);
     this.valves[idx].selected = 1 - this.valves[idx].selected;
@@ -131,6 +133,7 @@ export class FixedIntervalComponent implements OnInit {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();
   }
+
   setIntervalTime() {
     if (this.intervalTime > 0) {
       this.schedule.content.interval = {

@@ -11,23 +11,6 @@ import { AuthService } from '../../services/auth.service';
     styleUrls: ['./switch-widget.component.scss']
 })
 export class SwitchWidgetComponent extends Widget implements OnInit {
-    getInvolvedGateways(): string[] {
-        return [this.widgetInfo.data.gateway_id];
-    }
-    update(message: any = ""): void {
-        if (message != "") {
-            let mess = JSON.parse(message);
-            if (mess[this.model.attribute] == "1")
-                this.controlCheck = true;
-            else if (mess[this.model.attribute] == "0")
-                this.controlCheck = false;
-        }
-    }
-
-    getInvolvedDevices(): string[] {
-        return [this.widgetInfo.data.device_id];
-    }
-
     @Output() deleteEvent = new EventEmitter();
     @Output() editEvent = new EventEmitter();
     @Input('data') widgetInfo: any;
@@ -53,6 +36,24 @@ export class SwitchWidgetComponent extends Widget implements OnInit {
         private auth: AuthService
     ) {
         super();
+    }
+
+    update(message: any = ""): void {
+        if (message != "") {
+            let mess = JSON.parse(message);
+            if (mess[this.model.attribute] == "1")
+                this.controlCheck = true;
+            else if (mess[this.model.attribute] == "0")
+                this.controlCheck = false;
+        }
+    }
+
+    getInvolvedGateways(): string[] {
+        return [this.widgetInfo.data.gateway_id];
+    }
+
+    getInvolvedDevices(): string[] {
+        return [this.widgetInfo.data.device_id];
     }
 
     ngOnInit() {

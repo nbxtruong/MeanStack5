@@ -24,15 +24,19 @@ export class RuleService {
   createRule(ruleRequest: Object): Observable<any> {
     return this.http.post('rules', ruleRequest);
   }
+
   getRules(): Observable<any> {
     return this.http.get('rules');
   }
+
   updateRule(ruleID, ruleContent): Observable<any> {
     return this.http.put('rules/' + ruleID, ruleContent);
   }
+
   deleteRule(ruleID): Observable<any> {
     return this.http.delete('rules/' + ruleID);
   }
+
   getAttributes(): Observable<any> {
     let deviceTypes: any[] = ["Sensor"];
     return this.http.post('devices/getAttributes/', deviceTypes);

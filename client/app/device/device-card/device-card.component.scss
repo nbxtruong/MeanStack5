@@ -32,10 +32,8 @@ $red-color:#1aaa55;
       right: 0;
       position: absolute;
     }
-    &:hover {
-      .custom-control.custom-checkbox {
-        display: block;
-      }
+    .custom-control.custom-checkbox {
+      display: block;
     }
   }
 }

@@ -62,38 +62,5 @@ export class DeviceService {
   getSingleDeviceData(request: any): Observable<any> {
     console.log(request);
     return this.http.post("deviceData/data", request);
-    // return of(
-    //   {
-    //     created_at: 1521172195686,
-    //     data: [
-    //       {
-    //         "created_at": 1521172195686,
-    //         "device_id": "S002",
-    //         "val2": 1
-    //       },
-    //       {
-    //         "created_at": 1521172185705,
-    //         "device_id": "S002",
-    //         "val1": 1
-    //       },
-    //       {
-    //         "created_at": 1521171887328,
-    //         "device_id": "S002",
-    //         "val1": 1
-    //       },
-    //       {
-    //         "created_at": 1521171878683,
-    //         "device_id": "S002",
-    //         "val1": 0,
-    //         "val2": 0
-    //       },
-    //       {
-    //         "created_at": 1521171865617,
-    //         "device_id": "S002",
-    //         "val1": 1
-    //       }
-    //     ]
-    //   }
-    // )
   }
 }

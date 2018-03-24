@@ -12,6 +12,7 @@ import { ScheduleService } from '../../services/schedule.service';
   styleUrls: ['./fixed-daily.component.scss']
 })
 export class FixedDailyComponent implements OnInit {
+
   @Input('schedule') schedule: any;
   @Input('sprinklers') sprinklers: Array<any>;
   days = [];
@@ -27,7 +28,6 @@ export class FixedDailyComponent implements OnInit {
     private scheduleService: ScheduleService,
     private timepicker: AmazingTimePickerService
   ) { }
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.scheduleService.isEditting) {
@@ -51,10 +51,12 @@ export class FixedDailyComponent implements OnInit {
       this.time = this.schedule.content.time.hours + ":" + this.schedule.content.time.minutes;
     }
   }
+
   ngOnDestroy() {
     this.scheduleService.schedule.name = "";
     this.scheduleService.isValidSchedule = false;
   }
+
   initializeFixedDailySchedule() {
     this.schedule = {
       "content": {
@@ -104,6 +106,7 @@ export class FixedDailyComponent implements OnInit {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();
   }
+
   setValveList() {
     if (this.selectedSprinkler != undefined && this.sprinklers != undefined) {
       let l = this.sprinklers.find(x => x.id === this.selectedSprinkler);
@@ -170,6 +173,7 @@ export class FixedDailyComponent implements OnInit {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();
   }
+
   setTime() {
     let _time = <String>this.time;
     let splitTime = _time.split(':');

@@ -13,8 +13,8 @@ export class AddWidgetFormComponent implements OnInit {
 
   @Output('complete') complete = new EventEmitter();
   @Output('cancel') cancel = new EventEmitter();
-
   @Input('template') chosenTemplate: string = null;
+
   sprinklers: any[] = [];
   allAttribute: Array<any> = [];
   attributes: Array<any> = [];

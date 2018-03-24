@@ -34,28 +34,28 @@ export class DeviceEditPropertiesComponent implements OnInit {
 
   saveDevice() {
     const deviceData = { "name": this.device.name, "description": this.device.description };
-    this.util.isLoading=true;
+    this.util.isLoading = true;
     this.deviceService.updateDevice(this.device.id, deviceData).subscribe(
       res => {
-        this.util.isLoading=false;
+        this.util.isLoading = false;
         this.toast.setMessage('Device updated successfully!', 'success');
         this.router.navigate(['/devices']);
       },
       error => {
-        this.util.isLoading=false;
+        this.util.isLoading = false;
         this.toast.setMessage('Failed to update device', 'danger');
       }
     )
   }
   getDevice(deviceID: String) {
-    this.util.isLoading=true;
+    this.util.isLoading = true;
     this.deviceService.getDevice(deviceID).subscribe(
       res => {
-        this.util.isLoading=false;
+        this.util.isLoading = false;
         this.device = res;
       },
       error => {
-        this.util.isLoading=false;
+        this.util.isLoading = false;
         console.log(error);
       }
     )

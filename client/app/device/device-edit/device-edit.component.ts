@@ -16,6 +16,7 @@ export class DeviceEditComponent implements OnInit {
   routeLast: string = "";
   device: Device = new Device({});
   devices: Device[] = [];
+
   constructor(
     private route: ActivatedRoute,
     public util: UtilService,

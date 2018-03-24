@@ -13,6 +13,13 @@ import { User } from '../../shared/models/users.model';
 })
 export class AccountPasswordComponent implements OnInit {
 
+  user: User = {};
+  change = {
+    old: "",
+    new: "",
+    retype: ""
+  };
+
   constructor(
     private auth: AuthService,
     private location: Location,
@@ -20,13 +27,6 @@ export class AccountPasswordComponent implements OnInit {
     public util: UtilService,
     public toast: ToastComponent
   ) { }
-
-  user: User = {};
-  change = {
-    old: "",
-    new: "",
-    retype: ""
-  };
 
   ngOnInit() {
     Object.assign(this.user, this.auth.currentUser);

@@ -57,32 +57,32 @@ export class AppMqttService {
   connect() {
     this.getPresignedUrl()
       .subscribe(
-      response => {
-        this.client = mqtt.connect(response.url);
-        this.client.on('connect', () => {
-          console.log('Connected to AWS IoT Broker');
-          let count = 0;
-          this.topicAndWidgetMap.forEach((value, key) => {
-            this.client.subscribe(key);
-            count += value.length;
-          })
-          console.log(count + " widgets reconnected");
-        });
-        this.client.on('close', () => {
-          console.log('Connection to AWS IoT Broker closed');
-          this.client.end();
-          this.client = null;
-          this.connect();
-          console.log('Reconnecting to AWS IoT Broker');
-        });
-        this.client.on('message', (topic, message) => {
-          this.topicAndWidgetMap.get(topic).forEach((widget) => {
-            widget.update(message);
+        response => {
+          this.client = mqtt.connect(response.url);
+          this.client.on('connect', () => {
+            console.log('Connected to AWS IoT Broker');
+            let count = 0;
+            this.topicAndWidgetMap.forEach((value, key) => {
+              this.client.subscribe(key);
+              count += value.length;
+            })
+            console.log(count + " widgets reconnected");
           });
-        });
-      },
-      error => {
-        console.log(error);
-      })
+          this.client.on('close', () => {
+            console.log('Connection to AWS IoT Broker closed');
+            this.client.end();
+            this.client = null;
+            this.connect();
+            console.log('Reconnecting to AWS IoT Broker');
+          });
+          this.client.on('message', (topic, message) => {
+            this.topicAndWidgetMap.get(topic).forEach((widget) => {
+              widget.update(message);
+            });
+          });
+        },
+        error => {
+          console.log(error);
+        })
   }
 }

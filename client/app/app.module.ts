@@ -1,3 +1,46 @@
+// Import library
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { GridsterModule } from 'angular-gridster2';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import more from 'highcharts/highcharts-more.src';
+import exporting from 'highcharts/modules/exporting.src';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+export function highchartsModules() {
+  // apply Highcharts Modules to this array
+  return [more, exporting];
+}
+
+// Import service
+import { CatService } from './services/cat.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardLogin } from './services/auth-guard-login.service';
+import { AuthGuardAdmin } from './services/auth-guard-admin.service';
+import { DeviceService } from './services/device.service';
+import { UtilService } from './services/util.service';
+import { AppHttpClient } from './services/app-http.service';
+import { DashboardService } from './services/dashboard.service';
+import { WeatherService } from './services/weather-forecast.service';
+import { RuleService } from './services/rule.service';
+import { AppMqttService } from './services/app-mqtt.service';
+import { ScheduleService } from './services/schedule.service';
+
+// Import widgets component
+import { LineGraphComponent } from './widget/line-graph/line-graph.component';
+import { GaugeSeriesComponent } from './widget/gauge-series/gauge-series.component';
+import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
+import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
+import { HightChartComponent } from './widget/high-charts/high-charts.component';
+
 // Import pages component
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
@@ -25,42 +68,11 @@ import { MqttComponent } from './mqtt/mqtt.component';
 import { LinechartFormComponent } from './edit-widget-form/linechart-form/linechart-form.component';
 import { GaugechartFormComponent } from './edit-widget-form/gaugechart-form/gaugechart-from.component';
 import { AddDashboardComponent } from './add-dashboard/add-dashboard.component';
-
-// Import service
-import { CatService } from './services/cat.service';
-import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
-import { AuthGuardLogin } from './services/auth-guard-login.service';
-import { AuthGuardAdmin } from './services/auth-guard-admin.service';
-import { DeviceService } from './services/device.service';
-import { UtilService } from './services/util.service';
-import { AppHttpClient } from './services/app-http.service';
-import { DashboardService } from './services/dashboard.service';
-import { WeatherService } from './services/weather-forecast.service';
-import { RuleService } from './services/rule.service';
-import { AppMqttService } from './services/app-mqtt.service';
-
-// Import widgets component
-import { LineGraphComponent } from './widget/line-graph/line-graph.component';
-import { GaugeSeriesComponent } from './widget/gauge-series/gauge-series.component';
-import { WeatherComponent } from './widget/weather-forecast/weather-forecast.component';
-import { SwitchWidgetComponent } from './widget/switch-widget/switch-widget.component';
-import { HightChartComponent } from './widget/high-charts/high-charts.component';
-
-// Import library
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { GridsterModule } from 'angular-gridster2';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
-import more from 'highcharts/highcharts-more.src';
-import exporting from 'highcharts/modules/exporting.src';
-import { NgxGaugeModule } from 'ngx-gauge';
-import { GaugeChartComponent } from './widget/gauge-chart/gauge-chart.component';
-import { WidgetHeaderComponent } from './widget/widget-header/widget-header.component';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { DeviceCardComponent } from './device/device-card/device-card.component';
+import { DeviceEditDataComponent } from './device/device-edit-data/device-edit-data.component';
+import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
+import { FooterComponent } from './footer/footer.component';
+import { WeatherFormComponent } from './edit-widget-form/weather-form/weather-form.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { ScheduleComponent } from './schedule-list/schedule/schedule.component';
 import { SwitchFormComponent } from './edit-widget-form/switch-form/switch-form.component';
@@ -68,21 +80,8 @@ import { AddScheduleComponent } from './add-schedule/add-schedule.component';
 import { FixedDailyComponent } from './add-schedule/fixed-daily/fixed-daily.component';
 import { FixedIntervalComponent } from './add-schedule/fixed-interval/fixed-interval.component';
 import { FlexibleDailyComponent } from './add-schedule/flexible-daily/flexible-daily.component';
-import { ScheduleService } from './services/schedule.service';
-import { FooterComponent } from './footer/footer.component';
-import { WeatherFormComponent } from './edit-widget-form/weather-form/weather-form.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { AmazingTimePickerModule } from 'amazing-time-picker';
-import { DeviceCardComponent } from './device/device-card/device-card.component';
-import { DeviceEditDataComponent } from './device/device-edit-data/device-edit-data.component';
-import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
-
-export function highchartsModules() {
-  // apply Highcharts Modules to this array
-  return [more, exporting];
-}
+import { GaugeChartComponent } from './widget/gauge-chart/gauge-chart.component';
+import { WidgetHeaderComponent } from './widget/widget-header/widget-header.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -162,8 +161,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RuleService,
     ScheduleService,
     { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}
-
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -8,8 +8,6 @@ import { constants } from '../constants';
 @Injectable()
 export class UtilService {
 
-  constructor() { }
-
   currentPage: String;
   currentDevicePage: String;
   currentDevice: Device;
@@ -22,6 +20,8 @@ export class UtilService {
     name: string,
     timestamp: number
   }> = [];
+
+  constructor() { }
 
   getLocalDateTime(timestamp): String {
     let date = new Date(timestamp);

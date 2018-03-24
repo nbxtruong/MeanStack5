@@ -16,6 +16,7 @@ import { Validators, FormControlName } from '@angular/forms';
 })
 
 export class RuleComponent implements OnInit {
+
   ruleInput: Rule;
   searchRule: String;
   ruleProperties: RuleProperties;
@@ -28,14 +29,14 @@ export class RuleComponent implements OnInit {
   ruleInputInterval;
   devices = [];
   ruleList = [];
-  constructor(
 
+  constructor(
     public util: UtilService,
     private deviceService: DeviceService,
     private ruleService: RuleService,
     public toast: ToastComponent,
-  ) {
-  }
+  ) { }
+
   ngOnInit() {
     this.resetCreateRuleBindings();
     this.ruleProperties = new RuleProperties();
@@ -50,10 +51,12 @@ export class RuleComponent implements OnInit {
   onResize(event) {
     this.windowWidth = window.innerWidth;
   }
+
   @HostListener('window:load', ['$event'])
   onLoad(event) {
     this.windowWidth = window.innerWidth;
   }
+
   getRules() {
     let vm = this;
     this.util.isLoading = true;
@@ -81,6 +84,7 @@ export class RuleComponent implements OnInit {
       }
     );
   }
+
   getAttributes() {
     let vm = this;
     vm.ruleService.getAttributes().subscribe(res => {
@@ -92,6 +96,7 @@ export class RuleComponent implements OnInit {
       vm.ruleProperties.deviceList = Object.create(deviceList);
     });
   }
+
   getRuleFromJson(rule) {
     let _rule = new Rule();
     _rule.name = rule.name;
@@ -116,6 +121,7 @@ export class RuleComponent implements OnInit {
     }
     return _rule;
   }
+
   getRuleFromInput(_ruleInput: Rule) {
     var rule;
     rule.name = _ruleInput.name;
@@ -138,6 +144,7 @@ export class RuleComponent implements OnInit {
     rule.attributes.push(attr);
     return rule;
   }
+
   sendCreateRuleRequest(_jsonRequest) {
     let vm = this;
     vm.loadingMessage = "Creating rule...";
@@ -154,6 +161,7 @@ export class RuleComponent implements OnInit {
       }
     );
   }
+
   validateInputs() {
     let isEmailValid = this.isEmailValid();
     let isFilled = this.isAllFilled();
@@ -170,6 +178,7 @@ export class RuleComponent implements OnInit {
     }
     return isEmailValid && isFilled;
   }
+
   isAllFilled() {
     if (this.ruleInput.operator == "Operator" || this.ruleInput.device_id == "Device" || this.ruleInput.action == "Notify User By" || this.ruleInput.value == "" || this.ruleInput.value == null || this.ruleInput.name == "") {
       return false;
@@ -190,6 +199,7 @@ export class RuleComponent implements OnInit {
       return false;
     }
   }
+
   isEmailValid() {
     if (this.ruleInput.action == 'email') {
       return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.ruleInput.contact));
@@ -198,6 +208,7 @@ export class RuleComponent implements OnInit {
       return true;
     }
   }
+
   changeAttributes() {
     if (this.ruleInput.device_id != "Device") {
       let attributes = [];
@@ -209,6 +220,7 @@ export class RuleComponent implements OnInit {
     }
     this.validateInputs();
   }
+
   createRule() {
     if (!this.validateInputs()) {
       this.allowCreateRule = -1;
@@ -221,7 +233,6 @@ export class RuleComponent implements OnInit {
       this.resetCreateRuleBindings();
     }
   }
-
 
   generateJsonRequest(_rule: Rule) {
     let vm = this;
@@ -257,6 +268,7 @@ export class RuleComponent implements OnInit {
     };
     return json;
   }
+
   updateRule() {
     let jsonContent = this.generateJsonRequest(this.ruleInput);
     let ruleID = this.currentRuleList[this.editting].id;
@@ -277,14 +289,17 @@ export class RuleComponent implements OnInit {
       }
     );
   }
+
   editRule(index) {
     this.editting = index;
     this.ruleInput = clone(<Rule>this.currentRuleList[index]);
     this.changeAttributes();
   }
+
   deleteRule(index) {
     this.deleting = index;
   }
+
   deleteConfirm() {
     this.loadingMessage = "Deleting rules...";
     this.util.isLoading = true;
@@ -302,10 +317,12 @@ export class RuleComponent implements OnInit {
       }
     );
   }
+
   resetCreateRuleBindings() {
     this.ruleInput = new Rule();
     this.editting = -1;
   }
+
   updateCurrentRuleList() {
     if (this.searchRule.length > 0) {
       let searchRuleList = [];
@@ -323,9 +340,11 @@ export class RuleComponent implements OnInit {
     }
   }
 }
+
 function clone(target) {
   return Object.create(target);
 }
+
 export class RuleProperties {
   deviceList = [];
   deviceTypes = [];

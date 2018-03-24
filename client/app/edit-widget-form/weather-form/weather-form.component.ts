@@ -9,12 +9,14 @@ import { constants } from '../../constants';
     styleUrls: ['./weather-form.component.scss']
 })
 export class WeatherFormComponent implements OnInit, Widget {
-    getInvolvedGateways(): string[] {
-        throw new Error("Method not implemented.");
-    }
+
     update(): void {
         console.log("updating weather-form");
         //TODO: write update function
+    }
+
+    getInvolvedGateways(): string[] {
+        throw new Error("Method not implemented.");
     }
 
     getInvolvedDevices(): string[] {
@@ -23,11 +25,10 @@ export class WeatherFormComponent implements OnInit, Widget {
     }
 
     @Output('complete') complete = new EventEmitter();
-    @Output('cancel') cancel = new EventEmitter(); 
+    @Output('cancel') cancel = new EventEmitter();
     @Input('model') model: any;
 
     countryList = constants.countryList;
-
     isDeleting: boolean;
     isEditing: boolean;
 
@@ -43,7 +44,7 @@ export class WeatherFormComponent implements OnInit, Widget {
         this.cancel.emit();
     }
 
-    onSubmit() {       
+    onSubmit() {
         this.complete.emit(this.model);
         this.cancel.emit();
     }

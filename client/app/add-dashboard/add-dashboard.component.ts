@@ -31,6 +31,7 @@ export class AddDashboardComponent implements OnInit {
   onSubmit() {
     this.hideFormInput = false
     this.util.isLoading = true;
+
     if (this.dashboardData.name) {
       this.dashboardService.createDashboards(this.dashboardData).subscribe(
         res => {

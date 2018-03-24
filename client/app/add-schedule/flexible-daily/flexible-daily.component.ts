@@ -11,11 +11,13 @@ import { ScheduleService } from '../../services/schedule.service';
   styleUrls: ['./flexible-daily.component.scss']
 })
 export class FlexibleDailyComponent implements OnInit {
+
   @Input('editting') editting: any;
   @Input('schedule') schedule: any;
   @Input('sensors') sensors: any;
   @Input('devices') devices: any;
   @Input('sprinklers') sprinklers: any;
+
   days = [];
   time;
   duration;
@@ -28,13 +30,13 @@ export class FlexibleDailyComponent implements OnInit {
   operatorList: any;
   selectedOperator: any;
   value: any;
+
   constructor(
     private util: UtilService,
     private deviceService: DeviceService,
     private toast: ToastComponent,
     private scheduleService: ScheduleService,
   ) { }
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.scheduleService.isEditting) {
@@ -61,10 +63,12 @@ export class FlexibleDailyComponent implements OnInit {
     }
     this.operatorList = [">", "<", "=", ">=", "<="];
   }
+
   ngOnDestroy() {
     this.scheduleService.schedule.name = "";
     this.scheduleService.isValidSchedule = false;
   }
+
   initializeFlexibleSchedule() {
     this.schedule = {
       "content": {
@@ -93,6 +97,7 @@ export class FlexibleDailyComponent implements OnInit {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();
   }
+
   setAttribute() {
     if (this.selectedDevice != undefined && this.devices != undefined) {
       let sprinkler = this.devices.find(x => x.id === this.selectedDevice);
@@ -107,6 +112,7 @@ export class FlexibleDailyComponent implements OnInit {
       this.scheduleService.validateSchedule();
     }
   }
+
   setCondition() {
     if (this.selectedDevice != undefined) {
       if (this.selectedDevice != "Device") {
@@ -137,6 +143,7 @@ export class FlexibleDailyComponent implements OnInit {
       this.scheduleService.validateSchedule();
     }
   }
+
   setUseWeatherForecast() {
     this.useWeatherForecast = !this.useWeatherForecast;
     this.schedule.content.is_check_weather_forecast = this.useWeatherForecast;
@@ -202,6 +209,7 @@ export class FlexibleDailyComponent implements OnInit {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();
   }
+
   setIntervalTime() {
     this.scheduleService.schedule = this.schedule;
     this.scheduleService.validateSchedule();

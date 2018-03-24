@@ -13,6 +13,7 @@ import { Schedule } from '../shared/schedule';
   styleUrls: ['./add-schedule.component.scss']
 })
 export class AddScheduleComponent implements OnInit {
+
   schedules = [];
   scheduleType;
   sprinklers = [];
@@ -21,6 +22,7 @@ export class AddScheduleComponent implements OnInit {
   FIXED_DAILY: string = Schedule.FIXED_DAILY;
   FIXED_INTERVAL: string = Schedule.FIXED_INTERVAL;
   FLEXIBLE_DAILY: string = Schedule.FLEXIBLE_DAILY;
+
   constructor(
     private util: UtilService,
     private router: Router,
@@ -43,6 +45,7 @@ export class AddScheduleComponent implements OnInit {
     this.getSprinklers();
     this.getSensors();
   }
+
   initializeSchedule() {
     this.scheduleService.schedule = {
       "content": {
@@ -52,6 +55,7 @@ export class AddScheduleComponent implements OnInit {
       "type": "none"
     }
   }
+
   getSprinklers() {
     this.deviceService.getSprinklers().subscribe(
       res => {
@@ -61,6 +65,7 @@ export class AddScheduleComponent implements OnInit {
         this.toast.setMessage("Failed to get sprinkler list!", "danger");
       });
   }
+
   getSensors() {
     let vm = this;
     vm.deviceService.getSensors().subscribe(res => {
@@ -73,9 +78,11 @@ export class AddScheduleComponent implements OnInit {
       vm.devices = Object.create(deviceList);
     });
   }
+
   clearAll() {
     this.router.navigate([Schedule.SCHEDULE_URL]);
   }
+
   createSchedule() {
     this.scheduleService.createSchedule(this.scheduleService.schedule).subscribe(
       res => {
@@ -87,6 +94,7 @@ export class AddScheduleComponent implements OnInit {
       }
     )
   }
+
   updateSchedule() {
     this.scheduleService.updateSchedule(this.scheduleService.schedule).subscribe(
       res => {

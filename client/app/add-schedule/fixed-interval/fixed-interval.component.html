@@ -8,34 +8,37 @@
     <div class="no-bg col-12" valign="top">
       <div class="vertical-bar-body">
         <ul class="col-12 schedule-week my-2 py-0">
-            <input style="height:38px;text-align: center;" type="number" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 ml-0 mr-3 px-0 my-0 py-1" [(ngModel)]="intervalTime" (ngModelChange)="setIntervalTime()" oninput="this.value = Math.abs(this.value)"
-              min="0" />
-            <select type="text" (change)="setIntervalTime()" [(ngModel)]="intervalTimeType" class="form-control py-0 my-0 col-1 px-1">
-              <option value="minutes">mins</option>
-              <option value="hours">hours</option>
-              <option value="days">day</option>
-              <option value="weeks">week</option>
-              <option value="months">month</option>
-            </select>
+          <input style="height:38px;text-align: center;" type="number" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 ml-0 mr-3 px-0 my-0 py-1"
+            [(ngModel)]="intervalTime" (ngModelChange)="setIntervalTime()" oninput="this.value = Math.abs(this.value)" min="0"
+          />
+          <select type="text" (change)="setIntervalTime()" [(ngModel)]="intervalTimeType" class="form-control py-0 my-0 col-1 px-1">
+            <option value="minutes">mins</option>
+            <option value="hours">hours</option>
+            <option value="days">day</option>
+            <option value="weeks">week</option>
+            <option value="months">month</option>
+          </select>
         </ul>
         <ul class="col-12 schedule-week py-0">
-            <label class="my-0 py-0 col-12 my-2 mx-0 px-0">Duration(mins)</label>
-            <input style="height:38px;text-align: center;" type="number" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 mx-0 px-0 my-0 py-1" [(ngModel)]="schedule.content.duration" (ngModelChange)="setIntervalTime()" oninput="this.value = Math.abs(this.value)" min="0"/>
+          <label class="my-0 py-0 col-12 my-2 mx-0 px-0">Duration(mins)</label>
+          <input style="height:38px;text-align: center;" type="number" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 mx-0 px-0 my-0 py-1"
+            [(ngModel)]="schedule.content.duration" (ngModelChange)="setIntervalTime()" oninput="this.value = Math.abs(this.value)"
+            min="0" />
         </ul>
       </div>
     </div>
   </div>
   <div class="vertical-bar-foot col-12 py-0 my-0">
     <div class="no-bg font-size-18 col-12">
-        <div class="row mx-0 px-0">
-          <div class="col-12 mx-0 px-0">
-            <div class="col-12 my-0 py-0 mx-0 px-0">Sprinkler</div>
-            <select type="text" (change)="setValveList()" [(ngModel)]="selectedSprinkler" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 px-1 ml-0 mr-3">
-              <option disabled>Sprinkler</option>
-              <option *ngFor="let device of sprinklers" value="{{device.id}}">{{device.name}}</option>
-            </select>
-          </div>
+      <div class="row mx-0 px-0">
+        <div class="col-12 mx-0 px-0">
+          <div class="col-12 my-0 py-0 mx-0 px-0">Sprinkler</div>
+          <select type="text" (change)="setValveList()" [(ngModel)]="selectedSprinkler" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 px-1 ml-0 mr-3">
+            <option disabled>Sprinkler</option>
+            <option *ngFor="let device of sprinklers" value="{{device.id}}">{{device.name}}</option>
+          </select>
         </div>
+      </div>
       <div class="row col-8">
         <div class="py-0 my-0" *ngFor="let val of valves">
           <input type="checkbox" class="mx-1 px-1 py-0 my-0" (click)="setValve(val)" [(ngModel)]="val.selected">

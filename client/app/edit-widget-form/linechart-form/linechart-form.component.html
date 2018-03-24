@@ -54,8 +54,8 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Device</label>
-                      <select [(ngModel)]="line.data.device_id"  (change)="getAttributesForChart(idx)" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}"
-                        required>
+                      <select [(ngModel)]="line.data.device_id" (change)="getAttributesForChart(idx)" class="form-control" placeholder="Device"
+                        name="{{'device'+idx+'_id'}}" required>
                         <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
                       </select>
                     </div>

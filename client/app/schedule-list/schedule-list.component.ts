@@ -12,14 +12,16 @@ import { Router } from '@angular/router';
 })
 export class ScheduleListComponent implements OnInit {
 
+  searchSchedule: string;
+  schedules: Schedule[] = [];
+
   constructor(
     private scheduleService: ScheduleService,
     public util: UtilService,
     public toast: ToastComponent,
     private router: Router
   ) { }
-  searchSchedule: string;
-  schedules: Schedule[] = [];
+
   ngOnInit() {
     this.util.isLoading = true;
     this.scheduleService.getSchedules().subscribe(res => {

@@ -15,6 +15,7 @@ import * as screenfull from 'screenfull';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+  
   @ViewChildren('widget') widgets: QueryList<Widget>;
 
   isDeleting: boolean = false;

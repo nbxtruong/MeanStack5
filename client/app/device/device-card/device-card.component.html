@@ -4,9 +4,15 @@
     <div class="row">
       <div class="col-md-12 card-content">
         <div class="icon">
-          <i *ngIf="device.type==='Gateway'"><img src="../../../assets/img/gatewaytype.png"/></i>
-          <i *ngIf="device.type==='Sensor'"><img src="../../../assets/img/sensortype.png"/></i>
-          <i *ngIf="device.type==='Sprinkler'"><img src="../../../assets/img/sprinklertype.png"/></i>
+          <i *ngIf="device.type==='Gateway'">
+            <img src="../../../assets/img/gatewaytype.png" />
+          </i>
+          <i *ngIf="device.type==='Sensor'">
+            <img src="../../../assets/img/sensortype.png" />
+          </i>
+          <i *ngIf="device.type==='Sprinkler'">
+            <img src="../../../assets/img/sprinklertype.png" />
+          </i>
         </div>
         <p class="type">{{device.type}}</p>
         <p>Updated: {{util.getLocalDateTime(device.last_updated)}}</p>

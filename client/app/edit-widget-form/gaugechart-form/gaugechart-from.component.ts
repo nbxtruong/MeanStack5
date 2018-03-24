@@ -9,6 +9,7 @@ import { Device } from '../../shared/models/device.model';
     styleUrls: ['./gaugechart-from.component.scss']
 })
 export class GaugechartFormComponent implements OnInit {
+
     @Input('model') model: any;
     @Output('complete') complete = new EventEmitter();
     @Output('cancel') cancel = new EventEmitter();
@@ -61,5 +62,4 @@ export class GaugechartFormComponent implements OnInit {
     getAttributes() {
         this.attributes = Object.create(this.sensors.find(x => x.id === this.model.data.device_id).attributes);
     }
-
 }

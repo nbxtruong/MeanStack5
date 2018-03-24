@@ -2,20 +2,20 @@ $primary-color: #454545;
 $second-color: #939393;
 $red-color:#1aaa55;
 .app-breadcrumb {
-    background-color: #fafafa;
-    .breadcrumb {
-        background-color: transparent;
-        padding: 12px 0;
+  background-color: #fafafa;
+  .breadcrumb {
+    background-color: transparent;
+    padding: 12px 0;
+  }
+  .breadcrumb-item {
+    a {
+      color: $primary-color;
     }
-    .breadcrumb-item {
-        a {
-            color: $primary-color;
-        }
-        &.active {
-            color: $second-color;
-        }
+    &.active {
+      color: $second-color;
     }
-    .breadcrumb-item+.breadcrumb-item::before {
-        content: '>';
-    }
+  }
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: '>';
+  }
 }
