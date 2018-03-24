@@ -1,5 +1,5 @@
 import { WeatherService } from '../../services/weather-forecast.service';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { UtilService, Widget } from '../../services/util.service';
 import { constants } from '../../constants';
 
@@ -8,9 +8,12 @@ import { constants } from '../../constants';
     templateUrl: './weather-forecast.component.html',
     styleUrls: ['./weather-forecast.component.scss']
 })
-export class WeatherComponent implements OnInit, Widget {
+export class WeatherComponent extends Widget implements OnInit {
+    getInvolvedGateways(): string[] {
+        return [];
+        //TODO: wite get involved gateways function
+    }
     update(): void {
-        console.log("updating weather-forecast");
         //TODO: write update function
     }
 
@@ -19,12 +22,12 @@ export class WeatherComponent implements OnInit, Widget {
         //TODO: write get involved devices function
     }
 
+    @Input('data') widgetInfo: any;
+    @Input('name') name: String;    
     @Output() deleteEvent = new EventEmitter();
     @Output() editEvent = new EventEmitter();
-    @Input('name') widgetName: string;
-    @Input('country') country: string;
-    @Input('city') city: string;
 
+    widgetData: any;
     weather10Days;
     countryList = constants.countryList;
     weatherToday = { "today": "", "icon": "", "status": "", "temp": 0 };
@@ -32,24 +35,22 @@ export class WeatherComponent implements OnInit, Widget {
     { "day": "", "icon": "", "status": "", "temp": 0 },
     { "day": "", "icon": "", "status": "", "temp": 0 }
     ];
+    model: any;
     isDeleting: boolean;
     isEditing: boolean;
-    model: any = {
-        name: "",
-        local: {
-            country: "",
-            city: ""
-        }
-    };
 
     constructor(
         private weatherService: WeatherService,
         public util: UtilService,
-    ) { }
+    ) {
+        super();
+    }
 
-    ngOnInit() {
-        this.weatherService.country = this.country;
-        this.weatherService.cityName = this.city;
+    ngOnInit() {  
+        this.widgetData = this.widgetInfo.data;
+        this.model=this.widgetInfo;    
+        this.weatherService.country = this.widgetData.country;
+        this.weatherService.cityName = this.widgetData.city; 
         this.getWeather10Days();
         let that = this;
         setInterval(function () {
@@ -91,7 +92,7 @@ export class WeatherComponent implements OnInit, Widget {
     }
 
     setDelete(value: boolean) {
-        this.isDeleting = value;
+        this.isDeleting = value; 
     }
 
     deleteWidget() {
@@ -103,16 +104,7 @@ export class WeatherComponent implements OnInit, Widget {
     }
 
     onSubmit() {
-        this.model.name = this.widgetName;
-        this.model.country = this.country;
-        this.model.city = this.city;
-
+        this.ngOnInit();
         this.editEvent.emit(this.model);
-
-        this.weatherService.country = this.country;
-        this.weatherService.cityName = this.city;
-
-        this.setEdit(false);
-        this.getWeather10Days();
     }
 }

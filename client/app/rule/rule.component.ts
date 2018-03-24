@@ -21,13 +21,13 @@ export class RuleComponent implements OnInit {
   ruleProperties: RuleProperties;
   currentRuleList = [];
   editting;
-  topic = "smart_sprinkler/#";
-  windowWidth = 800;
+  deleting;
+  windowWidth = 1000;
   loadingMessage;
   allowCreateRule;
   ruleInputInterval;
   devices = [];
-  ruleList=[];
+  ruleList = [];
   constructor(
 
     public util: UtilService,
@@ -40,6 +40,7 @@ export class RuleComponent implements OnInit {
     this.resetCreateRuleBindings();
     this.ruleProperties = new RuleProperties();
     this.editting = -1;
+    this.deleting = -1;
     this.getRules();
     this.getAttributes();
     this.windowWidth = window.innerHeight;
@@ -73,18 +74,20 @@ export class RuleComponent implements OnInit {
             this.ruleList.push(_rule);
           }
         });
-        this.currentRuleList=this.ruleList;
-
+        this.currentRuleList = this.ruleList;
+      }, error => {
+        console.log(error);
+        this.util.isLoading = false;
       }
     );
   }
   getAttributes() {
     let vm = this;
     vm.ruleService.getAttributes().subscribe(res => {
-      vm.devices = res;
+      vm.devices = res[0];
       let deviceList = [];
       vm.devices.forEach(device => {
-        deviceList.push(device.name);
+        deviceList.push(device.id);
       });
       vm.ruleProperties.deviceList = Object.create(deviceList);
     });
@@ -93,7 +96,6 @@ export class RuleComponent implements OnInit {
     let _rule = new Rule();
     _rule.name = rule.name;
     _rule.id = rule.id;
-    _rule.device_id = rule.device_id;
     _rule.sql = rule.sql;
     if (typeof rule.actions.email != 'undefined' || rule.actions.email != null) {
       _rule.contact = rule.actions.email.email_address;
@@ -106,17 +108,16 @@ export class RuleComponent implements OnInit {
       _rule.contact = rule.actions.sms.phone_number;
       _rule.content = rule.actions.sms.message;
     }
-    if (typeof rule.attributes != 'undefined' || rule.attrbutes != null) {
-
-      _rule.attribute = rule.attributes[0].name;
-      _rule.operator = rule.attributes[0].operator;
-      _rule.value = rule.attributes[0].value;
+    if (typeof rule.conditions != 'undefined' || rule.conditions != null) {
+      _rule.device_id = rule.conditions[0].device_id;
+      _rule.attribute = rule.conditions[0].device_attribute;
+      _rule.operator = rule.conditions[0].operator;
+      _rule.value = rule.conditions[0].value;
     }
     return _rule;
   }
   getRuleFromInput(_ruleInput: Rule) {
     var rule;
-    rule.device_id = _ruleInput.device_id;
     rule.name = _ruleInput.name;
     rule.actions.action = _ruleInput.action;
     if (_ruleInput.action === "email") {
@@ -129,7 +130,8 @@ export class RuleComponent implements OnInit {
       rule.actions.sms.message = _ruleInput.content;
     }
     var attr;
-    attr.attribute = _ruleInput.attribute;
+    attr.device_id = _ruleInput.device_id;
+    attr.device_attribute = _ruleInput.attribute;
     attr.operator = _ruleInput.operator;
     attr.value = _ruleInput.value;
     attr.link_operator = "";
@@ -162,8 +164,7 @@ export class RuleComponent implements OnInit {
       if (!isEmailValid) {
         this.allowCreateRule = -1;
       }
-      else
-      {
+      else {
         this.allowCreateRule = 1;
       }
     }
@@ -173,22 +174,19 @@ export class RuleComponent implements OnInit {
     if (this.ruleInput.operator == "Operator" || this.ruleInput.device_id == "Device" || this.ruleInput.action == "Notify User By" || this.ruleInput.value == "" || this.ruleInput.value == null || this.ruleInput.name == "") {
       return false;
     }
-    if(this.ruleInput.action=="email")
-    {      
-      if (this.ruleInput.contact == "" || this.ruleInput.contact == null || this.ruleInput.subject == "" || this.ruleInput.subject == null || this.ruleInput.content == "" ) {
+    if (this.ruleInput.action == "email") {
+      if (this.ruleInput.contact == "" || this.ruleInput.contact == null || this.ruleInput.subject == "" || this.ruleInput.subject == null || this.ruleInput.content == "") {
         return false;
       }
       return true;
     }
-    else if(this.ruleInput.action=="sms")
-    {
-      if (this.ruleInput.contact == "" || this.ruleInput.contact == null || this.ruleInput.content == "" ) {
+    else if (this.ruleInput.action == "sms") {
+      if (this.ruleInput.contact == "" || this.ruleInput.contact == null || this.ruleInput.content == "") {
         return false;
       }
       return true;
     }
-    else
-    {
+    else {
       return false;
     }
   }
@@ -196,16 +194,14 @@ export class RuleComponent implements OnInit {
     if (this.ruleInput.action == 'email') {
       return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.ruleInput.contact));
     }
-    else
-    {
+    else {
       return true;
     }
   }
-  changeAttributes()
-  {
+  changeAttributes() {
     if (this.ruleInput.device_id != "Device") {
       let attributes = [];
-      attributes = Object.create(this.devices.find(x => x.name === this.ruleInput.device_id).attributes);
+      attributes = Object.create(this.devices.find(x => x.id === this.ruleInput.device_id).attributes);
       this.ruleProperties.attributeList = [];
       attributes.forEach(attribute => {
         this.ruleProperties.attributeList.push(attribute.name);
@@ -249,11 +245,11 @@ export class RuleComponent implements OnInit {
     }
     let json = {
       "name": _rule.name,
-      "device_id": _rule.device_id,
       "actions": actions,
-      "attributes": [
+      "conditions": [
         {
-          "name": _rule.attribute,
+          "device_id": _rule.device_id,
+          "device_attribute": _rule.attribute,
           "operator": _rule.operator,
           "value": _rule.value
         }
@@ -269,7 +265,9 @@ export class RuleComponent implements OnInit {
     this.ruleService.updateRule(ruleID, jsonContent).subscribe(
       res => {
         this.util.isLoading = false;
-        this.currentRuleList[this.editting] = this.ruleInput.clone();
+        let updatedRule = this.ruleInput.clone();
+        this.ruleList[this.ruleList.indexOf(this.currentRuleList[this.editting])] = updatedRule;
+        this.currentRuleList[this.editting] = updatedRule;
         this.toast.setMessage('Rule updated successfully!', 'success');
         this.resetCreateRuleBindings();
       },
@@ -282,18 +280,24 @@ export class RuleComponent implements OnInit {
   editRule(index) {
     this.editting = index;
     this.ruleInput = clone(<Rule>this.currentRuleList[index]);
+    this.changeAttributes();
   }
   deleteRule(index) {
+    this.deleting = index;
+  }
+  deleteConfirm() {
     this.loadingMessage = "Deleting rules...";
     this.util.isLoading = true;
-    this.ruleService.deleteRule(this.currentRuleList[index].id).subscribe(
+    this.ruleService.deleteRule(this.currentRuleList[this.deleting].id).subscribe(
       res => {
         this.util.isLoading = false;
         this.toast.setMessage('Rule deleted successfully!', 'success');
-        this.currentRuleList.splice(index, 1);
+        this.ruleList.splice(this.deleting, 1);
+        this.deleting = -1;
       },
       error => {
         this.util.isLoading = false;
+        this.deleting = -1;
         this.toast.setMessage('Failed to delete rule!', 'danger');
       }
     );
@@ -302,24 +306,20 @@ export class RuleComponent implements OnInit {
     this.ruleInput = new Rule();
     this.editting = -1;
   }
-  searchRules()
-  {
-    if(this.searchRule.length>0)
-    {
-      let searchRuleList=[];
-      this.currentRuleList.forEach(rule=>{
-        let ruleName = <string> rule.name;
-        let rs=ruleName.includes(this.searchRule.toString());
-        if(rs)
-        {
+  updateCurrentRuleList() {
+    if (this.searchRule.length > 0) {
+      let searchRuleList = [];
+      this.currentRuleList.forEach(rule => {
+        let ruleName = <string>rule.name;
+        let rs = ruleName.includes(this.searchRule.toString());
+        if (rs) {
           searchRuleList.push(rule);
         }
       });
-      this.currentRuleList=searchRuleList;
+      this.currentRuleList = searchRuleList;
     }
-    else
-    {
-      this.currentRuleList=this.ruleList;
+    else {
+      this.currentRuleList = this.ruleList;
     }
   }
 }

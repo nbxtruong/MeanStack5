@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { Widget, UtilService } from './util.service';
 import { AppHttpClient } from './app-http.service';
 import { environment } from '../../environments/environment';
+import { constants } from '../constants'
 
 @Injectable()
 export class AppMqttService {
@@ -20,11 +21,11 @@ export class AppMqttService {
   client = null;
 
   getUpdateTopic(deviceId: string) {
-    return this.util.topicPrefixed + "/devices/" + deviceId + "/update";
+    return constants.topicPrefixed + "/devices/" + deviceId + "/update";
   }
 
   getControlTopic(deviceId: string) {
-    return this.util.topicPrefixed + "/devices/" + deviceId + "/control";
+    return constants.topicPrefixed + "/devices/" + deviceId + "/control";
   }
 
   getPresignedUrl(): Observable<any> {

@@ -1,0 +1,41 @@
+<app-loading [content]="'Loading schedules...'"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="schedule-header">
+  <div class="app-container">
+    <h1 class="schedule-name">
+      <i class="far fa-calendar-alt"></i>All schedules</h1>
+    <div class="schedule-function">
+      <button class="app-btn" routerLink="/add-schedule">NEW</button>
+    </div>
+  </div>
+</div>
+
+<div class="app-container search">
+  <div class="search-box  col-11 col-md-3 ml-3">
+    <div class="input-group py-1">
+      <input type="text" class="col-10 search-input" [(ngModel)]="searchSchedule" placeholder="Schedule Name" />
+      <div class="col-2 px-2 mx-2 float-right">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="schedule-list">
+  <div class="app-container">
+    <ul class="schedules">
+      <li *ngFor="let schedule of schedules">
+        <schedule [schedule]="schedule" (onDelete)="deleteSchedule($event)" (onUpdate)="updateSchedule($event)"></schedule>
+      </li>
+      <li>
+        <button class="card createRuleTemplate px-0 my-2" data-toggle="modal" data-target="#createRuleModal">
+          <i class="fas fa-plus-circle"></i>
+        </button>
+      </li>
+    </ul>
+
+  </div>
+
+</section>
+

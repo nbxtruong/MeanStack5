@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { UtilService } from '../services/util.service';
+import { constants } from '../constants';
 
 @Component({
   selector: 'app-login',
@@ -53,6 +54,9 @@ export class LoginComponent implements OnInit {
     this.util.isLoading = true;
     this.auth.login(this.loginForm.value).subscribe(
       res => {
+        if (localStorage.getItem(constants.localStorage.recent_dashboards)) {
+          this.util.recentDashboards = JSON.parse(localStorage.getItem(constants.localStorage.recent_dashboards));
+        }
         this.router.navigate(['/dashboards']);
         this.util.isLoading = false;
       },

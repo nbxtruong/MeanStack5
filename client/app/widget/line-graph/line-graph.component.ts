@@ -10,8 +10,17 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './line-graph.component.html',
   styleUrls: ['./line-graph.component.scss']
 })
-export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
-  update(message=""): void {
+export class LineGraphComponent extends Widget implements OnInit, AfterViewInit {
+  getInvolvedGateways(): string[] {
+    let gatewayIds: string[] = [];
+    this.widgetData.lines.forEach((line) => {
+      if (line.data.gateway_id)
+        gatewayIds.push(line.data.gateway_id);
+    });
+    return gatewayIds;
+  }
+
+  update(message = ""): void {
     d3.select(".svg-container.svg-" + this.idx + " svg").remove();
     this.drawGraph();
   }
@@ -42,7 +51,9 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.init();
@@ -95,8 +106,8 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
     let y = d3.scaleLinear().range([height, 0]);
     let svg = d3.select(".svg-container.svg-" + this.idx)
       .attr(
-        "style",
-        "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
+      "style",
+      "padding-bottom: " + Math.ceil(graphHeight * 100 / width) + "%"
       )
       .append("svg")
       .attr("preserveAspectRatio", "xMinYMin meet")
@@ -108,7 +119,7 @@ export class LineGraphComponent implements OnInit, AfterViewInit, Widget {
       .style("left", "0")
       .append("g")
       .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+      "translate(" + margin.left + "," + margin.top + ")");
 
     function draw(Data) {
       let maxY = 0;

@@ -1,0 +1,101 @@
+
+<div class="mx-2 px-2">
+  <div class="vertical-bar-head col-12 my-0 py-0">
+    <div class="no-bg col-12" style="max-height:27px;">
+      <div style="max-height:27px;" class="row font-size-18 my-0 py-0 mx-0 px-0">
+        <select type="text" class="col-1 px-0 ml-0 mr-2" [(ngModel)]="selectedDevice" (change)="setAttribute()" style="max-height:27px;">
+          <option disabled>Device</option>
+          <option  *ngFor="let device of devices" value="{{device.id}}">{{device.name}}</option>
+        </select>
+        has
+        <select type="text" class="col-1 px-2 mx-2" (change)="setCondition()" [(ngModel)]="selectedAttribute" style="max-height:27px;">
+          <option disabled>Attribute</option>
+          <option *ngFor="let attribute of sensor_attributes" value="{{attribute.name}}">{{attribute.name}}</option>
+        </select>
+        <select type="text" class="col-1 px-2 mx-2" (change)="setCondition()" [(ngModel)]="selectedOperator" style="max-height:27px;">
+          <option disabled>Operator</option>
+          <option *ngFor="let op of operatorList" value="{{op}}">{{op}}</option>
+        </select>
+        <input style="height:27px;text-align: center;" type="number" class="form-control col-1 py-1 mx-2" placeholder="value" [(ngModel)]="value" (ngModelChange)="setCondition()"
+          min="0" />
+      </div>
+    </div>
+  </div>
+  <div class="vertical-bar-body mt-3 col-12">
+    <div class="no-bg col-12">
+      <div class="vertical-bar-body">
+        <div class="mx-0 px-0">
+          <label>Duration</label>
+          <div class="col-md-2 col-4 mx-0 px-0">
+            <input style="height:27px;text-align: center;" type="number" class="col-6 mx-0 py-1" [(ngModel)]="schedule.content.duration" (ngModelChange)="setIntervalTime()" oninput="this.value = Math.abs(this.value)"
+              min="0" />
+          </div>
+        </div>
+        <div class="row col my-2">
+          <input style="height:27px;text-align: center;"  type="checkbox" [(ngModel)]="schedule.content.is_skip_watering" checked="schedule.content.is_skip_watering" class="my-2 px-1 ml-0 mr-1" />
+          <button class="my-1 no-bg no-focus" (click)="setSkipWatering()">Skip Watering</button>
+        </div>
+
+        <div *ngIf="schedule.content.is_skip_watering===true" class="mb-2 mt-0 py-0">
+          <div class="col-12 my-0 py-0">When :
+            <div class="mx-5 my-2">
+              <div class="row my-2">
+                <p class="col-md-2 col-4 my-1">
+                  Rain forecast cycle
+                </p>
+                <div class="row col-2">
+                  <span class="col-1 mt-1">
+                    in
+                  </span>
+                  <input style="height:27px;text-align: center;"  type="number" (change)="scheduleService.validateSchedule()" [(ngModel)]="schedule.content.forecasting_cycle" placeholder="hours" class="mx-1 col-8 mb-2" oninput="this.value= Math.abs(this.value)" />
+                </div>
+              </div>
+              <div class="row my-2">
+                <p class="col-md-2 col-4 my-1">
+                  QPF
+                </p>
+                <div class="row col-2">
+                  <span class="col-1 mt-1">
+                    >
+                  </span>
+                  <input style="height:27px;text-align: center;"  type="number" (change)="scheduleService.validateSchedule()" [(ngModel)]="schedule.content.qpf" placeholder="mm" class="mx-1 col-8 mb-2" oninput="this.value= Math.abs(this.value)" />
+                </div>
+              </div>
+
+              <div class="row my-2">
+                <p class="col-md-2 col-4 my-1">
+                  {{selectedAttribute}}
+                </p>
+                <div class="row col-2">
+                  <span class="col-1 mt-1">
+                    >
+                  </span>
+                  <input style="height:27px;text-align: center;"  type="number" [(ngModel)]="this.schedule.content.skip_value" (change)="scheduleService.validateSchedule()" oninput="this.value= Math.abs(this.value)" placeholder="value" class="mx-1 col-8 mb-2" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vertical-bar-foot col-12 py-0 my-0">
+    <div class="no-bg font-size-18 col-12">
+        <div class="row mx-0 px-0">
+          <div class="col-12 mx-0 px-0">
+            <div class="col-12 my-0 py-0 mx-0 px-0">Sprinkler</div>
+            <select type="text" (change)="setValveList()" [(ngModel)]="selectedSprinkler" class="form-control col-12 col-sm-8 col-md-6 col-lg-3 px-1 ml-0 mr-3">
+              <option disabled>Sprinkler</option>
+              <option *ngFor="let sprinkler of sprinklers" value="{{sprinkler.id}}">{{sprinkler.name}}</option>
+            </select>
+          </div>
+        </div>
+      <div class="row col-12">
+        <div class="py-0 my-0" *ngFor="let val of valves">
+          <input type="checkbox" class="mx-1 px-1 py-0 my-0" (click)="setValve(val)" [(ngModel)]="val.selected">
+          <label class="form-check-label mx-1 px-1 py-0 my-0" (click)="setValve(val)" for="labelValve1">{{val.name}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

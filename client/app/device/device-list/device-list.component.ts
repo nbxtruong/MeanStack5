@@ -22,6 +22,7 @@ export class DeviceListComponent implements OnInit {
   dummyDevice: Device = new Device({});
   tableInitiated: boolean = false;
   table: any;
+  view: string = "card";
 
   constructor(
     private deviceService: DeviceService,
@@ -38,7 +39,7 @@ export class DeviceListComponent implements OnInit {
         stateSave: true,
         pagingType: 'full_numbers',
         dom: '<"top"fB>rt<"bottom"ipl>',
-        order: [[ 1, "asc" ]],
+        order: [[1, "asc"]],
         columnDefs: [
           {
             orderable: false,
@@ -69,6 +70,16 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
+  setView(_view: string) {
+    let prevView = this.view;
+    this.view = _view;
+    if (prevView != "list" && _view === "list") {
+      this.table.clear().draw();
+      this.table.destroy();
+      this.initDatatable();
+    }
+  }
+
   ngOnInit() {
     this.util.isLoading = true;
     this.getDevices();
@@ -89,6 +100,7 @@ export class DeviceListComponent implements OnInit {
         }
       },
       error => {
+        this.util.isLoading = false;
       }
     );
   }
@@ -112,6 +124,7 @@ export class DeviceListComponent implements OnInit {
         this.getDevices();
       },
       error => {
+        this.util.isLoading = false;
         console.log(error);
       }
     );
@@ -125,6 +138,7 @@ export class DeviceListComponent implements OnInit {
         this.getDevices();
       },
       error => {
+        this.util.isLoading = false;
         console.log(error);
       }
     );
@@ -147,6 +161,19 @@ export class DeviceListComponent implements OnInit {
         $("input[value=" + device.id + "]").prop("checked", false);
       });
     }
+  }
+
+  cardCheckboxChanged(event) {
+    if (event.state) {
+      this.idsToDelete.add(event.id);
+    } else {
+      this.idsToDelete.delete(event.id);
+    }
+  }
+
+  cardDelete(event) {
+    this.deviceToDelete = event;
+    this.deleteDevice();
   }
 
   checkboxChanged(event: any) {

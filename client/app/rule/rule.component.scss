@@ -22,8 +22,9 @@
     padding-top: 3px;
   }
   .card {
-    width: 99% !important;
-    margin-left: 1%;
+    width: 99.4% !important;
+    margin-left:0.2%;
+    margin-right: 0.4%;
   }
   
   .modal-element-pullleft{
@@ -50,7 +51,8 @@
     text-overflow: ellipsis;
     max-height: 30px!important;
     min-height: 30px!important;
-    width:80%;
+    width:75%;
+    margin-left:1%;
   }
   
   .rule-headerCell-2 {
@@ -59,10 +61,9 @@
     text-overflow: ellipsis;
     max-height: 30px!important;
     min-height: 30px!important;
-    width:18%;
-    align-items: flex-end;
-    align-content: flex-end;
-    text-align:end;
+    width:24%;
+    text-align:center;
+
   }
   .rule-header-label {
     white-space: nowrap;
@@ -79,10 +80,10 @@
     
   }
   .card-header-icon {
-    font-size: 16px;
+    font-size: 18px;
     background-color:transparent!important;
-    min-height: 24px!important;
-    max-height: 24px!important;
+    min-height: 30px!important;
+    max-height: 30px!important;
   }
     
   .create-rule-btn {
@@ -96,18 +97,21 @@
     line-height: normal;   
     text-transform: uppercase;
     color: #ffffff;
-    border:1px solid #ff3355; 
+    border:1px solid #1aaa55; 
     border-radius: 25px;
-    background-image: linear-gradient(202deg, #ff3355, #ee3731);
+    background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
+  }
+  .modal-body{
+    font-family: Poppins;
   }
 }
 
 @media (min-width: 450px) {
   select {
-    font-size: 16px;
+    font-size: 18px;
   }
   label {
-    font-size: 16px;
+    font-size: 18px;
     padding-top: 3px;
   }
   .modal:before {
@@ -122,33 +126,39 @@
     vertical-align: middle;
   }
   .card {
-    width: 99% !important;
+    width: 99.4% !important;
   }
   .rule-headerCell-1 {
-    width:80%;
+    width:88%;
+    margin-left:1%;
   }
   
   .rule-headerCell-2 {
-    width:16%;
+    width:11%;
   }
   
   .create-rule-btn {
-    font-size: 1.8rem;
+    border-bottom: none solid white !important;
+    width: 200px !important;
+    text-align: center !important;
+    margin: 0px 2px !important;
+    height: 34px;
   }
     
 }
 
 @media (min-width: 800px) {
   .card {
-    width: 99% !important;
+    width: 99.4% !important;
   }
   
   .rule-headerCell-1 {
-    width:80%;
+    width:92%;
+    margin-left:1%;
   }
   
   .rule-headerCell-2 {
-    width:16%;
+    width:7%;
   }
   .rule-header-label {
     font-size: 18px;
@@ -187,30 +197,31 @@
 
 @media (min-width: 1030px) {
   .card {
-    width: 49% !important;
+    width: 49.4% !important;
   }
   
   .rule-headerCell-1 {
-    width:85%;
+    width:89%;
+    margin-left:1%;
   }
   
   .rule-headerCell-2 {
-    width:14%;
+    width:10%;
   }
   
 }
 
 @media (min-width: 1300px) {
   .card {
-    width: 32% !important;
+    width: 32.4% !important;
   }
   
   .rule-headerCell-1 {
-    width:82%;
+    width:86%;
   }
   
   .rule-headerCell-2 {
-    width:16%;
+    width:12%;
   }
 }
 option{
@@ -226,7 +237,7 @@ option{
 }
 .rule-header i {
   margin-right: 20px;
-  color: #ee3731;
+  color: #1aaa55;
 }
 .card-body{
   max-height:500px!important;
@@ -242,14 +253,14 @@ option{
 .when-eclipse-1 {
   width: 10px;
   height: 10px;
-  border: solid 2px #ee3731;
+  border: solid 2px #1aaa55;
 }
 
 .when-eclipse-2 {
   width: 10px;
   height: 10px;
-  background-color: #ee3731;
-  border: solid 2px #ee3731;
+  background-color: #1aaa55;
+  border: solid 2px #1aaa55;
 }
 
 .inner-addon .glyphicon {
@@ -295,7 +306,7 @@ button:focus {
 }
 
 .fa-search {
-  color: #ee3731;
+  color: #1aaa55;
 }
 
 .search-box {
@@ -304,6 +315,8 @@ button:focus {
   border-radius: 15px !important;
   border-color: #dadada;
   height: 35px;
+  margin-left:0.2%;
+  margin-right:0.4%;
 }
 
 .flex-container {
@@ -325,7 +338,11 @@ button:focus {
 }
 
 .enable-background-red {
-  background-color: red;
+  background-color: #1aaa55;
+}
+
+.b-0{
+  border:none!important;
 }
 
 .card {
@@ -350,13 +367,17 @@ button:focus {
 }
 
 .line-gap {
-  height: 75px;
+  height: 72px;
   width: 2px;
 }
 
+.popin{
+  font-family: Poppins;
+}
+
 .line {
-  height: 90px;
-  border: 1px dashed red;
+  height: 70px;
+  border-left: 1px dashed #1aaa55;
 }
 
 .center {
@@ -365,34 +386,46 @@ button:focus {
   text-align: center !important;
 }
 
-.then-condition-box {
-  height: 60px !important;
-  line-height: 120px;
-  display: inline-block;
-  vertical-align: middle;
+.ellipse{
+  overflow: hidden!important;
+  text-overflow:ellipsis;
+  word-wrap: break-word;
+  white-space: nowrap;
 }
-
-.when-condition-box {
-  height: 60px !important;
-}
-
-.when-conditions {
-  height: 75px !important;
+.span-ellipse{
+  position:absolute!important;
   overflow: hidden!important;
   text-overflow: ellipsis;
   word-wrap: break-word;
+  white-space: initial;
+  left:0;
+  right:0;
 }
-
+.top-then{
+  top:80%;
+}
+.top-when{
+  top:15%;
+}
+.rule-table-height{
+  height:110px!important;
+}
+.span-ellipse:before{
+  content: '';
+  display:inline-block;
+}
 .then-conditions {
   height: 60px !important;
-  display: table;
+  overflow: hidden!important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
   vertical-align: bottom;
 }
 
 .then-conditions-span {
-  overflow: hidden;
+  overflow: hidden!important;
+  text-overflow: ellipsis;
   word-wrap: break-word;
-  text-overflow:ellipsis;
 }
 
 .switch-icon {
@@ -401,20 +434,24 @@ button:focus {
   object-fit: contain;
 }
 
-.mail-icon {
+.contact-icon {
   width: 20px;
   height: 14px;
   object-fit: contain;
 }
 
 .createRuleTemplate {
-  border: 3px dashed red;
+  border: 3px dashed #1aaa55;
   justify-content: center;
   vertical-align: middle;
   text-align: center;
   border-image-slice: 2;
   align-content: center;
   align-items: center;
+  .fas {
+    font-size: 50px;
+    color: #1aaa55;
+  }
 }
 
 
@@ -426,11 +463,18 @@ button:focus {
   font-weight: bold;
   .fas {
     margin-right: 20px;
-    color: #ee3731;
+    color: #1aaa55;
   }
 }
 
 .rules-header {
   height: 50px;
   margin-bottom: 2rem;
+}
+
+.bold{
+  font-weight:bold!important;
+}
+.black{
+  color:black!important;
 }

@@ -30,4 +30,28 @@ export class UserService {
   getUsers(): Observable<any> {
     return this.appHttpClient.get('users');
   }
+
+  disableUser(user_id: String): Observable<any> {
+    return this.appHttpClient.put('users/disable/' + user_id, null);
+  }
+
+  disableUsers(userID: String[]): Observable<any> {
+    return this.appHttpClient.post('users/disableByIds', userID);
+  }
+
+  editProfile(user): Observable<any> {
+    return this.appHttpClient.put("users/profile", user);
+  }
+
+  editPassword(change): Observable<any> {
+    return this.appHttpClient.put("users/password", change);
+  }
+
+  enableUser(user_id: String): Observable<any> {
+    return this.appHttpClient.put('users/enable/' + user_id, null);
+  }
+
+  enableUsers(userID: String[]): Observable<any> {
+    return this.appHttpClient.post('users/enableByIds', userID);
+  }
 }

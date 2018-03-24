@@ -16,7 +16,7 @@
               <input [(ngModel)]="dashboardData.name" type="text" class="form-control" placeholder="Name" name="first" required>
             </div>
           </div>
-          <div class="app-modal-footer">
+          <div class="app-modal-footer" *ngIf="hideFormInput">
             <button class="app-btn" type="submit" [disabled]="!metricForm.form.valid">Save</button>
             <button class="app-btn-white" type="button" (click)="onCancel()">Cancel</button>
           </div>

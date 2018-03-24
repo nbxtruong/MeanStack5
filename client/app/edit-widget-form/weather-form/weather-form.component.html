@@ -1,0 +1,37 @@
+<perfect-scrollbar style=" max-height: 100%px;" [scrollIndicators]="true">
+  <div class="app-modal edit-modal">
+    <div class="app-modal-content">
+      <div class="app-modal-header">
+        <p class="title">Edit widget</p>
+      </div>
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="app-modal-body">
+          <p class="edit-section">Weather overview</p>
+          <div class="form-group">
+            <label>Name</label>
+            <input [(ngModel)]="model.name" type="text" class="form-control" placeholder="Widget's Name" name="name">
+          </div>
+          <p class="edit-section">
+            Local
+          </p>
+          <div class="form-group">
+            <label>Country</label>
+            <select class="form-control" [(ngModel)]="model.data.country" [ngModelOptions]="{standalone: true}">
+              <option *ngFor='let country of countryList' [ngValue]="country.code">
+                {{country.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input [(ngModel)]="model.data.city" type="text" class="form-control" placeholder="City" name="city">
+          </div>
+        </div>
+        <div class="app-modal-footer">
+          <button class="app-btn" type="submit" [disabled]="!form.form.valid">Save</button>
+          <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</perfect-scrollbar>

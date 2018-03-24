@@ -1,0 +1,41 @@
+<app-loading [content]="'Loading data...'"></app-loading>
+<app-toast [message]="toast.message"></app-toast>
+<p class="title"> DEVICE DATA</p>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group input-box">
+      <i class="fas fa-search search-icon"></i>
+      <input class="form-control" type='text' id="filter" placeholder='Search for data' />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group input-box">
+      <label class="mr-sm-2" for="limit">Number of records per page</label>
+      <select [(ngModel)]="limit" class="custom-select" id="limit" (change)="onSizeChange()">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<ngx-datatable [rows]="rows" [columns]="columns" [rowHeight]="'auto'" [headerHeight]="40" [columnMode]="'force'" [externalPaging]="false"
+  [loadingIndicator]="true">
+</ngx-datatable>
+<div class="app-pager">
+  <ul>
+    <li>
+      <a>
+        <i class="fas fa-chevron-left" (click)="onLeft()"></i>
+      </a>
+    </li>
+    <li>Viewing {{start}} - {{end}}</li>
+    <li>
+      <a>
+        <i class="fas fa-chevron-right" (click)="onRight()"></i>
+      </a>
+    </li>
+  </ul>
+</div>

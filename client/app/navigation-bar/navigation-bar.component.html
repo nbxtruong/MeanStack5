@@ -3,7 +3,9 @@
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand app-title" routerLink="/"><img class="img-fluid" src="assets/img/irrigation-logo.png"></a>
+  <a class="navbar-brand app-title" routerLink="/">
+    <img class="img-fluid" src="assets/img/irrigation-logo.png">
+  </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto app-nav-ul">
@@ -14,8 +16,8 @@
           <span class="sr-only">Toggle Dropdown</span>
         </a>
         <div class="dropdown-menu">
-          <h6 class="dropdown-header">List Dashboards</h6>
-          <a class="dropdown-item" *ngFor="let dashboard of util.dashboards" [routerLink]="['/dashboards',dashboard.id]">{{dashboard.name}}</a>
+          <h6 class="dropdown-header">Recent Dashboards</h6>
+          <a class="dropdown-item" *ngFor="let dashboard of dashboards" [routerLink]="['/dashboards',dashboard.id]">{{dashboard.name}}</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item">
             <button class="app-btn" routerLink="/addDashboard">Create dashboard</button>
@@ -60,20 +62,8 @@
         </div>
       </li>
 
-      <li class="nav-item dropdown split-dropdown" [class.active]="util.currentPage=='event'">
-        <a class="nav-link" routerLink="/event" (click)="util.setCurrentPage('event')">Events</a>
-        <a class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <div class="dropdown-menu">
-          <h6 class="dropdown-header">Recent Events</h6>
-          <a class="dropdown-item" href="#">No Recent Events</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">View All Events</a>
-          <a class="dropdown-item" href="#">
-            <button class="app-btn">Create event</button>
-          </a>
-        </div>
+      <li class="nav-item" [class.active]="util.currentPage=='schedule'">
+        <a class="nav-link" routerLink="/schedule" (click)="util.setCurrentPage('schedule')">Schedules</a>
       </li>
     </ul>
 

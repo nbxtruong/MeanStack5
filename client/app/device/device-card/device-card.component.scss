@@ -1,0 +1,86 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#1aaa55;
+.card {
+  .card-body {
+    .card-content {
+      text-align: center;
+      .type {
+        font-weight: bold;
+        color: #a2a2a2;
+      }
+    }
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      i {
+        font-size: 48px;
+      }
+      img {
+        width: 81px;
+        height: 81px;
+      }
+    }
+    padding:20px;
+    p {
+      margin: 0;
+    }
+    .custom-control.custom-checkbox {
+      display: none;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+    }
+    &:hover {
+      .custom-control.custom-checkbox {
+        display: block;
+      }
+    }
+  }
+}
+
+.app-modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.app-modal-content {
+  border-radius: 5px;
+  background-color: #fefefe;
+  margin: 15% auto;
+  border: 1px solid #888;
+  width: 40%;
+  .message {
+    text-align: center;
+    font-size: 22px;
+    margin: 35px 0;
+  }
+  .app-modal-header {
+    padding: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    .title {
+      font-weight: 600;
+      margin: 0;
+      font-size: 22px;
+      color: $red-color;
+      text-transform: uppercase;
+    }
+  }
+  .app-modal-footer {
+    text-align: center;
+    padding-bottom: 30px;
+    .app-btn,
+    .app-btn-white {
+      margin: 0px 15px;
+    }
+  }
+}

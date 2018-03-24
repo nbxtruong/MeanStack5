@@ -7,7 +7,7 @@
   height: 30px !important;
   color: white;
   border-radius: 20px;
-  background-image: linear-gradient(202deg, #ff3355, #ee3731) !important;
+  background-image: linear-gradient(202deg, #ff3355, #1aaa55) !important;
   border-color: white;
   padding: 0px;
   border-width: 0px;
@@ -16,10 +16,10 @@
 .export-button {
   width: 93px !important;
   height: 30px !important;
-  color: #ee3731;
+  color: #1aaa55;
   border-radius: 20px;
   background-color: white;
-  border: 1px solid #ee3731;
+  border: 1px solid #1aaa55;
   margin-left: 15px;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .inputicon .fa {
-  color: #ee3731;
+  color: #1aaa55;
 }
 
 .select-all-checkbox {
@@ -62,16 +62,16 @@
   width: 10% !important;
 }
 
-.status-active {
+.active {
   color: #0ba200;
 }
 
-.status-disable {
+.disable {
   color: #444444;
 }
 
 .email {
-  color: #ee3731;
+  color: #1aaa55;
 }
 
 .users-header {
@@ -87,8 +87,13 @@
   font-weight: bold;
   .fas {
     margin-right: 20px;
-    color: #ee3731;
+    color: #1aaa55;
   }
+}
+
+.menu-button {
+  text-align: right; 
+  padding-top:18px
 }
 
 @media screen and (max-width:1920px) {}

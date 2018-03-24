@@ -1,0 +1,89 @@
+
+$red-color:#1aaa55;
+
+.when-eclipse-1 {
+    width: 16px;
+    height: 16px;
+    border: solid 2px #1aaa55;
+  }
+  
+.when-eclipse-2 {
+    width: 16px;
+    height: 16px;
+    background-color: #1aaa55;
+    border: solid 2px #1aaa55;
+}
+  
+.dashed-line {
+    border-left: 1px dashed red;
+  }
+
+.line-gap {
+  height: 72px;
+  width: 2px;
+}
+
+.rule-table-height{
+    height:110px!important;
+}
+
+
+.vertical-bar-head
+{
+  height:20px!important;
+}
+
+.vertical-bar-body{
+  height:300px!important;
+}
+.vertical-bar-foot{
+  height:100px!important;
+}
+.no-bg{
+    background-color:transparent!important;
+    border:none;
+}
+.schedule-week {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 10px;
+    li,button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 40px;
+      font-size: 14px;
+      text-align: center;
+      background-color: #fafafa;
+      border: solid 1px #bebebe;
+      &:first-child {
+        border-top-left-radius: 5px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 5px;
+      }
+      &.enabled {
+        color: $red-color;
+        font-weight: bold;
+      }
+    }
+  }
+
+.font-size-18{
+  font-size: 18px;
+}
+.bold{
+  font-weight: bold;
+}
+.input{
+  max-height: 30px;
+}
+.chosen{
+  color: #ff3355;
+}
+.not-chosen{
+  color:black;
+}

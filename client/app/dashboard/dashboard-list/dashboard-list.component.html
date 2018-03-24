@@ -1,0 +1,18 @@
+<app-loading [content]="'Loading dashboards...'"></app-loading>
+<div class="dashboard-header">
+  <div class="app-container">
+    <h1 class="dashboard-name">
+      <i class="fas fa-th-large"></i>All dashboards</h1>
+  </div>
+</div>
+
+<div class="app-container">
+  <ngx-datatable [rows]="rows" [rowHeight]="'auto'" [headerHeight]="40" [columnMode]="'force'" [footerHeight]="40" (activate)="onTableActivate($event)"
+    [cssClasses]="{
+    sortAscending: 'fas fa-sort-down',
+    sortDescending: 'fas fa-sort-up'
+  }">
+    <ngx-datatable-column name="Name" cellClass="name"></ngx-datatable-column>
+    <ngx-datatable-column name="Last updated" prop="last_updated"></ngx-datatable-column>
+  </ngx-datatable>
+</div>

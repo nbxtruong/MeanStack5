@@ -1,6 +1,6 @@
 $primary-color: #454545;
 $second-color: #939393;
-$red-color:#ee3731;
+$red-color:#1aaa55;
 .app-nav {
   height: 81px;
   padding: 0px 50px;
@@ -76,26 +76,69 @@ $red-color:#ee3731;
   font-size: 14px;
 }
 
+.navbar-toggler{
+  margin-top: 20px;
+}
+
 @media screen and (max-width:992px) {
   .app-nav {
     img {
       width: 20%;
     }
   }
+  .navbar-collapse {
+    text-align: center;
+    box-shadow: 0px 2px 10px 0 rgba(150, 150, 150, 0.2);
+    background: white;
+    position: absolute;
+    width: 100%;
+    top: 80px;
+    z-index: 100;
+    left: 0;
+    .app-nav-ul {
+      line-height: 40px;
+      .nav-item {
+        a {
+          padding: 0;
+        }
+        &.active{
+          border:none;
+        }
+      }
+      .dropdown-menu {
+        .dropdown-divider {
+          display: none;
+        }
+        border:none;
+        text-align: center;
+        .dropdown-item:last-child {
+          box-shadow: 0px 5px 10px 0 rgba(150, 150, 150, 0.2);
+        }
+      }
+    }
+  }
+  .my-2 {
+    margin-bottom: 0 !important;
+  }
+  .user-login {
+    border-top: 2px solid #949494;
+    background: aliceblue;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width:552px) {
-    .app-nav {
-      img {
-        width: 40%;
-      }
+  .app-nav {
+    img {
+      width: 40%;
     }
   }
+}
 
 @media screen and (max-width:414px) {
-    .app-nav {
-      img {
-        width: 55%;
-      }
+  .app-nav {
+    img {
+      width: 55%;
     }
   }
+}

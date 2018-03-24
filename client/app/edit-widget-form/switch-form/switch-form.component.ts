@@ -39,7 +39,7 @@ export class SwitchFormComponent implements OnInit {
   getSprinklers() {
     this.deviceService.getSprinklers().subscribe(
       res => {
-        this.controllers = res;
+        this.controllers = res[0];
         this.getControllerAttributes();
       },
       error => {

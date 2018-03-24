@@ -106,7 +106,7 @@
                   <div class="form-group">
                     <label>Attributes</label>
                     <select [(ngModel)]="line.data.field" class="form-control" placeholder="Attribute" name="{{'device'+idx+'_field'}}" required>
-                      <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+                      <option *ngFor="let attribute of attributes[idx]" [value]="attribute.name">{{attribute.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -200,7 +200,7 @@
                   <div class="form-group">
                     <label>Attributes</label>
                     <select [(ngModel)]="line.data.field" class="form-control" placeholder="Attribute" name="{{'device'+idx+'_field'}}" required>
-                      <option *ngFor="let attribute of attributes" [value]="attribute.name">{{attribute.name}}</option>
+                      <option *ngFor="let attribute of attributes[idx]" [value]="attribute.name">{{attribute.name}}</option>
                     </select>
                   </div>
                 </div>

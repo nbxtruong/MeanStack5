@@ -9,7 +9,10 @@ import { Chart } from 'angular-highcharts';
   templateUrl: './gauge-series.component.html',
   styleUrls: ['./gauge-series.component.scss']
 })
-export class GaugeSeriesComponent implements OnInit, Widget {
+export class GaugeSeriesComponent extends Widget implements OnInit {
+  getInvolvedGateways(): string[] {
+    return [this.widgetInfo.data.gateway_id];
+  }
   update(message = ""): void {
     let dataRequest = this.getDataRequest();
     this.getInitData(dataRequest);
@@ -42,7 +45,9 @@ export class GaugeSeriesComponent implements OnInit, Widget {
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.widgetData = this.widgetInfo.data;

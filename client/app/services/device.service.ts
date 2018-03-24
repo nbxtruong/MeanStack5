@@ -50,10 +50,50 @@ export class DeviceService {
   }
 
   getSprinklers(): Observable<any> {
-    return this.http.get("devices/getAttributes/Sprinkler");
+    let deviceTypes: any[] = ["Sprinkler"];
+    return this.http.post("devices/getAttributes/", deviceTypes);
   }
-  
+
   getSensors() {
-    return this.http.get("devices/getAttributes/Sensor");
+    let deviceTypes: any[] = ["Sensor"];
+    return this.http.post("devices/getAttributes/", deviceTypes);
+  }
+
+  getSingleDeviceData(request: any): Observable<any> {
+    console.log(request);
+    return this.http.post("deviceData/data", request);
+    // return of(
+    //   {
+    //     created_at: 1521172195686,
+    //     data: [
+    //       {
+    //         "created_at": 1521172195686,
+    //         "device_id": "S002",
+    //         "val2": 1
+    //       },
+    //       {
+    //         "created_at": 1521172185705,
+    //         "device_id": "S002",
+    //         "val1": 1
+    //       },
+    //       {
+    //         "created_at": 1521171887328,
+    //         "device_id": "S002",
+    //         "val1": 1
+    //       },
+    //       {
+    //         "created_at": 1521171878683,
+    //         "device_id": "S002",
+    //         "val1": 0,
+    //         "val2": 0
+    //       },
+    //       {
+    //         "created_at": 1521171865617,
+    //         "device_id": "S002",
+    //         "val1": 1
+    //       }
+    //     ]
+    //   }
+    // )
   }
 }

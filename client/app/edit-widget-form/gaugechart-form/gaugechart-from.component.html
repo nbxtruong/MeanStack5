@@ -18,7 +18,8 @@
           </p>
           <div class="form-group">
             <label>Device</label>
-            <select [(ngModel)]="model.data.device_id" (change)="getAttributes()" class="form-control" placeholder="Device" name="first" required>
+            <select [(ngModel)]="model.data.device_id" (change)="getAttributes()" class="form-control" placeholder="Device" name="first"
+              required>
               <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
             </select>
           </div>
@@ -35,7 +36,7 @@
         </div>
         <div class="app-modal-footer">
           <button class="app-btn" type="submit" [disabled]="!form.form.valid">Save</button>
-          <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+          <button class="app-btn-white" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </form>
     </div>

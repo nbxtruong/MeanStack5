@@ -1,16 +1,22 @@
 .card-header {
-    text-align: center;
+  text-align: center;
 }
 
 .loading-card {
-    width: 20%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
+  width: 20%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
 }
 
 .loading-text {
-    margin-top: 15px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width:992px) {
+  .loading-card {
+    width: 60%;
+  }
 }

@@ -1,0 +1,43 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#1aaa55;
+.dashboard-header {
+  height: 50px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  .dashboard-name {
+    line-height: 50px;
+    margin: 0;
+    float: left;
+    i {
+      margin-right: 20px;
+      color: $red-color;
+    }
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .dashboard-function {
+    float: right;
+    margin-top: 10px;
+    .dashboard-btn {
+      width: 30px;
+      color: $red-color;
+      background: none;
+      border: solid 1px $red-color;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+    .add-widget {
+      font-size: 12px;
+      line-height: 28px;
+      padding: 0px 15px;
+    }
+  }
+}
+
+:host /deep/ .name {
+  color: $red-color;
+  &:hover {
+    cursor: pointer;
+  }
+}

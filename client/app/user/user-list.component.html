@@ -11,10 +11,10 @@
                 <i class="fas fa-users"></i>Users
               </h1>
             </td>
-            <td style="text-align: right; padding-top:18px">
+            <td class="menu-button">
               <button class="app-btn">NEW</button>
-              <button class="app-btn-white">DISABLE</button>
-              <button class="app-btn-white">EXPORT</button>
+              <button class="app-btn-white" [disabled]="idsToEnable.size==0" data-toggle="modal" data-target="#enableMultipleModal">ENABLE</button>
+              <button class="app-btn-white" [disabled]="idsToDisable.size==0" data-toggle="modal" data-target="#disableMultipleModal">DISABLE</button>
             </td>
           </tr>
         </thead>
@@ -25,7 +25,7 @@
         <p class="fa fa-search" aria-hidden="true"></p>
         <a class="refresh" (click)="getListUsers()">
           <a class="fa fa-repeat"></a> Refresh</a>
-        <thead style="background-image: linear-gradient(339deg, #ff3355, #ee3731);">
+        <thead style="background-image: linear-gradient(339deg, #1aaa55, #1aaa55);">
           <tr>
             <th>
               <input type="checkbox" name="checkUser" value="selectAll" class="select-all-checkbox" (change)=checkAllChanged($event)>
@@ -41,22 +41,117 @@
             <td>
               <input type="checkbox" name="checkUser" value="{{user.id}}" (change)=checkboxChanged($event)>
             </td>
-            <td class="email">{{user.email}}</td>
-            <td>{{user.name}}</td>
+
+            <td class="email" *ngIf="user.activated==true">{{user.email}}</td>
+            <td class="disable" *ngIf="user.activated==false">{{user.email}}</td>
+
+            <td *ngIf="user.activated==true">{{user.name}}</td>
+            <td class="disable" *ngIf="user.activated==false">{{user.name}}</td>
+
             <td *ngIf="user.activated==true">
-              <li class="status-active">Active</li>
+              <li class="active">Active</li>
             </td>
             <td *ngIf="user.activated==false">
-              <li class="status-disable">Disable</li>
+              <li class="disable">Disable</li>
             </td>
-            <td>
-              <button class="trash">
+
+            <td *ngIf="user.activated==true">
+              <button class="trash" (click)="setDisableUser(user)" data-toggle="modal" data-target="#disableModal">
+                <a class="fa fa-pencil"></a>
+              </button>
+            </td>
+            <td *ngIf="user.activated==false">
+              <button class="trash" (click)="setEnableUser(user)" data-toggle="modal" data-target="#enableModal">
                 <a class="fa fa-pencil"></a>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Disable user -->
+<div class="modal fade" id="disableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Disable confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to disable this user: {{checkedUser.name}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="disableUser()" data-dismiss="modal">Disable</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Disable users -->
+<div class="modal fade" id="disableMultipleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Disable confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to disable these users?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="disableUsers()" data-dismiss="modal">Disable</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enable user -->
+<div class="modal fade" id="enableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enable confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to enable this user: {{checkedUser.name}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="enableUser()" data-dismiss="modal">Enable</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enable users -->
+<div class="modal fade" id="enableMultipleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enable confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to enable these users?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="enableUsers()" data-dismiss="modal">Enable</button>
+      </div>
     </div>
   </div>
 </div>

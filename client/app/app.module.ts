@@ -61,7 +61,22 @@ import { WidgetHeaderComponent } from './widget/widget-header/widget-header.comp
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ScheduleListComponent } from './schedule-list/schedule-list.component';
+import { ScheduleComponent } from './schedule-list/schedule/schedule.component';
 import { SwitchFormComponent } from './edit-widget-form/switch-form/switch-form.component';
+import { AddScheduleComponent } from './add-schedule/add-schedule.component';
+import { FixedDailyComponent } from './add-schedule/fixed-daily/fixed-daily.component';
+import { FixedIntervalComponent } from './add-schedule/fixed-interval/fixed-interval.component';
+import { FlexibleDailyComponent } from './add-schedule/flexible-daily/flexible-daily.component';
+import { ScheduleService } from './services/schedule.service';
+import { FooterComponent } from './footer/footer.component';
+import { WeatherFormComponent } from './edit-widget-form/weather-form/weather-form.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { DeviceCardComponent } from './device/device-card/device-card.component';
+import { DeviceEditDataComponent } from './device/device-edit-data/device-edit-data.component';
+import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 export function highchartsModules() {
@@ -105,17 +120,32 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GaugeChartComponent,
     GaugechartFormComponent,
     WidgetHeaderComponent,
+    ScheduleListComponent,
+    ScheduleComponent,
     SwitchFormComponent,
-    AddDashboardComponent
+    AddDashboardComponent,
+    AddScheduleComponent,
+    FixedDailyComponent,
+    FixedIntervalComponent,
+    FlexibleDailyComponent,
+    FooterComponent,
+    WeatherFormComponent,
+    DeviceCardComponent,
+    DeviceEditDataComponent,
+    DashboardListComponent
   ],
   imports: [
+    NgxDatatableModule,
     RoutingModule,
     SharedModule,
     GridsterModule,
     ColorPickerModule,
     ChartModule,
     NgxGaugeModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    BrowserModule,
+    AmazingTimePickerModule
+
   ],
   providers: [
     AuthService,
@@ -130,8 +160,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     WeatherService,
     AppMqttService,
     RuleService,
+    ScheduleService,
     { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

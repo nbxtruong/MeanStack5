@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.widgets.changes.subscribe(() => {
       this.widgetsComponent = this.widgets.toArray();
       this.widgets.forEach((widget) => {
-        widget.getInvolvedDevices().forEach(deviceId => {
+        widget.getInvolvedGateways().forEach(deviceId => {
           let topic = this.mqtt.getUpdateTopic(deviceId);
           setTimeout(() => { this.mqtt.subscribe(topic, widget); }, 1000);
         });
@@ -132,7 +132,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.getDashboards(true);
         this.util.isLoading = false;
       },
-      error => this.toast.setMessage('Failed to update dashboard', 'danger')
+      error => {
+        this.util.isLoading = false;
+        this.toast.setMessage('Failed to update dashboard', 'danger');
+      }
     );
     this.widgetsComponent.forEach(component => {
       component.update("");
@@ -159,6 +162,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.dashboardService.getDashboard(id).subscribe(res => {
       this.dashboardInfo = res;
       this.addUtilWidget();
+      this.getDashboards(true);
     }, error => {
       console.log(error);
     });
@@ -166,9 +170,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   editIndex(event, idx) {
     this.dashboardInfo.content[idx] = event;
-    this.dashboardInfo.content[idx].name = event.name;
-    this.dashboardInfo.content[idx].data.country = event.country;
-    this.dashboardInfo.content[idx].data.city = event.city;
     this.saveDashboards();
   }
 
@@ -178,18 +179,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   setEdit(value: boolean) {
     this.isEdit = value;
-    console.log(value);
   }
 
   deleteDashboard() {
     this.isEdit = false;
     this.isDeleting = false;
     this.util.isLoading = true;
-    
+
     this.dashboardService.deleteDashboards((this.dashboardInfo.id)).subscribe(res => {
       this.util.isLoading = false;
+      this.util.removeRecentDashboard(this.dashboardInfo.id);
       this.router.navigate(['./dashboards']);
     }, error => {
+      this.util.isLoading = false;
       console.log(error);
     });
   }

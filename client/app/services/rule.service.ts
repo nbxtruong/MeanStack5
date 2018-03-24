@@ -34,6 +34,7 @@ export class RuleService {
     return this.http.delete('rules/' + ruleID);
   }
   getAttributes(): Observable<any> {
-    return this.http.get('devices/getAttributes/Sensor');
+    let deviceTypes: any[] = ["Sensor"];
+    return this.http.post('devices/getAttributes/', deviceTypes);
   }
 }

@@ -49,7 +49,7 @@ export class GaugechartFormComponent implements OnInit {
     getSensors() {
         this.deviceService.getSensors().subscribe(
             res => {
-                this.sensors = res;
+                this.sensors = res[0];
                 this.getAttributes();
             },
             error => {

@@ -42,13 +42,13 @@ button:disabled {
 
 .app-btn {
   border-radius: 15px;
-  background-image: linear-gradient(202deg, #ff3355, #ee3731);
+  background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
   border: none;
   text-transform: uppercase;
   color: white;
   padding: 5px 20px;
   font-weight: bold;
-  border: 1px solid #ee3731;
+  border: 1px solid #1aaa55;
 }
 
 .app-btn-delete {
@@ -56,7 +56,7 @@ button:disabled {
   background-color: white;
   border: none;
   text-transform: uppercase;
-  color: #ee3731;
+  color: #1aaa55;
   padding: 25px 20px;
   margin-right: 100px;
   float: right;
@@ -68,10 +68,10 @@ button:disabled {
   background: white;
   border: none;
   text-transform: uppercase;
-  color: #ee3731;
+  color: #1aaa55;
   padding: 5px 20px;
   font-weight: bold;
-  border: 1px solid #ee3731;
+  border: 1px solid #1aaa55;
 }
 
 /*--------------------------------Datatable-----------------------------*/
@@ -108,7 +108,7 @@ body {
 
 .app-btn {
   border-radius: 25px;
-  background-image: linear-gradient(202deg, #ff3355, #ee3731);
+  background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
   border: none;
   text-transform: uppercase;
   color: white;
@@ -121,10 +121,10 @@ body {
   background: white;
   border: none;
   text-transform: uppercase;
-  color: #ee3731;
+  color: #1aaa55;
   padding: 5px 20px;
   font-weight: bold;
-  border: 1px solid #ee3731;
+  border: 1px solid #1aaa55;
 }
 
 button {
@@ -285,7 +285,7 @@ tbody tr:last-child td:last-child {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  border: solid 1px #ee3731 !important;
+  border: solid 1px #1aaa55 !important;
   background: #ffffff !important;
 }
 
@@ -403,7 +403,7 @@ tbody tr:last-child td:last-child {
     padding: 2px !important;
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    border: solid 1px #ee3731 !important;
+    border: solid 1px #1aaa55 !important;
     background: #ffffff !important;
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
@@ -484,7 +484,7 @@ tbody tr:last-child td:last-child {
     margin-bottom: 52px;
   }
   .device-tag i {
-    color: #ee3731;
+    color: #1aaa55;
   }
   .device-tag span {
     font-family: Poppins;
@@ -504,4 +504,46 @@ tbody tr:last-child td:last-child {
   .column-right p {
     margin-left: 30px;
   }
+}
+
+
+/* ngx-datatable */
+
+.ngx-datatable .datatable-header {
+	background-image: linear-gradient(339deg, #1aaa55, #1aaa55);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.ngx-datatable .datatable-header .datatable-header-cell {
+	line-height: 40px;
+	font-weight: bold;
+	color: white;
+	padding: 0 20px;
+}
+
+.ngx-datatable .datatable-body-row {
+	border: solid 1px #e6e6e6;
+}
+
+.ngx-datatable .datatable-body-row .datatable-body-cell {
+	line-height: 50px;
+	padding: 0 20px;
+}
+
+.ngx-datatable .datatable-body-row .datatable-body-cell p {
+	margin: 0;
+}
+
+.ngx-datatable .datatable-pager .pager li a {
+	text-align: center;
+	font-size: 14px;
+	color: #4c4c4c;
+	width: 20px;
+	height: 25px;
+}
+
+.ngx-datatable .datatable-pager .pager li.active a {
+	border-radius: 5px;
+	border: solid 1px #1aaa55;
 }

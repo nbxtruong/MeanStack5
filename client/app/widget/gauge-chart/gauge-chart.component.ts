@@ -1,17 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
-import { UtilService } from '../../services/util.service';
+import { UtilService, Widget } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
 @Component({
   selector: 'gauge-chart',
   templateUrl: './gauge-chart.component.html',
   styleUrls: ['./gauge-chart.component.scss']
 })
-export class GaugeChartComponent implements OnInit {
+export class GaugeChartComponent extends Widget implements OnInit {
+  getInvolvedGateways(): string[] {
+    return [this.widgetInfo.data.gateway_id];
+  }
 
   getInvolvedDevices(): string[] {
     return [this.getDataRequest()[0].device_id];
   }
-  update(message=""): void {
+  update(message = ""): void {
     let dataRequest = this.getDataRequest();
     this.getInitData(dataRequest);
   }
@@ -24,7 +27,7 @@ export class GaugeChartComponent implements OnInit {
   constructor(
     public util: UtilService,
     private deviceService: DeviceService
-  ) { }
+  ) { super() }
 
   widgetData: any;
   data: any = {};

@@ -1,3 +1,4 @@
+<app-loading [content]="'Loading device\'s information...'"></app-loading>
 <div class="edit-pages">
   <div class="device-tag">
     <p class="title">
@@ -10,7 +11,6 @@
       <textarea class="long-input" [(ngModel)]="device.description" name="description"></textarea>
     </form>
   </div>
-
   <div class="device-tag">
     <p class="title">
       <strong>DEVICE TYPE</strong>
@@ -19,8 +19,9 @@
       <input style="padding-top:10px" type="radio" disabled name="device-type" value="sensor" [checked]="device.type=='Sensor'"> Sensor</label>
     <label class="radio-inline column-right">
       <input type="radio" name="device-type" disabled value="gateway" [checked]="device.type=='Gateway'"> Gateway</label>
+    <label class="radio-inline column-right">
+      <input type="radio" name="device-type" disabled value="sprinkler" [checked]="device.type=='Sprinkler'"> Sprinkler</label>
   </div>
-
   <div class="device-tag" *ngIf="device.attributes != null">
     <p class="title">
       <strong> DEVICE ATTRIBUTE</strong>
@@ -31,7 +32,6 @@
           <tr *ngFor="let attribute of device.attributes; let idx = index">
             <td class="column-left">
               <p>Data Type</p>
-              <!-- <i class="fa fa-minus-circle" aria-hidden="true" style="color:gray" (click)="removeAttribute(idx)"></i> -->
               <select [(ngModel)]="attribute.type" class="short-input" disabled>
                 <option>Number</option>
                 <option>String</option>
@@ -45,19 +45,11 @@
         </table>
       </div>
     </div>
-
-    <!-- <div (click)="addAttribute()">
-      <i class="fa fa-plus-circle" aria-hidden="true">
-        <span> Add device attribute</span>
-      </i>
-    </div> -->
-
   </div>
-  <div class="bottom-bar">
-    <div class="bottom-bar-button">
-      <button class="app-btn" (click)="saveDevice()">Save Device</button>
-      <button class="app-btn-white" routerLink="/devices">Cancel</button>
-    </div>
+</div>
+<div class="bottom-bar">
+  <div class="bottom-bar-buttons">
+    <button class="app-btn" (click)="saveDevice()">Save</button>
+    <button class="app-btn-white" routerLink="/devices">Cancel</button>
   </div>
-
 </div>

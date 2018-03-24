@@ -1,0 +1,33 @@
+<div class="card">
+  <widget-header [name]="device.name" (editClick)="setEdit()" (deleteClick)="setDelete(true)"></widget-header>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 card-content">
+        <div class="icon">
+          <i *ngIf="device.type==='Gateway'"><img src="../../../assets/img/gatewaytype.png"/></i>
+          <i *ngIf="device.type==='Sensor'"><img src="../../../assets/img/sensortype.png"/></i>
+          <i *ngIf="device.type==='Sprinkler'"><img src="../../../assets/img/sprinklertype.png"/></i>
+        </div>
+        <p class="type">{{device.type}}</p>
+        <p>Updated: {{util.getLocalDateTime(device.last_updated)}}</p>
+      </div>
+    </div>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" value="{{device.id}}" (change)="checkboxChanged($event)">
+      <span class="custom-control-indicator"></span>
+    </label>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete {{device.name}}</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="TriggerDelete()">Delete</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>

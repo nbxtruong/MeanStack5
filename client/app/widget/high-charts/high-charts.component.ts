@@ -9,7 +9,16 @@ import { Chart } from 'angular-highcharts';
     templateUrl: './high-charts.component.html',
     styleUrls: ['./high-charts.component.scss']
 })
-export class HightChartComponent implements OnInit, Widget {
+export class HightChartComponent extends Widget implements OnInit {
+    getInvolvedGateways(): string[] {
+        let gatewayIds: string[] = [];
+        this.widgetData.lines.forEach((line) => {
+            if (line.data.gateway_id && !gatewayIds.includes(line.data.gateway_id))
+                gatewayIds.push(line.data.gateway_id);
+        });
+        return gatewayIds;
+    }
+
     update(message = ""): void {
         this.init();
         this.getInitData();
@@ -41,7 +50,9 @@ export class HightChartComponent implements OnInit, Widget {
     constructor(
         public util: UtilService,
         private deviceService: DeviceService
-    ) { }
+    ) {
+        super();
+    }
 
     init() {
         this.widgetData = this.widgetInfo.data;

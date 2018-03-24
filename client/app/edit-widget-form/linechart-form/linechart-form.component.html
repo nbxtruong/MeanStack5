@@ -54,17 +54,18 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Device</label>
-                      <select [(ngModel)]="line.data.device_id" (change)="getAttributes(idx)" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}"
+                      <select [(ngModel)]="line.data.device_id"  (change)="getAttributesForChart(idx)" class="form-control" placeholder="Device" name="{{'device'+idx+'_id'}}"
                         required>
-                        <option *ngFor="let device of devices" [value]="device.id">{{device.id}}</option>
+                        <option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.name}}</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Field</label>
-                      <input [(ngModel)]="line.data.field" type="text" class="form-control" placeholder="Field" name="{{'device'+idx+'_field'}}"
-                      required>
+                      <label>Attribute</label>
+                      <select [(ngModel)]="line.data.field" class="form-control" placeholder="Attribute" name="{{'device'+idx+'_field'}}" required>
+                        <option *ngFor="let attribute of attributes[idx]" [value]="attribute.name">{{attribute.name}}</option>
+                      </select>
                     </div>
                   </div>
 
@@ -76,7 +77,7 @@
           </div>
           <div class="app-modal-footer">
             <button class="app-btn" type="submit" [disabled]="!form.form.valid">Save</button>
-            <button class="app-btn-white" (click)="onCancel()">Cancel</button>
+            <button class="app-btn-white" type="button" (click)="onCancel()">Cancel</button>
           </div>
         </form>
       </div>

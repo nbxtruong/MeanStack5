@@ -10,7 +10,10 @@ import { AuthService } from '../../services/auth.service';
     templateUrl: './switch-widget.component.html',
     styleUrls: ['./switch-widget.component.scss']
 })
-export class SwitchWidgetComponent implements OnInit, Widget {
+export class SwitchWidgetComponent extends Widget implements OnInit {
+    getInvolvedGateways(): string[] {
+        return [this.widgetInfo.data.gateway_id];
+    }
     update(message: any = ""): void {
         if (message != "") {
             let mess = JSON.parse(message);
@@ -48,7 +51,9 @@ export class SwitchWidgetComponent implements OnInit, Widget {
         private deviceService: DeviceService,
         private mqtt: AppMqttService,
         private auth: AuthService
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.model = this.widgetInfo;
@@ -87,7 +92,7 @@ export class SwitchWidgetComponent implements OnInit, Widget {
             auth: this.auth.currentUser.auth_key
         };
         message[this.model.attribute] = this.controlCheck ? 1 : 0;
-        this.mqtt.publish(this.mqtt.getControlTopic(this.widgetInfo.data.device_id), JSON.stringify(message));
+        this.mqtt.publish(this.mqtt.getControlTopic(this.widgetInfo.data.gateway_id), JSON.stringify(message));
     }
 
     onSubmit($event) {

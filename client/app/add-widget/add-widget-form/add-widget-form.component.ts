@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UtilService } from '../../services/util.service';
 import { DeviceService } from '../../services/device.service';
-import { Device } from '../../shared/models/device.model';
 import { constants } from '../../constants';
 import { read } from 'fs';
 
@@ -16,15 +15,15 @@ export class AddWidgetFormComponent implements OnInit {
   @Output('cancel') cancel = new EventEmitter();
 
   @Input('template') chosenTemplate: string = null;
-  devices: Device[];
-  sprinklers: Device[] = [];
+  sprinklers: any[] = [];
+  allAttribute: Array<any> = [];
   attributes: Array<any> = [];
   model: any = {};
   lines = [];
   periodValue: number;
   periodUnit: number;
   countryList = constants.countryList;
-  sensors = [];  
+  sensors = [];
 
   constructor(
     public util: UtilService,
@@ -37,11 +36,16 @@ export class AddWidgetFormComponent implements OnInit {
     });
     if (controller) {
       this.attributes = controller.attributes;
+      if (controller.gateway_id) {
+        this.model.data.gateway_id = controller.gateway_id;
+      }
+      else {
+        this.model.data.gateway_id = controller.id;
+      }
     }
   }
 
   ngOnInit() {
-    this.getDevices();
     this.getSprinklers();
     this.setTemplate(this.chosenTemplate);
     this.getSensors();
@@ -96,18 +100,7 @@ export class AddWidgetFormComponent implements OnInit {
   getSprinklers() {
     this.deviceService.getSprinklers().subscribe(
       res => {
-        this.sprinklers = res;
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-
-  getDevices() {
-    this.deviceService.getListDevices().subscribe(
-      res => {
-        this.devices = res;
+        this.sprinklers = res[0];
       },
       error => {
         console.log(error);
@@ -118,18 +111,38 @@ export class AddWidgetFormComponent implements OnInit {
   getSensors() {
     this.deviceService.getSensors().subscribe(
       res => {
-        this.sensors = res;
+        this.sensors = res[0];
       },
       error => {
         console.log(error);
       }
     )
   }
+
   getAttributesForGauge() {
-    this.attributes = Object.create(this.sensors.find(x => x.id === this.model.data.device_id).attributes);
+    let device = this.sensors.find(x => x.id === this.model.data.device_id);
+    this.attributes = Object.create(device.attributes);
+    if (device.gateway_id) {
+      this.model.data.gateway_id = device.gateway_id;
+    }
+    else {
+      this.model.data.gateway_id = device.id;
+    }
   }
 
   getAttributesForChart(index) {
-    this.attributes = Object.create(this.sensors.find(x => x.id === this.lines[index].data.device_id).attributes);
+    let device = this.sensors.find(x => x.id === this.lines[index].data.device_id);
+    for (let i = 0; i < this.sensors.length; i++) {
+      if (device.id === this.sensors[i].id) {
+        this.allAttribute[index] = this.sensors[i];
+      }
+    }
+    this.attributes[index] = Object.create(this.allAttribute[index].attributes);
+    if (device.gateway_id) {
+      this.lines[index].data.gateway_id = device.gateway_id;
+    }
+    else {
+      this.lines[index].data.gateway_id = device.id;
+    }
   }
 }

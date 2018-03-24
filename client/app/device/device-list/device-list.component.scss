@@ -1,3 +1,6 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#1aaa55;
 .button-datatable td {
   border-bottom: none solid white;
 }
@@ -11,7 +14,7 @@
   height: 30px !important;
   color: white;
   border-radius: 20px;
-  background-image: linear-gradient(202deg, #ff3355, #ee3731) !important;
+  background-image: linear-gradient(202deg,#1aaa55, #1aaa55) !important;
   border-color: white;
   padding: 0px;
   border-width: 0px;
@@ -20,10 +23,10 @@
 .export-button {
   width: 93px !important;
   height: 30px !important;
-  color: #ee3731;
+  color: #1aaa55;
   border-radius: 20px;
   background-color: white;
-  border: 1px solid #ee3731;
+  border: 1px solid #1aaa55;
   margin-left: 15px;
 }
 
@@ -33,6 +36,21 @@
   margin-left: 275px;
   top: 10px;
   z-index: 1;
+}
+
+.view-btn {
+  background: none;
+  border: none;
+  i {
+    line-height: 36px;
+    font-size: 24px;
+    color: #454545;
+  }
+  &.active {
+    i {
+      color: $red-color;
+    }
+  }
 }
 
 .refresh {
@@ -47,7 +65,7 @@
 }
 
 .inputicon .fa {
-  color: #ee3731;
+  color: #1aaa55;
 }
 
 .select-all-checkbox {
@@ -65,7 +83,7 @@
 }
 
 .email {
-  color: #ee3731;
+  color: #1aaa55;
 }
 
 button:disabled {
@@ -96,6 +114,37 @@ button:disabled {
   }
   span {
     padding-left: 7px;
+  }
+  .fas {
+    margin-right: 20px;
+    color: #1aaa55;
+  }
+}
+
+.cards {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  li {
+    width: 25%;
+    padding: 10px;
+  }
+}
+
+.card-length {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+  .cards {
+    li {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 

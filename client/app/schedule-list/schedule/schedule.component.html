@@ -1,0 +1,150 @@
+<div class="schedule">
+  <div class="card">
+    <div class="widget-header">
+      <div class="row">
+        <div class="col-6">
+          <p class="widget-name ellipsis">{{schedule.name}}</p>
+          <p class="sub-header">{{schedule.getTypeName()}}</p>
+        </div>
+        <div class="col-6" #normal>
+          <div class="widget-function" *ngIf="isCollapsed===false">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="enabled" (change)="onControlChange()" />
+              <span class="slider round"></span>
+            </label>
+            <a (click)="setEdit()">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a (click)="setDelete(true)">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+
+          </div>
+          <div class="widget-function" *ngIf="isCollapsed===true">
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="setEdit()">
+                  <i class="fas fa-edit" style="margin-right:10px"></i>Edit</a>
+                <a class="dropdown-item" (click)="setDelete()">
+                  <i class="fas fa-trash-alt" style="margin-right:10px"></i>Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-block">
+      <div class="row content">
+        <div class="col-md-6">
+          <div class="content-left">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="when-content">
+                  <div class="when-title">
+                    <div class="icon-wrapper">
+                      <div class="icon-round">
+                        <i class="far fa-calendar-alt"></i>
+                      </div>
+                    </div>
+                    <p class="whenthen">When</p>
+                    <p class="sub-whenthen">{{schedule.getWhenText()}}</p>
+                  </div>
+                  <!--Fixed Schedule zone-->
+                  <div *ngIf="schedule.type===FIXED_DAILY">
+                    <ul class="schedule-week">
+                      <li *ngFor="let day of content.days" [class.enabled]="day.enabled">{{day.day}}</li>
+                    </ul>
+                    <div class="schedule-content">
+                      <i class="far fa-clock"></i>
+                      <span class="value">{{content.time.hours+':'+content.time.minutes}}</span>
+                      <span class="unit">PM</span>
+                    </div>
+                  </div>
+                  <!--Fixed Schedule zone end-->
+                  <!--Interval Schedule zone-->
+                  <div *ngIf="schedule.type===FIXED_INTERVAL">
+                    <div class="schedule-content">
+                      <div class="interval">
+                        <i class="fas fa-sync-alt"></i>
+                        <div class="interval-content">
+                          <p class="every">Every</p>
+                          <span class="value">{{content.interval.value}}</span>
+                          <span class="unit">{{content.interval.type}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Interval Schedule zone end-->
+                  <!--Flexible Schedule zone-->
+                  <div *ngIf="schedule.type===FLEXIBLE_DAILY">
+                    <div class="schedule-content">
+                      <div class="flexible-schedule">
+                        <span class="operator">
+                          {{content.conditions[0].operator}}</span>
+                        <span class="value"> {{content.conditions[0].value}}</span>
+                      </div>
+                    </div>
+                    <div class="schedule-content weather" [class.enabled]="content.is_skip_watering">
+                      <i class="fas fa-cloud"></i>
+                      <span class="unit">Check weather forecast</span>
+                    </div>
+                  </div>
+                  <!--Flexible Schedule zone end-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="content-right">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="when-content">
+                  <div class="when-title">
+                    <div class="icon-wrapper">
+                      <div class="icon-round">
+                        <i class="fas fa-cogs"></i>
+                      </div>
+                    </div>
+                    <p class="whenthen">Then</p>
+                    <p class="sub-whenthen">Turn on</p>
+                  </div>
+                  <ul class="devices">
+                    <li>
+                      <p class="device">{{content.sprinkler_name}}</p>
+                      <ul class="valves">
+                        <li *ngFor="let attribute of content.sprinkler_attributes">{{attribute}}</li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <div class="schedule-content">
+                    <i class="far fa-hourglass"></i>
+                    <span class="value">{{content.duration}}</span>
+                    <span class="unit">minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="app-modal" *ngIf="isDeleting==true">
+  <div class="app-modal-content">
+    <div class="app-modal-header">
+      <p class="title">Warning message</p>
+    </div>
+    <p class="message">Are you sure want to delete {{device.name}}</p>
+    <div class="app-modal-footer">
+      <button class="app-btn" (click)="deleteClick()">Delete</button>
+      <button class="app-btn-white" (click)="setDelete(false)">Cancel</button>
+    </div>
+  </div>
+</div>

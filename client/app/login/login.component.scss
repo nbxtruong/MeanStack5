@@ -1,317 +1,324 @@
 $primary-color: #454545;
 $second-color: #939393;
-$red-color:#ee3731;
+$red-color:#1aaa55;
 .login-section {
-    color: $primary-color;
-    position: fixed;
-    width: 50%;
-    height: 100%;
-    padding: 100px 150px;
-    .login-title {
-        margin-top: 80px;
-        font-size: 35px;
-        font-weight: bold;
+  color: $primary-color;
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-title {
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .login-form {
+    margin-top: 40px;
+  }
+  .login-addition {
+    margin-top: 40px;
+    .forgot-password {
+      float: right;
     }
-    .login-form {
-        margin-top: 40px;
-    }
-    .login-addition {
-        margin-top: 40px;
-        .forgot-password {
-            float: right;
-        }
-    }
+  }
+  .login-container {
+    width: 80%;
+  }
 }
 
 .login-btn {
-    width: 95%;
-    height: 60px;
-    border-radius: 30px;
-    background-image: linear-gradient(202deg, #ff3355, #ee3731);
-    font-size: 24px;
-    font-weight: 600;
-    color: white;
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    border: none;
-    &:disabled {
-        cursor: not-allowed;
-    }
+  width: 95%;
+  height: 60px;
+  border-radius: 30px;
+  background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  display: block;
+  margin: auto;
+  margin-top: 30px;
+  border: none;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .title-section {
-    background-image: url("../../assets/login-background.png");
-    position: fixed;
-    width: 50%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-position: right top;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    .welcome {
-        position: absolute;
-        top: 30%;
-        right: 10%;
-        .welcome-to {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-        .welcome-title {
-            font-size: 62px;
-            font-weight: bold;
-            color: white;
-        }
+  z-index: -1;
+  background-image: url("../../assets/login-background.png");
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  .welcome {
+    position: absolute;
+    top: 30%;
+    right: 10%;
+    .welcome-to {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
     }
+    .welcome-title {
+      font-size: 62px;
+      font-weight: bold;
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .login-section {
+    width: 100%;
+  }
+  .title-section {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
-    .title-section {
-        .welcome {
-            right: 5%;
-            .welcome-to {
-                font-size: 18px;
-            }
-            .welcome-title {
-                font-size: 48px;
-            }
-        }
+  .title-section {
+    .welcome {
+      right: 5%;
+      .welcome-to {
+        font-size: 18px;
+      }
+      .welcome-title {
+        font-size: 48px;
+      }
     }
+  }
 }
-
 
 /* BOX LOGIN */
 
 .box {
-    position: relative;
-    margin: auto;
-    height: 410px;
-    top: 40px;
-    left: 0;
-    z-index: 200;
-    right: 0;
-    width: 400px;
-    color: #666;
-    border-radius: 3px;
-    background: #FFF;
-    margin-bottom: 100px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    overflow: hidden;
+  position: relative;
+  margin: auto;
+  height: 410px;
+  top: 40px;
+  left: 0;
+  z-index: 200;
+  right: 0;
+  width: 400px;
+  color: #666;
+  border-radius: 3px;
+  background: #FFF;
+  margin-bottom: 100px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  overflow: hidden;
 }
 
 #header {
-    background: #009688;
-    position: relative;
-    height: 100px;
-    width: 100%;
-    margin-bottom: 30px;
+  background: #009688;
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 #cont-lock {
-    width: 100%;
-    height: 65px;
-    position: relative;
+  width: 100%;
+  height: 65px;
+  position: relative;
 }
 
 .lock {
-    text-align: center;
-    color: white;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0;
-    top: 0;
-    bottom: 0;
-    line-height: 65px;
-    font-size: 28px;
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  line-height: 65px;
+  font-size: 28px;
 }
 
 #bottom-head {
-    position: relative;
-    background: #00796b;
-    height: 35px;
+  position: relative;
+  background: #00796b;
+  height: 35px;
 }
 
 #bottom-head::after {
-    content: '';
-    width: 0px;
-    height: 0px;
-    display: block;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-bottom: 7px solid white;
-    border-right: 7px solid rgba(0, 0, 0, 0);
-    border-left: 7px solid rgba(0, 0, 0, 0);
-    border-top: 7px solid rgba(0, 0, 0, 0);
+  content: '';
+  width: 0px;
+  height: 0px;
+  display: block;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 7px solid white;
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-left: 7px solid rgba(0, 0, 0, 0);
+  border-top: 7px solid rgba(0, 0, 0, 0);
 }
 
 .box h1 {
-    margin-left: 20px;
-    margin-top: 0;
-    font-size: 24px;
-    font-weight: 300;
-    color: #cfd8dc;
-    line-height: 35px;
+  margin-left: 20px;
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 300;
+  color: #cfd8dc;
+  line-height: 35px;
 }
 
 .box button {
-    background: #cfd8dc;
-    border: 0;
-    color: #009688;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 300;
-    width: 330px;
-    margin: 20px auto;
-    display: block;
-    cursor: pointer;
-    -webkit-transition: all 0.4s;
-    transition: all 0.4s;
-    border-radius: 2px;
+  background: #cfd8dc;
+  border: 0;
+  color: #009688;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 300;
+  width: 330px;
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  border-radius: 2px;
 }
 
 .box button:active {
-    background: #009688;
-    color: #263238;
+  background: #009688;
+  color: #263238;
 }
 
 .box button:hover {
-    background: #009688;
-    color: #FFF;
-    -webkit-transition: all 0.4s;
-    transition: all 0.4s;
+  background: #009688;
+  color: #FFF;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .box p {
-    font-size: 14px;
-    text-align: center;
+  font-size: 14px;
+  text-align: center;
 }
 
 .group {
-    position: relative;
+  position: relative;
 }
 
 .inputMaterial {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    margin-top: 30px;
-    display: block;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #757575;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  margin-top: 30px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #757575;
 }
 
 .inputMaterial:focus {
-    outline: none;
+  outline: none;
 }
-
 
 /* LABEL ======================================= */
 
 label.login-label {
-    color: #999;
-    font-size: 14px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
 }
-
 
 /* active state */
 
 .inputMaterial:focus~label,
 .inputMaterial:valid~label {
-    top: -20px;
-    font-size: 14px;
-    color: #009688;
+  top: -20px;
+  font-size: 14px;
+  color: #009688;
 }
-
 
 /* BOTTOM BARS ================================= */
 
 .bar {
-    position: relative;
-    display: block;
-    width: 100%;
+  position: relative;
+  display: block;
+  width: 100%;
 }
 
 .bar:before,
 .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: $red-color;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: $red-color;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
 }
 
 .bar:before {
-    left: 50%;
+  left: 50%;
 }
 
 .bar:after {
-    right: 50%;
+  right: 50%;
 }
-
 
 /* active state */
 
 .inputMaterial:focus~.bar:before,
 .inputMaterial:focus~.bar:after {
-    width: 50%;
+  width: 50%;
 }
-
 
 /* active state */
 
 .inputMaterial:focus~.highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
 }
-
 
 /* ANIMATIONS ================ */
 
 @-webkit-keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }
 
 @-moz-keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }
 
 @keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
 }

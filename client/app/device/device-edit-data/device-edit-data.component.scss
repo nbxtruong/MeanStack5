@@ -1,0 +1,64 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#1aaa55;
+.bottom-bar {
+  width: 100%;
+  background: white;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  box-shadow: -0px -2px 5px 0 rgba(150, 150, 150, 0.2);
+  .bottom-bar-buttons {
+    float: right;
+    width: 83.3%;
+    .app-btn,
+    .app-btn-white {
+      margin: 20px 10px;
+    }
+  }
+}
+
+.title {
+  font-size: 18px;
+  color: #444444;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+//ngx-data-table
+.input-box {
+  input {
+    border: solid 1px #dadada;
+    border-radius: 17.5px;
+  }
+  .search-icon {
+    position: absolute;
+    right: 40px;
+    line-height: 38px;
+    color: $red-color;
+  }
+}
+
+.app-pager {
+  text-align: right;
+  ul {
+    list-style-type: none;
+    padding: 10px 20px;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    li {
+      display: inline;
+      a {
+        transition: all 0.5s;
+        font-size: 28px;
+        padding: 0 10px;
+        &:hover{
+          color:$red-color;
+        }
+      }
+    }
+  }
+}

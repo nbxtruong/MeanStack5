@@ -1,0 +1,121 @@
+$primary-color: #454545;
+$second-color: #939393;
+$red-color:#1aaa55;
+::-webkit-scrollbar {
+    display: none;
+} // Hide scrollbar of gridster when use 'scrollVertical' mode
+.schedule-header {
+    height: 50px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    .schedule-name {
+        line-height: 50px;
+        margin: 0;
+        float: left;
+        i {
+            margin-right: 20px;
+            color: $red-color;
+        }
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .schedule-function {
+        float: right;
+        margin-top: 10px;
+        .schedule-btn {
+            width: 30px;
+            color: $red-color;
+            background: none;
+            border: solid 1px $red-color;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    }
+}
+
+.app-btn {
+    margin: 5px 20px;
+    mix-blend-mode: undefined;
+    font-family: Poppins;
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid #1aaa55;
+    border-radius: 25px;
+    background-image: linear-gradient(202deg, #1aaa55, #1aaa55);
+    border-bottom: none solid white !important;
+    width: 200px !important;
+    text-align: center !important;
+    height: 34px;
+}
+
+.schedules {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    li {
+        height: 420px;
+        width: 50%;
+        padding: 10px;
+    }
+}
+
+.createRuleTemplate {
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
+    border: 3px dashed #1aaa55;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    border-image-slice: 2;
+    align-content: center;
+    align-items: center;
+    .fas {
+        font-size: 50px;
+        color: #1aaa55;
+    }
+}
+
+.search-input {
+    background-color: transparent;
+    border: none !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.fa-search {
+    color: #1aaa55;
+}
+
+.search-box {
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 15px !important;
+    border-color: #dadada;
+    height: 35px;
+}
+
+.search {
+    padding-bottom: 15px;
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+    .schedules {
+        li {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

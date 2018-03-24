@@ -1,20 +1,34 @@
-<div class="app-container">
-  <h2 class="layout-title">
-    {{device.name}}
-  </h2>
+<div class="header">
+  <div class="app-container">
+    <h1 class="name">
+      <i class="fas fa-microchip"> </i>{{this.device.name }}
+    </h1>
+  </div>
 </div>
 <div class="app-content">
-  <div class="side-menu">
-    <ul>
-      <li class="active" [class.active]="util.currentDevicePage=='properties'">
-        <a (click)="util.setCurrentDevicePage('properties')">Properties</a>
-      </li>
-      <li [class.active]="util.currentDevicePage=='data'">
-        <a (click)="util.setCurrentDevicePage('data')">Data</a>
-      </li>
-    </ul>
-  </div>
-  <div class="main-content">
-    <router-outlet></router-outlet>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="row">
+          <div class="side-menu">
+            <ul>
+              <li [class.active]="routeLast==='properties'">
+                <a href="#" routerLink="properties">Properties</a>
+              </li>
+              <li [class.active]="routeLast==='data'">
+                <a href="#" routerLink="data">Data</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="main-content">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -36,7 +36,7 @@
     <gauge-series #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" [name]="item.name" [data]="item"
       *ngIf="item.template=='gauge-series'"></gauge-series>
     <weather-app #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" *ngIf="item.template=='weather-forecast'"
-      [name]="item.name" [country]="item.data.country" [city]="item.data.city"></weather-app>
+      [name]="item.name" [data]="item"></weather-app>
     <switch-widget #widget (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)" *ngIf="item.template=='switch-widget'"
       [name]="item.name" [data]="item"></switch-widget>
     <high-charts #widget *ngIf="item.template=='high-charts'" [data]="item" (deleteEvent)="removeIndex(idx)" (editEvent)="editIndex($event,idx)"></high-charts>
